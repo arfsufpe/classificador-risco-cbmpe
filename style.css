@@ -1,0 +1,257 @@
+/* --- VARIÁVEIS DE DESIGN SYSTEM --- */
+:root {
+    /* Cores Institucionais e Semânticas */
+    --primary-color: #B71C1C; /* Vermelho Bombeiros (Cabeçalho) */
+    --accent-color: #0D47A1;  /* Azul para Ação (Botões) */
+    --accent-hover: #08306b;
+
+    /* Cores de Resultado */
+    --success-bg: #E8F5E9;
+    --success-text: #1B5E20;
+    --success-border: #4CAF50;
+
+    --warning-bg: #FFF3E0;
+    --warning-text: #E65100;
+    --warning-border: #FF9800;
+
+    --danger-bg: #FFEBEE;
+    --danger-text: #B71C1C;
+    --danger-border: #EF5350;
+
+    /* Cores Neutras */
+    --bg-body: #F4F6F8;
+    --bg-card: #FFFFFF;
+    --text-main: #333333;
+    --text-secondary: #555555;
+    --border-light: #E0E0E0;
+}
+
+/* --- RESET E ESTRUTURA BÁSICA --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background-color: var(--bg-card);
+    width: 100%;
+    max-width: 700px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    overflow: hidden;
+    border-top: 6px solid var(--primary-color);
+}
+
+/* --- CABEÇALHO --- */
+header {
+    padding: 25px 30px;
+    border-bottom: 1px solid var(--border-light);
+    text-align: center;
+}
+
+h2 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 5px;
+}
+
+/* --- CONTEÚDO DAS ETAPAS --- */
+.content-area {
+    padding: 30px;
+}
+
+.step {
+    display: none;
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+.step.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- TIPOGRAFIA DAS PERGUNTAS --- */
+.step-indicator {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.question-text {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 20px;
+}
+
+.info-box {
+    background-color: #F8F9FA;
+    border-left: 4px solid var(--accent-color);
+    padding: 12px 15px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+ul.details-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+ul.details-list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+ul.details-list li::before {
+    content: "•";
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+/* --- BOTÕES --- */
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Texto na esquerda, seta na direita */
+    width: 100%;
+    padding: 16px 20px;
+    background-color: #fff;
+    border: 2px solid var(--border-light);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+/* Estilo padrão para opções (Neutro para não enviesar) */
+.btn:hover {
+    border-color: var(--accent-color);
+    background-color: #F0F7FF;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(13, 71, 161, 0.1);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn::after {
+    content: "➜";
+    opacity: 0.3;
+    transition: opacity 0.2s;
+}
+
+.btn:hover::after {
+    opacity: 1;
+    color: var(--accent-color);
+}
+
+/* Botão Primário/Afirmativo Específico (Opcional, usado para Restart) */
+.btn-restart {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    justify-content: center;
+    text-align: center;
+}
+.btn-restart:hover {
+    background-color: var(--accent-hover);
+    color: white;
+}
+.btn-restart::after { content: none; }
+
+/* --- RESULTADO --- */
+.result-box {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+    border-radius: 12px;
+    border: 2px solid transparent;
+}
+
+.result-box h1 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.result-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* Modificadores de Resultado */
+.res-low { background: var(--success-bg); color: var(--success-text); border-color: var(--success-border); }
+.res-medium { background: var(--warning-bg); color: var(--warning-text); border-color: var(--warning-border); }
+.res-high { background: var(--danger-bg); color: var(--danger-text); border-color: var(--danger-border); }
+
+/* --- ENTRADA DE CNAE --- */
+.cnae-textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--border-light);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: vertical;
+    margin-bottom: 8px;
+}
+
+.cnae-textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.cnae-error {
+    color: var(--danger-text);
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+    min-height: 1.2em;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    .container { border-radius: 0; min-height: 100vh; box-shadow: none; }
+    h2 { font-size: 1.3rem; }
+    .btn { padding: 14px; font-size: 0.95rem; }
+}
