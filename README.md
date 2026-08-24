@@ -4,13 +4,13 @@ Página estática que guia o usuário por um questionário para determinar a cla
 
 ## Como usar
 
-Basta abrir o arquivo [`classificador_cbmpe_v4.html`](classificador_cbmpe_v4.html) diretamente no navegador (duplo clique ou `Start-Process` no Windows). Não há build, servidor ou dependências — é HTML/CSS/JS puro, funcionando via `file://`.
+Basta abrir o arquivo [`index.html`](index.html) diretamente no navegador (duplo clique ou `Start-Process` no Windows). Não há build, servidor ou dependências — é HTML/CSS/JS puro, funcionando via `file://`.
 
 ## Estrutura do projeto
 
 | Arquivo | Conteúdo |
 |---|---|
-| `classificador_cbmpe_v4.html` | Markup das etapas do questionário e da tela de resultado |
+| `index.html` | Markup das etapas do questionário e da tela de resultado |
 | `style.css` | Estilos visuais |
 | `script.js` | Lógica do questionário, listas de CNAE e regras de classificação |
 | `Classificacao de risco - CNAEs consolidados (Decreto 61.082-2026).csv` | Base de dados oficial dos CNAEs, usada para gerar as listas em `script.js` |
