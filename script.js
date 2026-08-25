@@ -91,6 +91,16 @@ const CNAE_MEDIO_RISCO = [
 // level: 'baixo' | 'medio' (risco 'alto' nunca chega aqui, pois é resolvido direto em submitCnae)
 let cnaeState = { floor: 1, matched: null, level: 'baixo' };
 
+// Histórico de etapas visitadas, para permitir "Voltar".
+let stepHistory = [];
+
+// Duração (ms) da animação de saída de uma etapa — deve casar com --dur-step-leave no CSS.
+const STEP_LEAVE_MS = 160;
+
+function prefersReducedMotion() {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
 function normalizeCnae(str) {
     return str.replace(/\D/g, '');
 }
@@ -107,6 +117,7 @@ function submitCnae() {
 
     if (codes.length === 0) {
         errorEl.textContent = 'Informe pelo menos um CNAE.';
+        document.getElementById('cnae-input').focus();
         return;
     }
 
@@ -128,13 +139,68 @@ function submitCnae() {
     nextStep('step-1');
 }
 
-function nextStep(id) {
-    // Remove a classe ativa de todos os passos
-    document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
-    // Adiciona classe ativa ao próximo
-    const next = document.getElementById(id);
-    if(next) next.classList.add('active');
+// Atualiza a barra de progresso, o rótulo da etapa e a visibilidade do botão Voltar.
+function updateProgressUI(stepEl) {
+    const step = Number(stepEl.dataset.step || 1);
+    const total = Number(stepEl.dataset.total || 7);
+    const label = stepEl.dataset.label || `Etapa ${step} de ${total}`;
+
+    const bar = document.getElementById('progress-bar');
+    const track = document.getElementById('progress-track');
+    const indicator = document.getElementById('step-indicator');
+    const backBtn = document.getElementById('back-btn');
+
+    const percent = Math.min(100, Math.round((step / total) * 100));
+    if (bar) bar.style.transform = `scaleX(${percent / 100})`;
+    if (track) track.setAttribute('aria-valuenow', String(percent));
+    if (indicator) indicator.textContent = label;
+    if (backBtn) backBtn.hidden = stepHistory.length === 0;
 }
+
+// Move o foco do teclado/leitor de tela para a nova etapa exibida.
+function focusStep(stepEl) {
+    if (!stepEl) return;
+    stepEl.setAttribute('tabindex', '-1');
+    stepEl.focus();
+}
+
+// Remove a classe ativa da(s) etapa(s) atual(is), disparando a animação de saída
+// (a etapa some de fato só depois de --dur-step-leave, via CSS "step-leaving").
+function fadeOutActiveSteps() {
+    document.querySelectorAll('.step.active').forEach(el => {
+        el.classList.remove('active');
+        if (!prefersReducedMotion()) {
+            el.classList.add('step-leaving');
+            setTimeout(() => el.classList.remove('step-leaving'), STEP_LEAVE_MS);
+        }
+    });
+}
+
+function activateStep(id) {
+    const target = document.getElementById(id);
+    if (!target || target.classList.contains('active')) return;
+    fadeOutActiveSteps();
+    target.classList.add('active');
+    updateProgressUI(target);
+    focusStep(target);
+}
+
+function nextStep(id) {
+    const current = document.querySelector('.step.active');
+    if (current) stepHistory.push(current.id);
+    activateStep(id);
+}
+
+function goBack() {
+    const previousId = stepHistory.pop();
+    if (!previousId) return;
+    activateStep(previousId);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const initial = document.querySelector('.step.active');
+    if (initial) updateProgressUI(initial);
+});
 
 function showResult(risk, reason) {
     // Aplica o piso mínimo definido pelo(s) CNAE(s) (etapa 1)
@@ -151,34 +217,37 @@ function showResult(risk, reason) {
         }
     }
 
-    // Esconde todos os passos
-    document.querySelectorAll('.step').forEach(el => el.style.display = 'none');
+    // Esconde a etapa atual (com a mesma animação de saída das demais transições)
+    fadeOutActiveSteps();
+
+    const progressRow = document.getElementById('progress-row');
+    if (progressRow) progressRow.hidden = true;
 
     const box = document.getElementById('result');
     const title = document.getElementById('res-title');
     const desc = document.getElementById('res-desc');
-    const icon = document.getElementById('res-icon');
 
-    box.style.display = 'block';
+    box.classList.add('is-visible');
 
     // Limpa classes anteriores
     box.classList.remove('res-low', 'res-medium', 'res-high');
 
     if(finalRisk === 1) {
         box.classList.add('res-low');
-        icon.innerText = "🛡️";
         title.innerText = "RISCO I (BAIXO)";
     }
     if(finalRisk === 2) {
         box.classList.add('res-medium');
-        icon.innerText = "⚠️";
         title.innerText = "RISCO II (MÉDIO)";
     }
     if(finalRisk === 3) {
         box.classList.add('res-high');
-        icon.innerText = "🚨";
         title.innerText = "RISCO III (ALTO)";
     }
 
-    desc.innerHTML = `<strong>Motivo:</strong> ${finalReason}`;
+    desc.innerText = finalReason;
+
+    // Leva o foco para o resultado, para leitores de tela anunciarem a classificação.
+    box.setAttribute('tabindex', '-1');
+    box.focus();
 }

@@ -1,208 +1,343 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classificador de Risco - CBMPE</title>
+    <meta name="description" content="Ferramenta gratuita do Corpo de Bombeiros Militar de Pernambuco para identificar a classificação de risco de incêndio (Risco I, II ou III) do seu estabelecimento, conforme o Decreto Estadual 61.082/2026.">
+    <meta name="theme-color" content="#B71C1C">
+    <title>Classificador de Risco de Incêndio | CBMPE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h2>Classificador de Risco</h2>
-        <div class="subtitle">Corpo de Bombeiros Militar de Pernambuco</div>
-    </header>
+<a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
 
-    <div class="content-area">
-
-        <div id="step-cnae" class="step active">
-            <span class="step-indicator">Etapa 1 de 7</span>
-            <p class="question-text">Quais são os CNAEs (atividades econômicas) cadastrados para a empresa?</p>
-
-            <div class="info-box">
-                Informe todos os códigos CNAE (principal e secundários), separados por vírgula, espaço ou quebra de linha. Pode digitar com ou sem pontuação (ex: 47.11-3-02 ou 4711302).
-            </div>
-
-            <textarea id="cnae-input" class="cnae-textarea" rows="4" placeholder="Ex: 47.11-3-02, 56.11-2-01, 85.11-1-02"></textarea>
-            <div id="cnae-error" class="cnae-error"></div>
-
-            <div class="actions">
-                <button class="btn btn-restart" onclick="submitCnae()">
-                    Continuar
-                </button>
+<header class="site-header">
+    <div class="site-header__inner">
+        <div class="brand">
+            <span class="brand__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22c4.5 0 7-3 7-6.8 0-3.2-2-5-3.2-7.3-.7 1.6-1.8 2.6-2.8 2.6-1.5 0-1.3-2-1.3-3.4C11.7 4.3 10.5 2 9 2c.6 2-.2 3.3-1.4 4.8C6.2 8.6 5 10.6 5 13.2 5 18 7.5 22 12 22Z"/>
+                    <path d="M12 22c1.8 0 3-1.4 3-3.2 0-1.6-1-2.6-1.6-3.7-.5.8-1 1.2-1.4 1.2-.6 0-.7-.8-.6-1.5-.9.6-1.9 1.8-1.9 3.4 0 2 1.4 3.8 2.5 3.8Z" fill="currentColor" stroke="none"/>
+                </svg>
+            </span>
+            <div class="brand__text">
+                <span class="brand__org">Corpo de Bombeiros Militar de Pernambuco</span>
+                <h1 class="brand__title">Classificador de Risco de Incêndio</h1>
             </div>
         </div>
-
-        <div id="step-1" class="step">
-            <span class="step-indicator">Etapa 2 de 7</span>
-            <p class="question-text">Qual a natureza da sua atividade?</p>
-            
-            <div class="info-box">
-                Considere esta opção se você possui escritório virtual (apenas para endereço fiscal), atividade 100% digital ou se presta serviço exclusivamente na casa do cliente.
-            </div>
-
-            <div class="actions">
-                <button class="btn" onclick="showResult(1, 'Atividade 100% Digital ou Domicílio Fiscal (Critério Prioritário de Isenção).')">
-                    Minha atividade é Digital / Domicílio Fiscal
-                </button>
-                <button class="btn" onclick="nextStep('step-2')">
-                    Possuo estabelecimento físico ou atendimento no local
-                </button>
-            </div>
-        </div>
-
-        <div id="step-2" class="step">
-            <span class="step-indicator">Etapa 3 de 7</span>
-            <p class="question-text">O seu estabelecimento se enquadra em ALGUMA das situações de alto risco abaixo?</p>
-            
-            <ul class="details-list">
-                <li>Comercializa ou Revende Gás de Cozinha (GLP)?</li>
-                <li>Armazena explosivos, tóxicos ou radioativos?</li>
-                <li>Possui mais de 190kg de Gás GLP (+ de 14 botijões P13)?</li>
-                <li>Armazena outros gases (solda, acetileno, gás natural)?</li>
-                <li>Armazena mais de 1.000 litros de líquidos inflamáveis?</li>
-                <li>É hospital com pacientes acamados ou dependentes?</li>
-                <li>É evento temporário com controle de acesso?</li>
-            </ul>
-
-            <div class="actions">
-                <button class="btn" onclick="showResult(3, 'Presença de gatilhos de Alto Risco (Materiais perigosos, GLP, Hospital, etc) conforme Art. 6º.')">
-                    SIM, enquadra-se em pelo menos uma
-                </button>
-                <button class="btn" onclick="nextStep('step-3')">
-                    NÃO, nenhuma das anteriores
-                </button>
-            </div>
-        </div>
-
-        <div id="step-3" class="step">
-            <span class="step-indicator">Etapa 4 de 7</span>
-            <p class="question-text">Onde seu estabelecimento está localizado?</p>
-            
-            <div class="actions">
-                <button class="btn" onclick="nextStep('step-3-complex')">
-                    Dentro de uma estrutura maior (Shopping, Galeria, Prédio Empresarial)
-                </button>
-                <button class="btn" onclick="nextStep('step-4')">
-                    É um imóvel de rua ou estrutura isolada
-                </button>
-            </div>
-        </div>
-
-        <div id="step-3-complex" class="step">
-            <span class="step-indicator">Etapa 4.1 - Avaliação da Edificação</span>
-            <p class="question-text">Sobre a estrutura principal (o Shopping ou Prédio):</p>
-            <div class="info-box">
-                Ela possui área total maior que 930 m², tem mais de 3 andares OU é local de grande reunião de público?
-            </div>
-
-            <div class="actions">
-                <button class="btn" onclick="nextStep('step-3-unit-check')">
-                    SIM (A estrutura é Grande/Alto Risco)
-                </button>
-                <button class="btn" onclick="nextStep('step-4')">
-                    NÃO (A estrutura é pequena/simples)
-                </button>
-            </div>
-        </div>
-
-        <div id="step-3-unit-check" class="step">
-            <span class="step-indicator">Etapa 4.2 - Verificação de Independência</span>
-            <p class="question-text">A sua loja atende a TODOS os critérios abaixo?</p>
-            
-            <ul class="details-list">
-                <li>Está localizada no Térreo?</li>
-                <li>Tem saída direta para a rua (sem passar por corredor interno)?</li>
-                <li>Não tem acesso às áreas comuns do prédio?</li>
-                <li>Tem sistemas preventivos (extintor, etc) independentes?</li>
-                <li>Tem área interna de até 930 m²?</li>
-            </ul>
-
-            <div class="actions">
-                <button class="btn" onclick="showResult(2, 'Classificado como Risco II (Médio) pela regra de exceção do Art. 7º §3º (Loja independente em estrutura maior).')">
-                    SIM, atendo a TODOS os critérios
-                </button>
-                <button class="btn" onclick="showResult(3, 'Classificado como Risco III pois está inserido em edificação de risco e não possui independência total (Art. 7º §3º).')">
-                    NÃO, falho em algum critério
-                </button>
-            </div>
-        </div>
-
-        <div id="step-4" class="step">
-            <span class="step-indicator">Etapa 5 de 7</span>
-            <p class="question-text">Selecione a opção que descreve as dimensões e uso do seu imóvel:</p>
-            
-            <div class="actions">
-                <button class="btn" onclick="showResult(3, 'Classificado Risco III: Área superior a 930m² (Art. 6º).')">
-                    Área maior que 930 m²
-                </button>
-                <button class="btn" onclick="showResult(3, 'Classificado Risco III: Edificação com mais de 3 pavimentos (Art. 6º).')">
-                    Possui mais de 3 andares (pavimentos)
-                </button>
-                <button class="btn" onclick="showResult(3, 'Classificado Risco III: Local de reunião de público > 100 pessoas ou Hotel > 40 leitos.')">
-                    Público > 100 pessoas OU Hotel > 40 leitos
-                </button>
-                <button class="btn" onclick="nextStep('step-5')">
-                    Nenhuma das anteriores (É menor e mais simples)
-                </button>
-            </div>
-        </div>
-
-        <div id="step-5" class="step">
-            <span class="step-indicator">Etapa 6 de 7</span>
-            <p class="question-text">Verificação de casos especiais de Baixo Risco:</p>
-            <div class="info-box">
-                Sua atividade se enquadra em algum destes casos?
-            </div>
-            <ul class="details-list">
-                <li>Realizada na própria residência (casa/apto).</li>
-                <li>Ambulante (food truck/carrinho individual).</li>
-                <li>Usa apenas tenda/barraca (área até 200m²).</li>
-                <li>Infraestrutura isolada (torre/antena/bomba até 200m²).</li>
-            </ul>
-
-            <div class="actions">
-                <button class="btn" onclick="showResult(1, 'Isenção por tipo de atividade (Residencial, Ambulante, Tenda ou Torre) conforme Art. 5º.')">
-                    SIM, se enquadra
-                </button>
-                <button class="btn" onclick="nextStep('step-6')">
-                    NÃO
-                </button>
-            </div>
-        </div>
-
-        <div id="step-6" class="step">
-            <span class="step-indicator">Etapa Final</span>
-            <p class="question-text">Para confirmar o Baixo Risco, você precisa atender a TUDO abaixo:</p>
-            
-            <ul class="details-list">
-                <li>Área construída até 200 m²;</li>
-                <li>Funciona exclusivamente no Térreo;</li>
-                <li>Tem saída direta para a rua e é isolado de vizinhos;</li>
-                <li>Máx. 3 botijões de gás (P13) e 150L de inflamáveis.</li>
-            </ul>
-
-            <div class="actions">
-                <button class="btn" onclick="showResult(1, 'Classificado Risco I: Atende todos os requisitos físicos do Art. 5º, VII.')">
-                    SIM, atendo a todos os itens
-                </button>
-                <button class="btn" onclick="showResult(2, 'Classificado como Risco II (Residual). Não é alto risco, mas excede os limites físicos do Risco I.')">
-                    NÃO, excedo algum limite acima
-                </button>
-            </div>
-        </div>
-
-        <div id="result" class="result-box">
-            <span id="res-icon" class="result-icon"></span>
-            <h1 id="res-title"></h1>
-            <p id="res-desc"></p>
-            <br>
-            <button class="btn btn-restart" onclick="location.reload()">Realizar Nova Consulta</button>
-        </div>
-
+        <p class="brand__subtitle">Responda a um questionário rápido e descubra a classificação de risco (I, II ou III) do seu estabelecimento para fins de regularização junto ao CBMPE.</p>
     </div>
-</div>
+</header>
+
+<main id="main-content" class="page">
+    <div class="card">
+
+        <div class="progress" id="progress-row">
+            <button type="button" id="back-btn" class="btn-back" onclick="goBack()" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+                Voltar
+            </button>
+            <div class="progress__track" role="progressbar" aria-label="Progresso do questionário" aria-valuemin="0" aria-valuemax="100" aria-valuenow="14" id="progress-track">
+                <div id="progress-bar" class="progress__bar"></div>
+            </div>
+            <span id="step-indicator" class="step-indicator">Etapa 1 de 7</span>
+        </div>
+
+        <div class="content-area">
+
+            <div id="step-cnae" class="step active" data-step="1" data-total="7" data-label="Etapa 1 de 7">
+                <h2 class="question-text">Quais são os CNAEs (atividades econômicas) cadastrados para a empresa?</h2>
+
+                <div class="info-box">
+                    <svg class="info-box__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="0.9" fill="currentColor" stroke="none"/>
+                    </svg>
+                    <span>Informe todos os códigos CNAE (principal e secundários), separados por vírgula, espaço ou quebra de linha. Pode digitar com ou sem pontuação (ex: 47.11-3-02 ou 4711302).</span>
+                </div>
+
+                <label for="cnae-input" class="field-label">Códigos CNAE</label>
+                <textarea id="cnae-input" class="cnae-textarea" rows="4" placeholder="Ex: 47.11-3-02, 56.11-2-01, 85.11-1-02" aria-describedby="cnae-error"></textarea>
+                <div id="cnae-error" class="cnae-error" role="alert" aria-live="polite"></div>
+
+                <details class="disclosure">
+                    <summary>Não sei meu CNAE. Onde encontro?</summary>
+                    <p>O código CNAE está registrado no Cartão CNPJ da empresa, emitido pela Receita Federal. Ele também costuma aparecer no contrato social ou no alvará de funcionamento.</p>
+                </details>
+
+                <div class="actions">
+                    <button type="button" class="btn btn-primary" onclick="submitCnae()">
+                        Continuar
+                    </button>
+                </div>
+            </div>
+
+            <div id="step-1" class="step" data-step="2" data-total="7" data-label="Etapa 2 de 7">
+                <h2 class="question-text">Qual a natureza da sua atividade?</h2>
+
+                <div class="info-box">
+                    <svg class="info-box__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="0.9" fill="currentColor" stroke="none"/>
+                    </svg>
+                    <span>Considere esta opção se você possui escritório virtual (apenas para endereço fiscal), atividade 100% digital ou se presta serviço exclusivamente na casa do cliente.</span>
+                </div>
+
+                <div class="actions">
+                    <button type="button" class="btn" onclick="showResult(1, 'Atividade 100% Digital ou Domicílio Fiscal (Critério Prioritário de Isenção).')">
+                        Minha atividade é Digital / Domicílio Fiscal
+                    </button>
+                    <button type="button" class="btn" onclick="nextStep('step-2')">
+                        Possuo estabelecimento físico ou atendimento no local
+                    </button>
+                </div>
+            </div>
+
+            <div id="step-2" class="step" data-step="3" data-total="7" data-label="Etapa 3 de 7">
+                <h2 class="question-text">O seu estabelecimento se enquadra em ALGUMA das situações de alto risco abaixo?</h2>
+
+                <ul class="details-list">
+                    <li>Comercializa ou Revende Gás de Cozinha (GLP)?</li>
+                    <li>Armazena explosivos, tóxicos ou radioativos?</li>
+                    <li>Possui mais de 190kg de Gás GLP (+ de 14 botijões P13)?</li>
+                    <li>Armazena outros gases (solda, acetileno, gás natural)?</li>
+                    <li>Armazena mais de 1.000 litros de líquidos inflamáveis?</li>
+                    <li>É hospital com pacientes acamados ou dependentes?</li>
+                    <li>É evento temporário com controle de acesso?</li>
+                </ul>
+
+                <div class="actions">
+                    <button type="button" class="btn" onclick="showResult(3, 'Presença de gatilhos de Alto Risco (Materiais perigosos, GLP, Hospital, etc) conforme Art. 6º.')">
+                        SIM, enquadra-se em pelo menos uma
+                    </button>
+                    <button type="button" class="btn" onclick="nextStep('step-3')">
+                        NÃO, nenhuma das anteriores
+                    </button>
+                </div>
+            </div>
+
+            <div id="step-3" class="step" data-step="4" data-total="7" data-label="Etapa 4 de 7">
+                <h2 class="question-text">Onde seu estabelecimento está localizado?</h2>
+
+                <div class="actions">
+                    <button type="button" class="btn" onclick="nextStep('step-3-complex')">
+                        Dentro de uma estrutura maior (Shopping, Galeria, Prédio Empresarial)
+                    </button>
+                    <button type="button" class="btn" onclick="nextStep('step-4')">
+                        É um imóvel de rua ou estrutura isolada
+                    </button>
+                </div>
+            </div>
+
+            <div id="step-3-complex" class="step" data-step="4" data-total="7" data-label="Etapa 4 de 7 · Avaliação da edificação">
+                <h2 class="question-text">Sobre a estrutura principal (o Shopping ou Prédio):</h2>
+                <div class="info-box">
+                    <svg class="info-box__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="0.9" fill="currentColor" stroke="none"/>
+                    </svg>
+                    <span>Ela possui área total maior que 930 m², tem mais de 3 andares OU é local de grande reunião de público?</span>
+                </div>
+
+                <div class="actions">
+                    <button type="button" class="btn" onclick="nextStep('step-3-unit-check')">
+                        SIM (A estrutura é Grande/Alto Risco)
+                    </button>
+                    <button type="button" class="btn" onclick="nextStep('step-4')">
+                        NÃO (A estrutura é pequena/simples)
+                    </button>
+                </div>
+            </div>
+
+            <div id="step-3-unit-check" class="step" data-step="4" data-total="7" data-label="Etapa 4 de 7 · Verificação de independência">
+                <h2 class="question-text">A sua loja atende a TODOS os critérios abaixo?</h2>
+
+                <ul class="details-list">
+                    <li>Está localizada no Térreo?</li>
+                    <li>Tem saída direta para a rua (sem passar por corredor interno)?</li>
+                    <li>Não tem acesso às áreas comuns do prédio?</li>
+                    <li>Tem sistemas preventivos (extintor, etc) independentes?</li>
+                    <li>Tem área interna de até 930 m²?</li>
+                </ul>
+
+                <div class="actions">
+                    <button type="button" class="btn" onclick="showResult(2, 'Classificado como Risco II (Médio) pela regra de exceção do Art. 7º §3º (Loja independente em estrutura maior).')">
+                        SIM, atendo a TODOS os critérios
+                    </button>
+                    <button type="button" class="btn" onclick="showResult(3, 'Classificado como Risco III pois está inserido em edificação de risco e não possui independência total (Art. 7º §3º).')">
+                        NÃO, falho em algum critério
+                    </button>
+                </div>
+            </div>
+
+            <div id="step-4" class="step" data-step="5" data-total="7" data-label="Etapa 5 de 7">
+                <h2 class="question-text">Selecione a opção que descreve as dimensões e uso do seu imóvel:</h2>
+
+                <div class="actions">
+                    <button type="button" class="btn" onclick="showResult(3, 'Classificado Risco III: Área superior a 930m² (Art. 6º).')">
+                        Área maior que 930 m²
+                    </button>
+                    <button type="button" class="btn" onclick="showResult(3, 'Classificado Risco III: Edificação com mais de 3 pavimentos (Art. 6º).')">
+                        Possui mais de 3 andares (pavimentos)
+                    </button>
+                    <button type="button" class="btn" onclick="showResult(3, 'Classificado Risco III: Local de reunião de público > 100 pessoas ou Hotel > 40 leitos.')">
+                        Público > 100 pessoas OU Hotel > 40 leitos
+                    </button>
+                    <button type="button" class="btn" onclick="nextStep('step-5')">
+                        Nenhuma das anteriores (É menor e mais simples)
+                    </button>
+                </div>
+            </div>
+
+            <div id="step-5" class="step" data-step="6" data-total="7" data-label="Etapa 6 de 7">
+                <h2 class="question-text">Verificação de casos especiais de Baixo Risco:</h2>
+                <div class="info-box">
+                    <svg class="info-box__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="0.9" fill="currentColor" stroke="none"/>
+                    </svg>
+                    <span>Sua atividade se enquadra em algum destes casos?</span>
+                </div>
+                <ul class="details-list">
+                    <li>Realizada na própria residência (casa/apto).</li>
+                    <li>Ambulante (food truck/carrinho individual).</li>
+                    <li>Usa apenas tenda/barraca (área até 200m²).</li>
+                    <li>Infraestrutura isolada (torre/antena/bomba até 200m²).</li>
+                </ul>
+
+                <div class="actions">
+                    <button type="button" class="btn" onclick="showResult(1, 'Isenção por tipo de atividade (Residencial, Ambulante, Tenda ou Torre) conforme Art. 5º.')">
+                        SIM, se enquadra
+                    </button>
+                    <button type="button" class="btn" onclick="nextStep('step-6')">
+                        NÃO
+                    </button>
+                </div>
+            </div>
+
+            <div id="step-6" class="step" data-step="7" data-total="7" data-label="Etapa final">
+                <h2 class="question-text">Para confirmar o Baixo Risco, você precisa atender a TUDO abaixo:</h2>
+
+                <ul class="details-list">
+                    <li>Área construída até 200 m²;</li>
+                    <li>Funciona exclusivamente no Térreo;</li>
+                    <li>Tem saída direta para a rua e é isolado de vizinhos;</li>
+                    <li>Máx. 3 botijões de gás (P13) e 150L de inflamáveis.</li>
+                </ul>
+
+                <div class="actions">
+                    <button type="button" class="btn" onclick="showResult(1, 'Classificado Risco I: Atende todos os requisitos físicos do Art. 5º, VII.')">
+                        SIM, atendo a todos os itens
+                    </button>
+                    <button type="button" class="btn" onclick="showResult(2, 'Classificado como Risco II (Residual). Não é alto risco, mas excede os limites físicos do Risco I.')">
+                        NÃO, excedo algum limite acima
+                    </button>
+                </div>
+            </div>
+
+            <div id="result" class="result-box">
+                <div class="result-icon" aria-hidden="true">
+                    <svg class="icon-low" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3l7 3v6c0 4.6-3 8.3-7 9-4-.7-7-4.4-7-9V6l7-3Z"/><path d="M9 12l2 2 4-4"/>
+                    </svg>
+                    <svg class="icon-medium" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                    </svg>
+                    <svg class="icon-high" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M8.5 3h7L21 8.5v7L15.5 21h-7L4 15.5v-7L8.5 3Z"/><line x1="12" y1="8" x2="12" y2="13"/><circle cx="12" cy="16" r="0.9" fill="currentColor" stroke="none"/>
+                    </svg>
+                </div>
+                <h2 id="res-title" class="result-title"></h2>
+
+                <div class="result-reason">
+                    <span class="result-reason__label">Motivo</span>
+                    <p id="res-desc"></p>
+                </div>
+
+                <!-- =====================================================
+                     PRÓXIMOS PASSOS — exibidos condicionalmente por CSS
+                     conforme a classe res-low / res-medium / res-high
+                ====================================================== -->
+
+                <!-- RISCO I -->
+                <div class="next-steps next-steps--low" aria-label="Próximos passos para Risco I">
+                    <h3 class="next-steps__title">O que fazer agora?</h3>
+                    <div class="next-steps__alert">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                        </svg>
+                        <span>Atenção: a dispensa é apenas do AVCB. Os dispositivos de segurança contra incêndio (extintores, saídas de emergência, etc.) continuam <strong>obrigatórios</strong>.</span>
+                    </div>
+                    <p class="next-steps__body">Seu estabelecimento está dispensado do AVCB (Atestado de Vistoria do Corpo de Bombeiros). Em substituição, você receberá o <strong>DDLCB</strong> — Declaração de Dispensa de Licença do Corpo de Bombeiros.</p>
+                    <a href="https://www.bombeiros.pe.gov.br" target="_blank" rel="noopener noreferrer" class="next-steps__cta">
+                        Acessar o site do CBMPE
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                </div>
+
+                <!-- RISCO II -->
+                <div class="next-steps next-steps--medium" aria-label="Próximos passos para Risco II">
+                    <h3 class="next-steps__title">O que fazer agora?</h3>
+                    <p class="next-steps__body">Para obter o <strong>AVCB</strong> (Atestado de Vistoria do Corpo de Bombeiros), acesse o site do CBMPE e dê entrada no processo de <strong>Vistoria de Regularização</strong>. Não é necessário apresentar projeto contra incêndio.</p>
+                    <p class="next-steps__highlight">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                        Prazo estimado: até <strong>2 semanas</strong> após a realização da vistoria.
+                    </p>
+                    <a href="https://www.bombeiros.pe.gov.br" target="_blank" rel="noopener noreferrer" class="next-steps__cta">
+                        Iniciar processo de vistoria no site do CBMPE
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                </div>
+
+                <!-- RISCO III -->
+                <div class="next-steps next-steps--high" aria-label="Próximos passos para Risco III">
+                    <h3 class="next-steps__title">O que fazer agora?</h3>
+                    <p class="next-steps__body">A regularização exige dois processos sequenciais. Acesse o site do CBMPE e siga a ordem abaixo:</p>
+                    <ol class="next-steps__steps">
+                        <li>
+                            <span class="next-steps__step-num">1</span>
+                            <div>
+                                <strong>Análise de Projeto contra incêndio</strong>
+                                <span>Protocole este processo primeiro. É pré-requisito obrigatório para a etapa seguinte.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="next-steps__step-num">2</span>
+                            <div>
+                                <strong>Vistoria de Regularização</strong>
+                                <span>Dê entrada somente após a aprovação do projeto para obter o AVCB.</span>
+                            </div>
+                        </li>
+                    </ol>
+                    <a href="https://www.bombeiros.pe.gov.br" target="_blank" rel="noopener noreferrer" class="next-steps__cta">
+                        Iniciar processo no site do CBMPE
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                </div>
+
+                <p class="disclaimer disclaimer--result">Esta ferramenta tem caráter orientativo e não substitui a análise técnica oficial do CBMPE. Em caso de dúvida, procure a unidade do Corpo de Bombeiros responsável pela sua região.</p>
+
+                <div class="actions actions--result">
+                    <button type="button" class="btn btn-primary" onclick="window.print()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="4" y="9" width="16" height="8" rx="1.5"/><path d="M6 14h12v7H6z"/></svg>
+                        Imprimir / salvar resultado
+                    </button>
+                    <button type="button" class="btn btn-outline" onclick="location.reload()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3"/><path d="M18 3v4h-4M6 21v-4h4"/></svg>
+                        Fazer nova consulta
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<footer class="site-footer">
+    <p>Corpo de Bombeiros Militar de Pernambuco &middot; Decreto Estadual 61.082/2026</p>
+</footer>
 
 <script src="script.js"></script>
 
