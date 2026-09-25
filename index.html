@@ -42,12 +42,12 @@
             <div class="progress__track" role="progressbar" aria-label="Progresso do questionário" aria-valuemin="0" aria-valuemax="100" aria-valuenow="14" id="progress-track">
                 <div id="progress-bar" class="progress__bar"></div>
             </div>
-            <span id="step-indicator" class="step-indicator">Etapa 1 de 7</span>
+            <span id="step-indicator" class="step-indicator">Etapa 1 de 5</span>
         </div>
 
         <div class="content-area">
 
-            <div id="step-cnae" class="step active" data-step="1" data-total="4" data-label="Etapa 1 de 4">
+            <div id="step-cnae" class="step active" data-step="1" data-total="5" data-label="Etapa 1 de 5">
                 <h2 class="question-text">Quais são os CNAEs (atividades econômicas) cadastrados para a empresa?</h2>
 
                 <div class="info-box">
@@ -73,7 +73,84 @@
                 </div>
             </div>
 
-            <div id="step-alto-risco" class="step" data-step="2" data-total="4" data-label="Etapa 2 de 4 · Risco Alto">
+            <div id="step-eventos" class="step" data-step="2" data-total="5" data-label="Etapa 2 de 5 · Eventos e Casas de Festas">
+                <h2 class="question-text">O seu estabelecimento envolve casas de festas, eventos ou público temporário?</h2>
+
+                <div class="info-box">
+                    <svg class="info-box__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="0.9" fill="currentColor" stroke="none"/>
+                    </svg>
+                    <span>Marque tudo o que se aplica. Se o seu negócio não tem nenhuma relação com festas ou eventos, pode deixar tudo desmarcado e avançar.</span>
+                </div>
+
+                <div class="risk-block">
+                    <div class="check-item">
+                        <label class="check-item__label">
+                            <input type="checkbox" class="check-item__input" data-reason="casa de festas/eventos (local fixo/permanente destinado a festas e eventos)">
+                            <span>O seu estabelecimento é um local fixo/permanente voltado para festas, eventos, shows, recepções, casas noturnas ou salões de bailes?</span>
+                        </label>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <p>Aplica-se a imóveis comerciais permanentes destinados à locação ou realização de festas e eventos.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="check-item">
+                        <label class="check-item__label">
+                            <input type="checkbox" class="check-item__input" data-reason="evento temporário com controle/restrição de acesso de público, independente da área ou do público (Art. 6º, XV)">
+                            <span>Trata-se de um evento temporário que terá controle ou restrição de acesso de público (cobrança de ingressos, bilheteria, catracas, portaria com lista ou contagem de pessoas), independentemente do tamanho do espaço ou da quantidade de público?</span>
+                        </label>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <p>Inclui qualquer festa temporária, show, feira, circo, parque ou festival fechado que exija ingresso, convite, cadastro ou contagem na entrada, mesmo que seja em área pequena.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="check-item">
+                        <label class="check-item__label">
+                            <input type="checkbox" class="check-item__input" data-reason="evento temporário sem controle de acesso com área montada superior a 930 m² ou camarotes/arquibancadas para mais de 100 pessoas (Art. 6º, XIV)">
+                            <span>Trata-se de um evento temporário livre e aberto ao público (sem bilheteria ou controle de entrada) que possua área montada/ocupada superior a 930 metros quadrados OU camarotes/arquibancadas para mais de 100 pessoas?</span>
+                        </label>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <p>Aplica-se a eventos em praças públicas, ruas ou espaços abertos sem cobrança/catraca, mas que utilizem grandes estruturas (tendas/palcos acima de 930 m²) ou arquibancadas/camarotes significativos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="risk-block risk-block--neutral">
+                    <div class="check-item check-item--none">
+                        <label class="check-item__label">
+                            <input type="checkbox" class="check-item__input check-item__input--none">
+                            <span><strong>Nenhuma das alternativas anteriores</strong> — meu negócio não tem relação com casas de festas, eventos ou público temporário.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <p class="selection-hint">Selecione ao menos uma opção acima para continuar.</p>
+                    <button type="button" class="btn btn-primary" onclick="checkEventos()" disabled>
+                        Continuar
+                    </button>
+                </div>
+            </div>
+
+            <div id="step-alto-risco" class="step" data-step="3" data-total="5" data-label="Etapa 3 de 5 · Risco Alto">
                 <h2 class="question-text">O seu estabelecimento se enquadra em ALGUMA das situações de Alto Risco abaixo?</h2>
 
                 <div class="info-box">
@@ -91,10 +168,15 @@
                             <input type="checkbox" class="check-item__input" data-reason="área construída superior a 930 m²">
                             <span>A área construída onde a empresa vai funcionar tem mais de 930 metros quadrados?</span>
                         </label>
-                        <details class="disclosure disclosure--tight">
-                            <summary>Ajuda para responder</summary>
-                            <p>Caso a empresa esteja inserida em uma outra edificação maior (shopping, galeria, prédio comercial), você DEVE considerar a área total do condomínio. Para o CBMPE, área construída é qualquer espaço coberto com teto sob piso trabalhado (soma de todos os cômodos, andares, garagens cobertas, galpões, depósitos, varandas, marquises e mezaninos) — diferente da Prefeitura, o CBMPE não desconta garagens ou coberturas na soma.</p>
-                        </details>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <p>Caso a empresa esteja inserida em uma outra edificação maior (shopping, galeria, prédio comercial), você DEVE considerar a área total do condomínio. Para o CBMPE, área construída é qualquer espaço coberto com teto sob piso trabalhado (soma de todos os cômodos, andares, garagens cobertas, galpões, depósitos, varandas, marquises e mezaninos) — diferente da Prefeitura, o CBMPE não desconta garagens ou coberturas na soma.</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="check-item">
@@ -102,10 +184,15 @@
                             <input type="checkbox" class="check-item__input" data-reason="edificação com mais de 3 pavimentos">
                             <span>O imóvel onde a empresa vai funcionar possui mais de 3 andares (pavimentos)?</span>
                         </label>
-                        <details class="disclosure disclosure--tight">
-                            <summary>Ajuda para responder</summary>
-                            <p>Conte o número total de pavimentos do prédio (térreo + andares superiores). Se houver subsolo utilizado exclusivamente para estacionamento de veículos (sem posto de combustível ou lavagem), esse subsolo não entra na contagem dos andares.</p>
-                        </details>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <p>Conte o número total de pavimentos do prédio (térreo + andares superiores). Se houver subsolo utilizado exclusivamente para estacionamento de veículos (sem posto de combustível ou lavagem), esse subsolo não entra na contagem dos andares.</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="check-item">
@@ -113,10 +200,15 @@
                             <input type="checkbox" class="check-item__input" data-reason="local de reunião de público com mais de 100 pessoas">
                             <span>O local é destinado a reunir pessoas (restaurante, bar, igreja, salão de festas, academia, danceteria ou auditório) e tem capacidade para mais de 100 pessoas ao mesmo tempo?</span>
                         </label>
-                        <details class="disclosure disclosure--tight">
-                            <summary>Ajuda para responder</summary>
-                            <p>Aplica-se a espaços destinados ao acesso público onde as pessoas se reúnem para eventos, cultos, refeições, festas, aulas em grupo ou lazer.</p>
-                        </details>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <p>Aplica-se a espaços destinados ao acesso público onde as pessoas se reúnem para eventos, cultos, refeições, festas, aulas em grupo ou lazer.</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="check-item">
@@ -124,10 +216,15 @@
                             <input type="checkbox" class="check-item__input" data-reason="hotel, pousada ou alojamento com mais de 40 leitos">
                             <span>Se o local for um hotel, pousada, pensão ou alojamento: possui mais de 40 camas (leitos) para hóspedes?</span>
                         </label>
-                        <details class="disclosure disclosure--tight">
-                            <summary>Ajuda para responder</summary>
-                            <p>Conte o número total de camas (leitos de solteiro e casal) disponíveis para os hóspedes no estabelecimento.</p>
-                        </details>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <p>Conte o número total de camas (leitos de solteiro e casal) disponíveis para os hóspedes no estabelecimento.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -139,10 +236,15 @@
                             <input type="checkbox" class="check-item__input" data-reason="venda/revenda de botijões de GLP ou central fixa acima de 190 kg">
                             <span>O negócio faz a venda ou revenda de botijões de gás de cozinha, ou possui central fixa de gás com mais de 190 kg?</span>
                         </label>
-                        <details class="disclosure disclosure--tight">
-                            <summary>Ajuda para responder</summary>
-                            <p>Aplica-se a depósitos/comércios que vendem botijões de gás e a estabelecimentos com centrais fixas de tubulação de gás com capacidade superior a 190 kg (como grandes padarias, restaurantes e indústrias).</p>
-                        </details>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <p>Aplica-se a depósitos/comércios que vendem botijões de gás e a estabelecimentos com centrais fixas de tubulação de gás com capacidade superior a 190 kg (como grandes padarias, restaurantes e indústrias).</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="check-item">
@@ -150,10 +252,15 @@
                             <input type="checkbox" class="check-item__input" data-reason="mais de 1.000 litros de líquidos inflamáveis">
                             <span>O estabelecimento guarda ou utiliza mais de 1.000 litros de produtos líquidos que pegam fogo (como gasolina, álcool, óleo diesel, tintas ou solventes)?</span>
                         </label>
-                        <details class="disclosure disclosure--tight">
-                            <summary>Ajuda para responder</summary>
-                            <p>Some a quantidade total contida em todos os galões, tambores, latas de tinta, solventes ou tanques armazenados no seu espaço.</p>
-                        </details>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <p>Some a quantidade total contida em todos os galões, tambores, latas de tinta, solventes ou tanques armazenados no seu espaço.</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="check-item">
@@ -161,16 +268,21 @@
                             <input type="checkbox" class="check-item__input" data-reason="fabricação, armazenamento ou comércio de outros gases combustíveis, industriais ou medicinais">
                             <span>O seu estabelecimento fabrica, armazena, utiliza em seus processos ou comercializa outros tipos de gases combustíveis, industriais ou medicinais (em cilindros, tanques ou tubulação encanada)?</span>
                         </label>
-                        <details class="disclosure disclosure--tight">
-                            <summary>Ajuda para responder</summary>
-                            <p>Verifique se o seu negócio utiliza ou guarda algum dos gases abaixo:</p>
-                            <ul class="details-list">
-                                <li><strong>Gases combustíveis</strong> (pegam fogo ou podem explodir facilmente): usados como combustível para veículos, máquinas, aquecimento ou solda. Exemplos: Gás Natural Encanado (GN) ou Veicular (GNV), acetileno (maçaricos de solda), hidrogênio, biogás e propano industrial.</li>
-                                <li><strong>Gases industriais</strong> (usados em oficinas, fábricas, refrigeração ou processos técnicos): empregados no funcionamento de indústrias, oficinas mecânicas, corte de metais, envasamento de bebidas ou refrigeração de câmaras frias. Exemplos: oxigênio industrial, argônio, nitrogênio, amônia anidra (frigoríficos e fábricas de gelo) e dióxido de carbono (CO₂ industrial).</li>
-                                <li><strong>Gases medicinais</strong> (uso hospitalar, odontológico ou terapêutico): gases com grau de pureza medicinal usados para tratamento de saúde, respiração assistida, anestesia ou equipamentos médicos e odontológicos. Exemplos: oxigênio medicinal, óxido nitroso (anestésico), ar comprimido medicinal e misturas gasosas para UTIs ou fisioterapia respiratória.</li>
-                            </ul>
-                            <p class="risk-block__note">Obs.: nitrogênio utilizado exclusivamente em dispensers de bebidas e chopeiras não se enquadra neste critério.</p>
-                        </details>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <p>Verifique se o seu negócio utiliza ou guarda algum dos gases abaixo:</p>
+                                <ul class="details-list">
+                                    <li><strong>Gases combustíveis</strong> (pegam fogo ou podem explodir facilmente): usados como combustível para veículos, máquinas, aquecimento ou solda. Exemplos: Gás Natural Encanado (GN) ou Veicular (GNV), acetileno (maçaricos de solda), hidrogênio, biogás e propano industrial.</li>
+                                    <li><strong>Gases industriais</strong> (usados em oficinas, fábricas, refrigeração ou processos técnicos): empregados no funcionamento de indústrias, oficinas mecânicas, corte de metais, envasamento de bebidas ou refrigeração de câmaras frias. Exemplos: oxigênio industrial, argônio, nitrogênio, amônia anidra (frigoríficos e fábricas de gelo) e dióxido de carbono (CO₂ industrial).</li>
+                                    <li><strong>Gases medicinais</strong> (uso hospitalar, odontológico ou terapêutico): gases com grau de pureza medicinal usados para tratamento de saúde, respiração assistida, anestesia ou equipamentos médicos e odontológicos. Exemplos: oxigênio medicinal, óxido nitroso (anestésico), ar comprimido medicinal e misturas gasosas para UTIs ou fisioterapia respiratória.</li>
+                                </ul>
+                                <p class="risk-block__note">Obs.: nitrogênio utilizado exclusivamente em dispensers de bebidas e chopeiras não se enquadra neste critério.</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="check-item">
@@ -178,58 +290,67 @@
                             <input type="checkbox" class="check-item__input" data-reason="fabricação, guarda ou comércio de produtos perigosos, químicos ou explosivos">
                             <span>O seu estabelecimento fabrica, guarda, comercializa ou manipula algum produto ou substância perigosa listada na ajuda abaixo?</span>
                         </label>
-                        <details class="disclosure disclosure--tight">
-                            <summary>Ajuda para responder</summary>
-                            <p>Verifique se possui algum destes itens:</p>
-                            <ul class="details-list">
-                                <li>Explosivos e pirotecnia: pólvoras, dinamites, espoletas ou fogos de artifício</li>
-                                <li>Gases perigosos ou tóxicos: acetileno, amônia, cloro ou hidrogênio</li>
-                                <li>Sólidos inflamáveis: materiais que acendem facilmente por calor ou atrito (fósforos industriais, enxofre, magnésio)</li>
-                                <li>Combustão espontânea: produtos que podem pegar fogo sozinhos no ar (carvão ativado, fósforo branco, trapos com óleo)</li>
-                                <li>Reativos com água: substâncias que soltam gases perigosos se molhadas (sódio metálico, potássio, carbureto de cálcio)</li>
-                                <li>Oxidantes e peróxidos: produtos que alimentam o fogo ou explodem com calor (água oxigenada industrial, cloro concentrado para piscinas, nitrato de amônio, peróxidos orgânicos)</li>
-                                <li>Produtos tóxicos ou infectantes: agrotóxicos, pesticidas, venenos ou resíduos hospitalares infectantes</li>
-                                <li>Produtos corrosivos: ácidos fortes (sulfúrico, clorídrico, nítrico), soda cáustica ou alvejantes industriais</li>
-                                <li>Materiais radioativos: substâncias ou aparelhos que emitem radiação</li>
-                            </ul>
-                        </details>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <p>Verifique se possui algum destes itens:</p>
+                                <ul class="details-list">
+                                    <li>Explosivos e pirotecnia: pólvoras, dinamites, espoletas ou fogos de artifício</li>
+                                    <li>Gases perigosos ou tóxicos: acetileno, amônia, cloro ou hidrogênio</li>
+                                    <li>Sólidos inflamáveis: materiais que acendem facilmente por calor ou atrito (fósforos industriais, enxofre, magnésio)</li>
+                                    <li>Combustão espontânea: produtos que podem pegar fogo sozinhos no ar (carvão ativado, fósforo branco, trapos com óleo)</li>
+                                    <li>Reativos com água: substâncias que soltam gases perigosos se molhadas (sódio metálico, potássio, carbureto de cálcio)</li>
+                                    <li>Oxidantes e peróxidos: produtos que alimentam o fogo ou explodem com calor (água oxigenada industrial, cloro concentrado para piscinas, nitrato de amônio, peróxidos orgânicos)</li>
+                                    <li>Produtos tóxicos ou infectantes: agrotóxicos, pesticidas, venenos ou resíduos hospitalares infectantes</li>
+                                    <li>Produtos corrosivos: ácidos fortes (sulfúrico, clorídrico, nítrico), soda cáustica ou alvejantes industriais</li>
+                                    <li>Materiais radioativos: substâncias ou aparelhos que emitem radiação</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="risk-block">
-                    <p class="risk-block__label">Saúde e eventos</p>
+                    <p class="risk-block__label">Saúde</p>
 
                     <div class="check-item">
                         <label class="check-item__label">
                             <input type="checkbox" class="check-item__input" data-reason="estabelecimento de saúde com internação ou pacientes de mobilidade reduzida">
                             <span>O local é um hospital, pronto-socorro ou clínica onde os pacientes ficam internados ou têm dificuldade para andar e sair sozinhos em uma emergência?</span>
                         </label>
-                        <details class="disclosure disclosure--tight">
-                            <summary>Ajuda para responder</summary>
-                            <p>Aplica-se a estabelecimentos de saúde com leitos de internação ou atendimento a pessoas acamadas/com mobilidade reduzida.</p>
-                        </details>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <p>Aplica-se a estabelecimentos de saúde com leitos de internação ou atendimento a pessoas acamadas/com mobilidade reduzida.</p>
+                            </div>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="check-item">
+                <div class="risk-block risk-block--neutral">
+                    <div class="check-item check-item--none">
                         <label class="check-item__label">
-                            <input type="checkbox" class="check-item__input" data-reason="evento temporário ou casa de festas com grande público ou área">
-                            <span>O local é uma casa de festas/eventos ou receberá evento temporário com cobrança/controle de ingressos, camarotes/arquibancadas para mais de 100 pessoas ou área montada maior que 930 metros quadrados?</span>
+                            <input type="checkbox" class="check-item__input check-item__input--none">
+                            <span><strong>Nenhuma das alternativas anteriores</strong> — meu negócio não se enquadra em nenhuma das situações de Alto Risco acima.</span>
                         </label>
-                        <details class="disclosure disclosure--tight">
-                            <summary>Ajuda para responder</summary>
-                            <p>Inclui festas com bilheteria/controle de acesso (independente do tamanho), feiras, shows, circos, rodeios ou estruturas temporárias como palcos, tendas e camarotes.</p>
-                        </details>
                     </div>
                 </div>
 
                 <div class="actions">
-                    <button type="button" class="btn btn-primary" onclick="checkAltoRisco()">
+                    <p class="selection-hint">Selecione ao menos uma opção acima para continuar.</p>
+                    <button type="button" class="btn btn-primary" onclick="checkAltoRisco()" disabled>
                         Verificar classificação
                     </button>
                 </div>
             </div>
 
-            <div id="step-baixo-bloco-a" class="step" data-step="3" data-total="4" data-label="Etapa 3 de 4 · Risco Baixo (Bloco A)">
+            <div id="step-baixo-bloco-a" class="step" data-step="4" data-total="5" data-label="Etapa 4 de 5 · Risco Baixo (Bloco A)">
                 <h2 class="question-text">O seu negócio se enquadra em ALGUMA das situações abaixo?</h2>
 
                 <div class="info-box">
@@ -245,10 +366,15 @@
                             <input type="checkbox" class="check-item__input" data-reason="domicílio fiscal / trabalho digital ou externo, sem atendimento presencial no local">
                             <span>O endereço cadastrado serve apenas como ponto de contato fiscal (para impostos e correspondências), SEM atendimento presencial de clientes, SEM estoque de mercadorias e SEM funcionários no local, sendo o serviço prestado exclusivamente pela internet ou no endereço dos clientes?</span>
                         </label>
-                        <details class="disclosure disclosure--tight">
-                            <summary>Ajuda para responder</summary>
-                            <p>Exemplos: pintor, eletricista, encanador, pedreiro, programador, consultor, representante comercial, vendedor digital, aula particular online ou escritório virtual operado em casa ou apartamento.</p>
-                        </details>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <p>Exemplos: pintor, eletricista, encanador, pedreiro, programador, consultor, representante comercial, vendedor digital, aula particular online ou escritório virtual operado em casa ou apartamento.</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="check-item">
@@ -256,17 +382,34 @@
                             <input type="checkbox" class="check-item__input" data-reason="atividade comercial ou artesanal executada dentro de residência unifamiliar">
                             <span>A atividade comercial, artesanal ou de pequena produção é efetivamente executada dentro da sua moradia, sendo este imóvel uma casa (residência unifamiliar própria ou alugada)?</span>
                         </label>
-                        <details class="disclosure disclosure--tight">
-                            <summary>Ajuda para responder</summary>
-                            <p>Exemplos: ateliê de costura, produção artesanal de doces ou pequenas oficinas montadas na garagem/espaço de uma casa.</p>
-                        </details>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <p>Exemplos: ateliê de costura, produção artesanal de doces ou pequenas oficinas montadas na garagem/espaço de uma casa.</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="check-item">
                         <label class="check-item__label">
-                            <input type="checkbox" class="check-item__input" data-reason="atividade ambulante ou comércio em veículo">
-                            <span>A atividade é exercida individualmente de forma itinerante/ambulante (food truck, carrinho de lanche, reboque ou veículo comercial)?</span>
+                            <input type="checkbox" class="check-item__input" data-reason="atividade ambulante isolada em via pública, fora de Food Park, feira ou praça de alimentação">
+                            <span>A sua atividade é exercida de forma individual, ISOLADA e diretamente na via pública (rua/calçada), FORA de qualquer Food Park, feira, arena, praça de alimentação ou evento?</span>
                         </label>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <ul class="details-list">
+                                    <li><strong>Marque SIM apenas se:</strong> você trabalha sozinho na rua ou calçada pública com seu carrinho, reboque, barraca ou food truck.</li>
+                                    <li><strong>Marque NÃO se:</strong> o seu food truck, reboque ou barraca funciona dentro de um Food Park, feira comercial, praça privada, arena ou espaço com outros comércios/trailers ao lado (mesmo que seja em área aberta ou temporária).</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="check-item">
@@ -284,14 +427,24 @@
                     </div>
                 </div>
 
+                <div class="risk-block risk-block--neutral">
+                    <div class="check-item check-item--none">
+                        <label class="check-item__label">
+                            <input type="checkbox" class="check-item__input check-item__input--none">
+                            <span><strong>Nenhuma das alternativas anteriores</strong> — meu negócio não se enquadra em nenhuma das situações acima.</span>
+                        </label>
+                    </div>
+                </div>
+
                 <div class="actions">
-                    <button type="button" class="btn btn-primary" onclick="checkBaixoBlocoA()">
+                    <p class="selection-hint">Selecione ao menos uma opção acima para continuar.</p>
+                    <button type="button" class="btn btn-primary" onclick="checkBaixoBlocoA()" disabled>
                         Verificar classificação
                     </button>
                 </div>
             </div>
 
-            <div id="step-baixo-bloco-b" class="step" data-step="4" data-total="4" data-label="Etapa 4 de 4 · Risco Baixo (Bloco B)">
+            <div id="step-baixo-bloco-b" class="step" data-step="5" data-total="5" data-label="Etapa 5 de 5 · Risco Baixo (Bloco B)">
                 <h2 class="question-text">Para ser Risco Baixo, seu estabelecimento precisa atender a TODOS os itens abaixo:</h2>
 
                 <div class="info-box">
@@ -336,17 +489,20 @@
                             <span>Guarda ou utiliza no máximo 150 litros de líquidos que pegam fogo (como álcool, tinta, solvente ou combustível)?</span>
                         </label>
                     </div>
+                </div>
 
-                    <div class="check-item">
+                <div class="risk-block risk-block--neutral">
+                    <div class="check-item check-item--none">
                         <label class="check-item__label">
-                            <input type="checkbox" class="check-item__input">
-                            <span>O local NÃO se trata de um evento temporário que reúna público?</span>
+                            <input type="checkbox" class="check-item__input check-item__input--none">
+                            <span><strong>Nenhuma das alternativas anteriores</strong> — meu negócio não atende a todas as afirmações acima.</span>
                         </label>
                     </div>
                 </div>
 
                 <div class="actions">
-                    <button type="button" class="btn btn-primary" onclick="checkBaixoBlocoB()">
+                    <p class="selection-hint">Selecione ao menos uma opção acima para continuar.</p>
+                    <button type="button" class="btn btn-primary" onclick="checkBaixoBlocoB()" disabled>
                         Verificar classificação
                     </button>
                 </div>

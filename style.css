@@ -388,6 +388,12 @@ ul.details-list {
 
 .risk-block--low .risk-block__label { color: var(--color-low-text); }
 
+/* Bloco neutro para a opção "Nenhuma das alternativas anteriores" */
+.risk-block--neutral {
+    background-color: var(--color-surface-muted);
+    border: 1px dashed var(--color-border);
+}
+
 /* --- ITENS DE MARCAÇÃO (checklists de Alto Risco / Baixo Risco) --- */
 .check-item {
     padding: 12px 0;
@@ -423,8 +429,37 @@ ul.details-list {
     border-radius: 4px;
 }
 
-.check-item .disclosure--tight {
-    margin-left: 34px;
+/* "Como responder": texto de ajuda sempre visível dentro de um check-item (não é mais
+   um <details> colapsável) — quem nunca respondeu o questionário precisa ler sem clicar. */
+.check-item__warning {
+    display: flex;
+    gap: var(--space-2);
+    align-items: flex-start;
+    background-color: var(--color-medium-bg);
+    border: 1px solid var(--color-medium-border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-3);
+    margin: var(--space-2) 0 0 34px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-medium-text);
+}
+
+.check-item__warning svg {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+}
+
+.check-item__warning .details-list {
+    margin-top: 6px;
+    margin-bottom: 0;
+}
+
+.check-item__warning .details-list li {
+    color: inherit;
+    font-size: 0.9rem;
 }
 
 ul.details-list li {
@@ -520,28 +555,19 @@ ul.details-list li::before {
     line-height: 1.55;
 }
 
-/* Variante compacta: ajuda ligada a uma pergunta/opção específica (não ao passo todo) */
-.disclosure--tight {
-    margin-top: 6px;
-    margin-bottom: 0;
-    font-size: 0.85rem;
-}
-
-.disclosure--tight summary {
-    min-height: 32px;
-    padding: 4px;
-    font-size: 0.85rem;
-}
-
-.disclosure--tight p {
-    font-style: normal;
-}
-
 /* --- BOTÕES --- */
 .actions {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
+}
+
+/* Texto auxiliar exibido enquanto o botão de avançar está desabilitado por falta de seleção */
+.selection-hint {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    text-align: center;
+    margin: 0;
 }
 
 .btn {
@@ -602,6 +628,19 @@ ul.details-list li::before {
 }
 
 .btn:active { transform: translateY(1px); box-shadow: none; }
+
+/* Botão desabilitado (validação obrigatória: aguardando seleção do usuário) */
+.btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+.btn-primary:disabled:hover {
+    background-color: var(--color-action);
+    border-color: var(--color-action);
+}
 
 .btn svg { width: 20px; height: 20px; flex-shrink: 0; }
 

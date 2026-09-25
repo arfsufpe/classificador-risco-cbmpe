@@ -136,12 +136,25 @@ function submitCnae() {
         cnaeState = { floor: 1, matched: null, level: 'baixo' };
     }
 
+    nextStep('step-eventos');
+}
+
+// Etapa de Eventos e Casas de Festas: basta UMA situação marcada para classificar direto, sem prosseguir.
+// Isolada logo após o CNAE para descartar rápido o caso mais comum de Risco Alto (Art. 6º, XIV e XV)
+// antes de perguntas sobre edificações fixas, que confundem quem está organizando um evento.
+function checkEventos() {
+    const checked = Array.from(document.querySelectorAll('#step-eventos .check-item__input:checked:not(.check-item__input--none)'));
+    if (checked.length > 0) {
+        const motivos = checked.map(c => c.dataset.reason).join('; ');
+        showResult(3, `Classificado Risco III (Alto) por apresentar: ${motivos}.`);
+        return;
+    }
     nextStep('step-alto-risco');
 }
 
 // Bloco de Risco Alto: basta UMA situação marcada para classificar direto, sem prosseguir.
 function checkAltoRisco() {
-    const checked = Array.from(document.querySelectorAll('#step-alto-risco .check-item__input:checked'));
+    const checked = Array.from(document.querySelectorAll('#step-alto-risco .check-item__input:checked:not(.check-item__input--none)'));
     if (checked.length > 0) {
         const motivos = checked.map(c => c.dataset.reason).join('; ');
         showResult(3, `Classificado Risco III (Alto) por apresentar: ${motivos} (Art. 6º).`);
@@ -152,7 +165,7 @@ function checkAltoRisco() {
 
 // Bloco A de Risco Baixo: hipóteses diretas de isenção — basta UMA marcada.
 function checkBaixoBlocoA() {
-    const checked = Array.from(document.querySelectorAll('#step-baixo-bloco-a .check-item__input:checked'));
+    const checked = Array.from(document.querySelectorAll('#step-baixo-bloco-a .check-item__input:checked:not(.check-item__input--none)'));
     if (checked.length > 0) {
         const motivos = checked.map(c => c.dataset.reason).join('; ');
         showResult(1, `Classificado Risco I (Baixo) por apresentar: ${motivos} (Art. 5º).`);
@@ -164,7 +177,7 @@ function checkBaixoBlocoA() {
 // Bloco B de Risco Baixo: pequeno estabelecimento físico — precisa atender a TODOS os critérios.
 // Quem não atender a todos não é Risco Alto (já descartado) nem Risco Baixo, logo é Risco Médio por exclusão.
 function checkBaixoBlocoB() {
-    const inputs = document.querySelectorAll('#step-baixo-bloco-b .check-item__input');
+    const inputs = document.querySelectorAll('#step-baixo-bloco-b .check-item__input:not(.check-item__input--none)');
     const todosMarcados = Array.from(inputs).every(input => input.checked);
 
     if (todosMarcados) {
@@ -232,9 +245,47 @@ function goBack() {
     activateStep(previousId);
 }
 
+// Etapas cujo bloco de checkboxes tem a opção exclusiva "Nenhuma das alternativas anteriores".
+const EXCLUSIVE_CHECK_STEPS = ['step-eventos', 'step-alto-risco', 'step-baixo-bloco-a', 'step-baixo-bloco-b'];
+
+// Ativa, para uma etapa de checkboxes, a exclusão mútua da opção "Nenhuma das alternativas
+// anteriores" (marcá-la desmarca as demais e vice-versa) e mantém o botão de avançar
+// desabilitado até haver ao menos uma marcação — evita que o usuário avance sem ler as opções.
+function setupExclusiveCheckGroup(stepId) {
+    const stepEl = document.getElementById(stepId);
+    if (!stepEl) return;
+
+    const inputs = Array.from(stepEl.querySelectorAll('.check-item__input'));
+    const noneInput = stepEl.querySelector('.check-item__input--none');
+    const button = stepEl.querySelector('.actions .btn-primary');
+    const hint = stepEl.querySelector('.selection-hint');
+
+    function updateState() {
+        const anyChecked = inputs.some(input => input.checked);
+        if (button) button.disabled = !anyChecked;
+        if (hint) hint.hidden = anyChecked;
+    }
+
+    inputs.forEach(input => {
+        input.addEventListener('change', () => {
+            if (input === noneInput) {
+                if (input.checked) {
+                    inputs.forEach(other => { if (other !== noneInput) other.checked = false; });
+                }
+            } else if (input.checked && noneInput) {
+                noneInput.checked = false;
+            }
+            updateState();
+        });
+    });
+
+    updateState();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const initial = document.querySelector('.step.active');
     if (initial) updateProgressUI(initial);
+    EXCLUSIVE_CHECK_STEPS.forEach(setupExclusiveCheckGroup);
 });
 
 function showResult(risk, reason) {
