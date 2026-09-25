@@ -136,7 +136,42 @@ function submitCnae() {
         cnaeState = { floor: 1, matched: null, level: 'baixo' };
     }
 
-    nextStep('step-1');
+    nextStep('step-alto-risco');
+}
+
+// Bloco de Risco Alto: basta UMA situação marcada para classificar direto, sem prosseguir.
+function checkAltoRisco() {
+    const checked = Array.from(document.querySelectorAll('#step-alto-risco .check-item__input:checked'));
+    if (checked.length > 0) {
+        const motivos = checked.map(c => c.dataset.reason).join('; ');
+        showResult(3, `Classificado Risco III (Alto) por apresentar: ${motivos} (Art. 6º).`);
+        return;
+    }
+    nextStep('step-baixo-bloco-a');
+}
+
+// Bloco A de Risco Baixo: hipóteses diretas de isenção — basta UMA marcada.
+function checkBaixoBlocoA() {
+    const checked = Array.from(document.querySelectorAll('#step-baixo-bloco-a .check-item__input:checked'));
+    if (checked.length > 0) {
+        const motivos = checked.map(c => c.dataset.reason).join('; ');
+        showResult(1, `Classificado Risco I (Baixo) por apresentar: ${motivos} (Art. 5º).`);
+        return;
+    }
+    nextStep('step-baixo-bloco-b');
+}
+
+// Bloco B de Risco Baixo: pequeno estabelecimento físico — precisa atender a TODOS os critérios.
+// Quem não atender a todos não é Risco Alto (já descartado) nem Risco Baixo, logo é Risco Médio por exclusão.
+function checkBaixoBlocoB() {
+    const inputs = document.querySelectorAll('#step-baixo-bloco-b .check-item__input');
+    const todosMarcados = Array.from(inputs).every(input => input.checked);
+
+    if (todosMarcados) {
+        showResult(1, 'Classificado Risco I (Baixo): pequeno estabelecimento físico que atende a todos os critérios do Bloco B (Art. 5º, VII).');
+    } else {
+        showResult(2, 'Classificado Risco II (Médio) por exclusão: não se enquadra em nenhuma hipótese de isenção direta (Bloco A) nem atende a todos os critérios do pequeno estabelecimento físico (Bloco B).');
+    }
 }
 
 // Atualiza a barra de progresso, o rótulo da etapa e a visibilidade do botão Voltar.

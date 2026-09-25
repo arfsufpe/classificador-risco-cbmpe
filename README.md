@@ -11,9 +11,11 @@ Basta abrir o arquivo [`index.html`](index.html) diretamente no navegador (duplo
 | Arquivo | Conteúdo |
 |---|---|
 | `index.html` | Markup das etapas do questionário e da tela de resultado |
-| `style.css` | Estilos visuais |
+| `style.css` | Estilos visuais — sem dependências externas, inclusive fontes (usa apenas fontes do sistema) |
 | `script.js` | Lógica do questionário, listas de CNAE e regras de classificação |
 | `Classificacao de risco - CNAEs consolidados (Decreto 61.082-2026).csv` | Base de dados oficial dos CNAEs, usada para gerar as listas em `script.js` |
+
+O visual segue o **Padrão Digital de Pernambuco** (azul `#0034B7`, amarelo `#FFB60C`, azul médio `#4067C9`), com os níveis de risco mantendo cores semânticas próprias (verde/âmbar/vermelho) para leitura imediata do resultado.
 
 ## Como funciona a classificação
 
@@ -21,8 +23,10 @@ Basta abrir o arquivo [`index.html`](index.html) diretamente no navegador (duplo
    - Se algum CNAE constar em `CNAE_ALTO_RISCO`, o resultado é **Risco III** imediatamente, sem passar pelas demais perguntas.
    - Se algum CNAE constar em `CNAE_MEDIO_RISCO`, é aplicado um **piso mínimo de Risco II** — o questionário continua, mas o resultado final nunca fica abaixo disso.
    - CNAEs fora das duas listas (nível I no decreto) não aplicam piso algum.
-2. **Etapas seguintes:** perguntas sobre natureza da atividade, presença de materiais/situações de alto risco, localização (imóvel isolado ou dentro de estrutura maior), dimensões do imóvel e casos especiais de baixo risco.
-3. **Resultado final:** `Math.max()` entre o risco apurado pelo questionário e o piso definido pelo CNAE (quando houver).
+2. **Bloco de Risco Alto:** checklist único com todas as situações que classificam o estabelecimento como Risco III (área, andares, público, GLP, inflamáveis, gases, produtos perigosos, saúde, eventos). Basta UMA marcada para o resultado ser Risco III imediatamente.
+3. **Bloco A de Risco Baixo:** se nenhuma situação de risco alto se aplicar, o usuário verifica as hipóteses diretas de isenção (domicílio fiscal/digital, atividade em casa, ambulante, tenda, estrutura técnica). Basta UMA marcada para o resultado ser Risco I.
+4. **Bloco B de Risco Baixo:** se nenhuma hipótese do Bloco A se aplicar, o usuário verifica os critérios do pequeno estabelecimento físico (≤200 m², térreo, isolado, limites de GLP/inflamáveis). Só é Risco I se **TODOS** os critérios forem marcados; caso contrário, o resultado é **Risco II por exclusão**.
+5. **Resultado final:** `Math.max()` entre o risco apurado pelo questionário e o piso definido pelo CNAE (quando houver).
 
 ## Atualizando a lista de CNAEs
 
