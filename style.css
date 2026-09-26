@@ -429,7 +429,7 @@ ul.details-list {
     border-radius: 4px;
 }
 
-/* Fluxo condicional de área (Etapa 3): perguntas Sim/Não reveladas progressivamente */
+/* Fluxos condicionais (Etapas 4, 5 e 6): perguntas Sim/Não reveladas progressivamente */
 .area-q {
     border: 0;
     margin: 0;

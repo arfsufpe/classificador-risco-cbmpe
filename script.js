@@ -1,4 +1,20 @@
 // Regras de classificação: Decreto Estadual nº 52.005/2021 (atualizado pelo Decreto nº 61.082/2026).
+//
+// PRINCÍPIOS
+// P1. Ordem das perguntas:
+//   1º) CNAE (Anexo II) — Etapa 1.
+//   2º) Situações que, sozinhas, já caracterizam Risco III, sem depender de contexto
+//       (Art. 6º, caput c/c Anexo II; III; IV; V; VI; VIII; X; XI; XII) — Etapa 2.
+//   3º) Hipóteses diretas de Risco I (Art. 5º, I, II, III, IV e VI) — Etapa 3. Como o
+//       Art. 5º, caput, ressalva as atividades de alto risco, cada item traz no próprio texto
+//       as ressalvas de contexto que o tornariam Risco III.
+//   4º) Perguntas que dependem de contexto, uma a uma: evento temporário (Art. 6º, XIV e XV;
+//       Art. 5º, VII, "m") — Etapa 4; área e pavimentos (Art. 6º, I e II, com a exceção do
+//       Art. 7º, §3º) — Etapa 5; hospedagem (Art. 5º, VII, "e") — Etapa 6; e as condições
+//       cumulativas do pequeno estabelecimento (Art. 5º, VII) — Etapa 7.
+//   O que não se enquadra nos arts. 5º e 6º é Risco II (Art. 7º, caput).
+// P2. O risco nunca diminui — ver o comentário acima de showResult().
+//
 // --- LISTAS DE CNAE ---
 // Fonte das listas: Anexos I e II na versão consolidada pelo Decreto nº 61.082/2026 (coluna CBMPE_nivel),
 // único decreto que alterou os Anexos.
@@ -93,14 +109,9 @@ const CNAE_MEDIO_RISCO = [
 // level: 'baixo' | 'medio' (risco 'alto' nunca chega aqui, pois é resolvido direto em submitCnae)
 let cnaeState = { floor: 1, matched: null, level: 'baixo' };
 
-// Evento temporário aberto de pequeno porte (Etapa 2): não é Risco Alto (Art. 6º, XIV/XV),
-// mas também nunca é Risco I (Art. 5º, VII, "m"), logo tem piso de Risco II (Art. 7º, caput).
-// Recalculado a cada chamada de checkEventos(), pois o usuário pode voltar e desmarcar.
-let eventoTemporarioPequeno = false;
-
-// Piso mínimo de risco somando o CNAE e o evento temporário de pequeno porte.
+// Piso mínimo de risco do percurso: só o CNAE de Risco Médio (Art. 3º, II c/c Anexo II).
 function getRiskFloor() {
-    return Math.max(cnaeState.floor, eventoTemporarioPequeno ? 2 : 1);
+    return cnaeState.floor;
 }
 
 // Histórico de etapas visitadas, para permitir "Voltar".
@@ -148,45 +159,70 @@ function submitCnae() {
         cnaeState = { floor: 1, matched: null, level: 'baixo' };
     }
 
+    nextStep('step-alto-direto');
+}
+
+// Etapa 2 — situações que, sozinhas, já caracterizam Risco III sem depender de contexto
+// (Art. 6º, caput c/c Anexo II; III; IV; V; VI; VIII; X; XI; XII). Basta UMA marcada.
+// Cada data-reason já cita o inciso correspondente.
+function checkAltoDireto() {
+    const checked = Array.from(document.querySelectorAll('#step-alto-direto .check-item__input:checked:not(.check-item__input--none)'));
+    if (checked.length > 0) {
+        const motivos = checked.map(c => c.dataset.reason).join('; ');
+        showResult(3, `Classificado Risco III (Alto) por apresentar: ${motivos}.`);
+        return;
+    }
+    nextStep('step-baixo-bloco-a');
+}
+
+// Etapa 3 — hipóteses diretas de Risco I (Art. 5º, I, II, III, IV e VI): basta UMA marcada.
+// O Art. 5º, caput, ressalva as atividades de alto risco; por isso cada item traz no próprio
+// texto as ressalvas de contexto (área, pavimentos, evento temporário) que o tornariam Risco III.
+// Domicílio fiscal (II) e ambulante (III) não têm ressalva de área/pavimentos: empresa sem
+// estabelecimento não "possui nem está inserida em edificação" para fins do Art. 6º, I e II,
+// e os pavimentos do prédio onde fica o endereço fiscal não a afetam.
+function checkBaixoBlocoA() {
+    const checked = Array.from(document.querySelectorAll('#step-baixo-bloco-a .check-item__input:checked:not(.check-item__input--none)'));
+    if (checked.length > 0) {
+        const motivos = checked.map(c => c.dataset.reason).join('; ');
+        showResult(1, `Classificado Risco I (Baixo) por apresentar: ${motivos}.`);
+        return;
+    }
     nextStep('step-eventos');
 }
 
-// --- FLUXO CONDICIONAL DE EVENTOS (Etapa 2) ---
-// Cadeia Sim/Não: casa de festas fixa (Art. 6º, caput, c/c Anexo II) → evento temporário? →
-// controle de acesso (Art. 6º, XV) → porte (Art. 6º, XIV). Evento temporário aberto e de pequeno
-// porte não é Risco Alto, mas também nunca é Risco I (Art. 5º, VII, "m"): piso de Risco II
-// (Art. 7º, caput). Mesma convenção do fluxo de hospedagem.
-const EVT_Q_ORDER = ['e0', 'e1', 'e2', 'e3'];
+// --- FLUXO CONDICIONAL DE EVENTOS (Etapa 4) ---
+// Evento temporário? → controle de acesso (Art. 6º, XV) → porte (Art. 6º, XIV). Evento aberto de
+// pequeno porte não é Risco III, mas também nunca é Risco I (Art. 5º, VII, "m"): termina aqui em
+// Risco II (Art. 7º, caput). Público > 100 pessoas já foi tratado na Etapa 2 (Art. 6º, III).
+// Mesma convenção do fluxo de hospedagem.
+const EVT_Q_ORDER = ['e1', 'e2', 'e3'];
 
 function evtAnswer(q) {
     const input = document.querySelector(`#eventos-flow input[name="evt-${q}"]:checked`);
     return input ? input.value : null;
 }
 
-// Devolve as perguntas visíveis e o desfecho: { visible, resolved, alto, reason, pequeno }.
+// Devolve as perguntas visíveis e o desfecho: { visible, resolved, result (3 | 2 | null), reason }.
 function evaluateEventosFlow() {
     const a = {};
     EVT_Q_ORDER.forEach(q => { a[q] = evtAnswer(q); });
 
-    const visible = ['e0'];
-    const pending = () => ({ visible, resolved: false, alto: false, reason: null, pequeno: false });
-    const done = (alto, reason, pequeno = false) => ({ visible, resolved: true, alto, reason, pequeno });
+    const visible = ['e1'];
+    const pending = () => ({ visible, resolved: false, result: null, reason: null });
+    const done = (result, reason) => ({ visible, resolved: true, result, reason });
 
-    if (!a.e0) return pending();
-    if (a.e0 === 'sim') return done(true, 'local fixo/permanente destinado a festas e eventos (Art. 6º, caput, c/c Anexo II)');
-
-    visible.push('e1');
     if (!a.e1) return pending();
-    if (a.e1 === 'nao') return done(false, null);
+    if (a.e1 === 'nao') return done(null, null);
 
     visible.push('e2');
     if (!a.e2) return pending();
-    if (a.e2 === 'sim') return done(true, 'evento temporário com controle/restrição de acesso de público, independentemente da área (Art. 6º, XV)');
+    if (a.e2 === 'sim') return done(3, 'Classificado Risco III (Alto) por apresentar: evento temporário com controle/restrição de acesso de público, independentemente da área (Art. 6º, XV).');
 
     visible.push('e3');
     if (!a.e3) return pending();
-    if (a.e3 === 'sim') return done(true, 'evento temporário sem controle de acesso, com área montada/ocupada superior a 930 m² ou camarotes/arquibancadas para mais de 100 pessoas (Art. 6º, XIV)');
-    return done(false, null, true);
+    if (a.e3 === 'sim') return done(3, 'Classificado Risco III (Alto) por apresentar: evento temporário sem controle de acesso, com área construída, ocupada ou montada superior a 930 m² ou camarotes/arquibancadas para mais de 100 pessoas (Art. 6º, XIV).');
+    return done(2, 'Classificado Risco II (Médio): evento temporário sem controle de acesso, com público de até 100 pessoas, área de até 930 m² e sem camarotes ou arquibancadas para mais de 100 pessoas. Não se enquadra no Art. 6º, III, XIV e XV, e evento temporário que reúne público não pode ser Risco I (Art. 5º, VII, "m"); classificado como Risco II por exclusão (Art. 7º, caput).');
 }
 
 function setEventosStatus(text, tone) {
@@ -206,7 +242,7 @@ function renderEventosFlow(changedQ, moveFocus) {
         });
     }
 
-    const { visible, resolved, alto, pequeno } = evaluateEventosFlow();
+    const { visible, resolved, result } = evaluateEventosFlow();
     let revealed = null;
     flow.querySelectorAll('.area-q').forEach(fieldset => {
         const show = visible.includes(fieldset.dataset.q);
@@ -214,10 +250,10 @@ function renderEventosFlow(changedQ, moveFocus) {
         fieldset.hidden = !show;
     });
 
-    if (resolved && alto) {
+    if (resolved && result === 3) {
         setEventosStatus('Pergunta respondida: enquadra em Risco Alto.', 'alto');
-    } else if (resolved && pequeno) {
-        setEventosStatus('Pergunta respondida: evento temporário de pequeno porte — a classificação mínima será Risco II.');
+    } else if (resolved && result === 2) {
+        setEventosStatus('Pergunta respondida: evento temporário de pequeno porte — classificação Risco II.');
     } else if (resolved) {
         setEventosStatus('Pergunta respondida: siga para a próxima etapa.', 'ok');
     } else if (changedQ && revealed && !moveFocus) {
@@ -255,139 +291,74 @@ function setupEventosFlow() {
     renderEventosFlow(null, false);
 }
 
-// Etapa de Eventos e Casas de Festas: Risco Alto classifica direto, sem prosseguir.
-// Isolada logo após o CNAE para descartar rápido o caso mais comum de Risco Alto (Art. 6º, caput,
-// c/c Anexo II; Art. 6º, XIV e XV) antes de perguntas sobre edificações fixas, que confundem quem
-// está organizando um evento. Evento de pequeno porte só define o piso de Risco II (Art. 5º, VII, "m").
 function checkEventos() {
     const r = evaluateEventosFlow();
     if (!r.resolved) return;
-    if (r.alto) {
-        showResult(3, `Classificado Risco III (Alto) por apresentar: ${r.reason}.`);
+    if (r.result === null) {
+        nextStep('step-area');
         return;
     }
-    eventoTemporarioPequeno = r.pequeno;
-    nextStep('step-combustiveis-saude');
+    showResult(r.result, r.reason);
 }
 
-// Etapa de Combustíveis, Gás, Produtos Perigosos e Saúde: basta UMA situação marcada
-// para classificar direto, sem prosseguir.
-function checkCombustiveisSaude() {
-    const checked = Array.from(document.querySelectorAll('#step-combustiveis-saude .check-item__input:checked:not(.check-item__input--none)'));
-    const motivos = checked.map(c => c.dataset.reason);
-    if (motivos.length > 0) {
-        showResult(3, `Classificado Risco III (Alto) por apresentar: ${motivos.join('; ')} (Art. 6º).`);
-        return;
-    }
-    nextStep('step-alto-risco');
-}
-
-// Bloco de Risco Alto: basta UMA situação marcada (ou o fluxo de área indicar Risco Alto)
-// para classificar direto, sem prosseguir. Área (Art. 6º, I) e pavimentos (Art. 6º, II) são
-// critérios da edificação e ficam afastados quando se aplica a exceção do Art. 7º, §3º;
-// lotação (III) e leitos (IV) são da atividade e valem sempre.
-function checkAltoRisco() {
-    const checked = Array.from(document.querySelectorAll('#step-alto-risco .check-item__input:checked:not(.check-item__input--none)'));
-    const motivos = checked.map(c => c.dataset.reason);
-    if (areaOutcome && areaOutcome.alto) motivos.unshift(areaOutcome.reason);
-    if (motivos.length > 0) {
-        showResult(3, `Classificado Risco III (Alto) por apresentar: ${motivos.join('; ')} (Art. 6º).`);
-        return;
-    }
-    nextStep('step-baixo-bloco-a');
-}
-
-// --- FLUXO CONDICIONAL DE ÁREA (Etapa 4) ---
-// Art. 6º, I (área > 930 m²) com a exceção do Art. 7º, §3º: unidade exclusivamente no térreo,
-// com até 930 m², dentro de edificação maior, sem compartilhar sistemas preventivos, sem acesso
-// às áreas comuns e com saída direta para a via pública, fica desvinculada da edificação
-// principal — a exceção afasta tanto o Art. 6º, I (área) quanto o Art. 6º, II (pavimentos).
+// --- FLUXO CONDICIONAL DE ÁREA E ANDARES (Etapa 5) ---
+// Art. 6º, I (área > 930 m²) e II (mais de 3 pavimentos) são critérios da EDIFICAÇÃO que a
+// atividade "possui ou em que está inserida". A exceção do Art. 7º, §3º (unidade exclusivamente
+// no térreo, com até 930 m², sem compartilhar sistemas preventivos, sem acesso às áreas comuns
+// e com saída direta para a via pública) só tem função quando a edificação principal acionaria
+// o inciso I ou II; por isso o fluxo pergunta primeiro pelo prédio e só depois pela exceção.
+// Cumprida a exceção, o resultado é Risco II FINAL ("serão classificadas como risco II"): a
+// unidade não segue para as Etapas 6 e 7 (invariante P2).
 // A ordem importa: ao mudar uma resposta, todas as posteriores são apagadas.
-const AREA_Q_ORDER = ['p1', 'area-imovel', 'p2', 'p3', 'p4a', 'p4b', 'p4c', 'area-predio'];
-
-// null enquanto o fluxo não foi totalmente respondido; depois { alto, reason }.
-let areaOutcome = null;
-let excecaoTerreoAplicada = false;
-
-// Item de pavimentos (Art. 6º, II): o texto depende de a empresa ocupar o prédio inteiro ou
-// ser uma unidade, pois o decreto fala em atividade que "possuir ou estiver inserida em
-// edificação" com mais de 3 pavimentos. No modo 'excecao' (Art. 7º, §3º) o item some.
-const PAVIMENTOS_MODES = {
-    inteiro: {
-        text: 'O imóvel onde a empresa funciona possui mais de 3 andares (pavimentos)?',
-        reason: 'edificação com mais de 3 pavimentos (Art. 6º, II)',
-        help: 'Conte o número total de pavimentos do imóvel (térreo + andares superiores). O subsolo usado exclusivamente como estacionamento de veículos, sem abastecimento de combustível no local, não entra na contagem (Art. 6º, II).',
-    },
-    unidade: {
-        text: 'O prédio onde a sua unidade está possui mais de 3 andares (pavimentos)? Conte todos os andares do prédio, não só os que a sua empresa usa.',
-        reason: 'unidade inserida em edificação com mais de 3 pavimentos (Art. 6º, II)',
-        help: 'Conte todos os pavimentos do prédio onde a sua unidade está (térreo + andares superiores), mesmo os que a sua empresa não usa: o decreto considera a edificação em que a atividade está inserida (Art. 6º, II). O subsolo usado exclusivamente como estacionamento de veículos, sem abastecimento de combustível no local, não entra na contagem.',
-    },
-};
-let pavimentosMode = null;
-
-// mode: null (fluxo de área pendente), 'inteiro', 'unidade' ou 'excecao'.
-function updatePavimentosItem(mode) {
-    if (mode === pavimentosMode) return;
-    pavimentosMode = mode;
-
-    const item = document.getElementById('pavimentos-item');
-    const note = document.getElementById('pavimentos-excecao');
-    const input = document.getElementById('pavimentos-input');
-    if (!item || !note || !input) return;
-
-    // A resposta anterior pode ter sido dada para outra pergunta: sempre desmarca.
-    input.checked = false;
-    const cfg = PAVIMENTOS_MODES[mode];
-    if (cfg) {
-        document.getElementById('pavimentos-text').textContent = cfg.text;
-        document.getElementById('pavimentos-help').textContent = cfg.help;
-        input.dataset.reason = cfg.reason;
-    }
-    item.hidden = !cfg;
-    note.hidden = mode !== 'excecao';
-}
+const AREA_Q_ORDER = ['p1', 'area-imovel', 'pav-imovel', 'area-predio', 'pav-predio', 'p2', 'p3', 'p4a', 'p4b', 'p4c'];
+const AREA_EXCECAO_QS = ['p2', 'p3', 'p4a', 'p4b', 'p4c'];
 
 function areaAnswer(q) {
     const input = document.querySelector(`#area-flow input[name="area-${q}"]:checked`);
     return input ? input.value : null;
 }
 
-// Percorre a árvore de decisão e devolve as perguntas visíveis e o desfecho (se já houver).
+// Percorre a árvore de decisão: { visible, resolved, result (3 | 2 | null), reason }.
 function evaluateAreaFlow() {
     const a = {};
     AREA_Q_ORDER.forEach(q => { a[q] = areaAnswer(q); });
 
     const visible = ['p1'];
-    const pending = () => ({ visible, outcome: null, excecao: false });
-    const done = (alto, reason, excecao = false) => ({ visible, outcome: { alto, reason }, excecao });
-    const regraGeral = () => {
-        visible.push('area-predio');
-        if (!a['area-predio']) return pending();
-        return done(a['area-predio'] === 'sim', 'área total da edificação superior a 930 m²');
-    };
+    const pending = () => ({ visible, resolved: false, result: null, reason: null });
+    const done = (result, reason) => ({ visible, resolved: true, result, reason });
 
     if (!a.p1) return pending();
+
     if (a.p1 === 'inteiro') {
         visible.push('area-imovel');
         if (!a['area-imovel']) return pending();
-        return done(a['area-imovel'] === 'sim', 'área construída superior a 930 m²');
+        if (a['area-imovel'] === 'sim') return done(3, 'área construída superior a 930 m² (Art. 6º, I)');
+
+        visible.push('pav-imovel');
+        if (!a['pav-imovel']) return pending();
+        if (a['pav-imovel'] === 'sim') return done(3, 'edificação com mais de 3 pavimentos (Art. 6º, II)');
+        return done(null, null);
     }
 
-    visible.push('p2');
-    if (!a.p2) return pending();
-    if (a.p2 === 'nao') return regraGeral();
+    // Unidade dentro de prédio maior: só pergunta a exceção se o prédio acionar o Art. 6º, I ou II.
+    let gatilho;
+    visible.push('area-predio');
+    if (!a['area-predio']) return pending();
+    if (a['area-predio'] === 'sim') {
+        gatilho = 'unidade inserida em edificação com área construída superior a 930 m² (Art. 6º, I)';
+    } else {
+        visible.push('pav-predio');
+        if (!a['pav-predio']) return pending();
+        if (a['pav-predio'] === 'nao') return done(null, null);
+        gatilho = 'unidade inserida em edificação com mais de 3 pavimentos (Art. 6º, II)';
+    }
 
-    visible.push('p3');
-    if (!a.p3) return pending();
-    if (a.p3 === 'nao') return done(true, 'unidade no térreo com área própria superior a 930 m²');
-
-    for (const q of ['p4a', 'p4b', 'p4c']) {
+    for (const q of AREA_EXCECAO_QS) {
         visible.push(q);
         if (!a[q]) return pending();
-        if (a[q] === 'nao') return regraGeral();
+        if (a[q] === 'nao') return done(3, `${gatilho}, sem atender às condições da exceção do Art. 7º, §3º`);
     }
-    return done(false, null, true);
+    return done(2, 'Classificado Risco II (Médio): unidade autônoma situada exclusivamente no pavimento térreo, com área de até 930 m², inserida em edificação principal que seria de Risco Alto pela área ou pela quantidade de andares, sem compartilhar sistemas preventivos, sem acesso às áreas comuns e com saída direta para a via pública (Art. 7º, §3º).');
 }
 
 function setAreaStatus(text, tone) {
@@ -410,24 +381,21 @@ function renderAreaFlow(changedQ, moveFocus) {
         });
     }
 
-    const { visible, outcome, excecao } = evaluateAreaFlow();
+    const { visible, resolved, result } = evaluateAreaFlow();
     let revealed = null;
     flow.querySelectorAll('.area-q').forEach(fieldset => {
         const show = visible.includes(fieldset.dataset.q);
         if (show && fieldset.hidden) revealed = fieldset;
         fieldset.hidden = !show;
     });
-    flow.querySelector('[data-q-group="p4"]').hidden = !visible.includes('p4a');
+    flow.querySelector('[data-q-group="excecao"]').hidden = !visible.includes('p2');
 
-    areaOutcome = outcome;
-    excecaoTerreoAplicada = excecao;
-
-    if (outcome && outcome.alto) {
-        setAreaStatus('Critério de área respondido: enquadra em Risco Alto.', 'alto');
-    } else if (outcome && excecao) {
-        setAreaStatus('Critério de área respondido: exceção do Art. 7º, §3º aplicável — a área e a quantidade de andares do prédio não geram Risco Alto para a sua unidade.', 'ok');
-    } else if (outcome) {
-        setAreaStatus('Critério de área respondido: não gera Risco Alto. Responda abaixo sobre a quantidade de andares.', 'ok');
+    if (resolved && result === 3) {
+        setAreaStatus('Enquadra em Risco Alto.', 'alto');
+    } else if (resolved && result === 2) {
+        setAreaStatus('Exceção do Art. 7º, §3º aplicável: Risco II.', 'ok');
+    } else if (resolved) {
+        setAreaStatus('Área e andares não geram Risco Alto. Siga para a próxima etapa.', 'ok');
     } else if (changedQ && revealed && !moveFocus) {
         setAreaStatus(`Nova pergunta: ${revealed.querySelector('legend').textContent}`);
     } else {
@@ -439,16 +407,12 @@ function renderAreaFlow(changedQ, moveFocus) {
         revealed.focus();
     }
 
-    let modoPavimentos = null;
-    if (outcome) modoPavimentos = excecao ? 'excecao' : (areaAnswer('p1') === 'inteiro' ? 'inteiro' : 'unidade');
-    updatePavimentosItem(modoPavimentos);
-
-    // Área em Risco Alto conta como uma situação marcada: desfaz "Nenhuma das alternativas anteriores".
-    if (outcome && outcome.alto) {
-        const none = document.querySelector('#step-alto-risco .check-item__input--none');
-        if (none) none.checked = false;
-    }
-    if (groupUpdaters['step-alto-risco']) groupUpdaters['step-alto-risco']();
+    const stepEl = document.getElementById('step-area');
+    const button = stepEl.querySelector('.actions .btn-primary');
+    const hint = stepEl.querySelector('.selection-hint');
+    if (button) button.disabled = !resolved;
+    if (hint) hint.hidden = resolved;
+    updateDebugLiveRisk();
 }
 
 function setupAreaFlow() {
@@ -467,12 +431,15 @@ function setupAreaFlow() {
     renderAreaFlow(null, false);
 }
 
-// Bloco A de Risco Baixo: hipóteses diretas de isenção — basta UMA marcada.
-function checkBaixoBlocoA() {
-    const checked = Array.from(document.querySelectorAll('#step-baixo-bloco-a .check-item__input:checked:not(.check-item__input--none)'));
-    if (checked.length > 0) {
-        const motivos = checked.map(c => c.dataset.reason).join('; ');
-        showResult(1, `Classificado Risco I (Baixo) por apresentar: ${motivos} (Art. 5º).`);
+function checkArea() {
+    const { resolved, result, reason } = evaluateAreaFlow();
+    if (!resolved) return;
+    if (result === 3) {
+        showResult(3, `Classificado Risco III (Alto) por apresentar: ${reason}.`);
+        return;
+    }
+    if (result === 2) {
+        showResult(2, reason);
         return;
     }
     nextStep('step-hospedagem');
@@ -481,6 +448,7 @@ function checkBaixoBlocoA() {
 // --- FLUXO CONDICIONAL DE HOSPEDAGEM (Etapa 6) ---
 // Art. 5º, VII, "e": condição cumulativa do pequeno estabelecimento, mas só se aplica a
 // hotéis, pousadas e pensões — para quem não é hospedagem, está automaticamente cumprida.
+// Hospedagem com mais de 40 leitos já terminou em Risco III na Etapa 2 (Art. 6º, IV).
 const HOSP_Q_ORDER = ['h1', 'h2'];
 
 function hospAnswer(q) {
@@ -573,27 +541,29 @@ function checkHospedagem() {
 }
 
 // Onde cada condição cumulativa do Art. 5º, VII é verificada:
-//   caput (edificação ≤ 200 m²) + "a" (térreo) → Bloco B, item 1
-//   "b" (saída direta) + "c" (sem aberturas)   → Bloco B, item 2
-//   "d" (reunião ≤ 100)                        → Etapa 4 (Art. 6º, III, > 100 = Risco III)
-//   "e" (hospedagem ≤ 16 leitos)               → Etapa 6 (#step-hospedagem)
-//   "f" (não hospital)                         → Etapa 3 (Art. 6º, VI)
-//   "h" (≤ 3 P13)                              → Bloco B, item de GLP
-//   "i" (sem outros gases inflamáveis)         → Etapa 3 (Art. 6º, XI)
-//   "j" (≤ 150 L)                              → Bloco B, item de inflamáveis
-//   "k" (sem produtos perigosos)               → Etapa 3 (Art. 6º, XII)
-//   "m" (não evento temporário)                → Etapa 2 (piso eventoTemporarioPequeno)
+//   caput (edificação ≤ 200 m²) + "a" (térreo) → Etapa 7, item 1
+//   "b" (saída direta) + "c" (sem aberturas)   → Etapa 7, item 2
+//   "d" (reunião ≤ 100)                        → Etapa 2 (Art. 6º, III: > 100 = Risco III, inclusive eventos)
+//   "e" (hospedagem ≤ 16 leitos)               → Etapa 6 (> 40 já é Risco III na Etapa 2)
+//   "f" (não hospital)                         → Etapa 2 (Art. 6º, VI)
+//   "h" (≤ 3 P13)                              → Etapa 7, item de GLP
+//   "i" (sem outros gases inflamáveis)         → Etapa 2 (Art. 6º, XI)
+//   "j" (≤ 150 L)                              → Etapa 7, item de inflamáveis
+//   "k" (sem produtos perigosos)               → Etapa 2 (Art. 6º, XII)
+//   "m" (não evento temporário)                → Etapa 4 (eventos nunca chegam à Etapa 7)
 //   "g" e "l"                                  → revogadas
-// Bloco B de Risco Baixo: pequeno estabelecimento físico — precisa atender a TODOS os critérios.
+// Unidades com a exceção do Art. 7º, §3º terminam em Risco II na Etapa 5 e nunca chegam à
+// Etapa 7 (invariante P2).
+// Etapa 7 — pequeno estabelecimento físico: precisa atender a TODOS os critérios.
 // Quem não atender a todos não é Risco Alto (já descartado) nem Risco Baixo, logo é Risco Médio por exclusão.
 function checkBaixoBlocoB() {
     const inputs = document.querySelectorAll('#step-baixo-bloco-b .check-item__input:not(.check-item__input--none)');
     const todosMarcados = Array.from(inputs).every(input => input.checked);
 
     if (todosMarcados) {
-        showResult(1, 'Classificado Risco I (Baixo): pequeno estabelecimento físico que atende a todos os critérios do Bloco B (Art. 5º, VII).');
+        showResult(1, 'Classificado Risco I (Baixo): pequeno estabelecimento físico que atende a todas as condições cumulativas do Art. 5º, VII.');
     } else {
-        showResult(2, 'Classificado Risco II (Médio) por exclusão: não se enquadra em nenhuma hipótese de isenção direta (Bloco A) nem atende a todos os critérios do pequeno estabelecimento físico (Bloco B).');
+        showResult(2, 'Classificado Risco II (Médio) por exclusão: não se enquadra em nenhuma hipótese direta de Risco Baixo (Art. 5º, I, II, III, IV e VI) nem atende a todas as condições do pequeno estabelecimento (Art. 5º, VII); classificado como Risco II (Art. 7º, caput).');
     }
 }
 
@@ -657,16 +627,11 @@ function goBack() {
 }
 
 // Etapas cujo bloco de checkboxes tem a opção exclusiva "Nenhuma das alternativas anteriores".
-const EXCLUSIVE_CHECK_STEPS = ['step-combustiveis-saude', 'step-alto-risco', 'step-baixo-bloco-a', 'step-baixo-bloco-b'];
-
-// Recalcula o estado do botão de cada grupo; usado também pelo fluxo de área da Etapa 4.
-const groupUpdaters = {};
+const EXCLUSIVE_CHECK_STEPS = ['step-alto-direto', 'step-baixo-bloco-a', 'step-baixo-bloco-b'];
 
 // Ativa, para uma etapa de checkboxes, a exclusão mútua da opção "Nenhuma das alternativas
 // anteriores" (marcá-la desmarca as demais e vice-versa) e mantém o botão de avançar
 // desabilitado até haver ao menos uma marcação — evita que o usuário avance sem ler as opções.
-// Se a etapa tiver o fluxo de área, ele precisa estar totalmente respondido, e um desfecho
-// de Risco Alto conta como uma situação marcada.
 function setupExclusiveCheckGroup(stepId) {
     const stepEl = document.getElementById(stepId);
     if (!stepEl) return;
@@ -675,31 +640,18 @@ function setupExclusiveCheckGroup(stepId) {
     const noneInput = stepEl.querySelector('.check-item__input--none');
     const button = stepEl.querySelector('.actions .btn-primary');
     const hint = stepEl.querySelector('.selection-hint');
-    const hasAreaFlow = Boolean(stepEl.querySelector('#area-flow'));
 
     function updateState() {
-        const flowPending = hasAreaFlow && areaOutcome === null;
-        const areaAlto = hasAreaFlow && areaOutcome !== null && areaOutcome.alto;
-        const ready = !flowPending && (areaAlto || inputs.some(input => input.checked));
+        const ready = inputs.some(input => input.checked);
         if (button) button.disabled = !ready;
-        if (hint) {
-            hint.hidden = ready;
-            hint.textContent = flowPending
-                ? 'Responda às perguntas sobre a área do imóvel para continuar.'
-                : 'Selecione ao menos uma opção acima para continuar.';
-        }
+        if (hint) hint.hidden = ready;
         updateDebugLiveRisk();
     }
 
     inputs.forEach(input => {
         input.addEventListener('change', () => {
             if (input === noneInput) {
-                if (input.checked && hasAreaFlow && areaOutcome && areaOutcome.alto) {
-                    input.checked = false;
-                    setAreaStatus('Sua resposta sobre a área já enquadra em Risco Alto. Para marcar "Nenhuma das alternativas anteriores", revise as perguntas sobre a área.', 'alto');
-                } else if (input.checked) {
-                    inputs.forEach(other => { if (other !== noneInput) other.checked = false; });
-                }
+                if (input.checked) inputs.forEach(other => { if (other !== noneInput) other.checked = false; });
             } else if (input.checked && noneInput) {
                 noneInput.checked = false;
             }
@@ -707,16 +659,16 @@ function setupExclusiveCheckGroup(stepId) {
         });
     });
 
-    groupUpdaters[stepId] = updateState;
     updateState();
 }
 
 // ============================================================================
-// DEBUG TEMPORÁRIO — remover esta função, suas chamadas (em activateStep e no
-// updateState de setupExclusiveCheckGroup) e o HTML/CSS correspondentes antes
-// de publicar. Mostra, no topo de cada etapa, a classificação que resultaria
-// se o usuário parasse de responder agora e dissesse "não" a tudo o que ainda
-// não foi respondido — só para facilitar teste manual do fluxo.
+// DEBUG TEMPORÁRIO — remover esta função, suas chamadas (em activateStep, nos
+// render*Flow e no updateState de setupExclusiveCheckGroup) e o HTML/CSS
+// correspondentes antes de publicar. Mostra, no topo de cada etapa, a
+// classificação que resultaria se o usuário parasse de responder agora e
+// dissesse "não" a tudo o que ainda não foi respondido — só para facilitar
+// teste manual do fluxo.
 // ============================================================================
 function updateDebugLiveRisk() {
     const step = document.querySelector('.step.active');
@@ -727,24 +679,24 @@ function updateDebugLiveRisk() {
     let risk;
 
     switch (step.id) {
-        case 'step-eventos': {
-            const { alto } = evaluateEventosFlow();
-            risk = alto ? 3 : Math.max(2, floor);
-            break;
-        }
-        case 'step-combustiveis-saude': {
-            const any = document.querySelector('#step-combustiveis-saude .check-item__input:checked:not(.check-item__input--none)');
-            risk = any ? 3 : Math.max(2, floor);
-            break;
-        }
-        case 'step-alto-risco': {
-            const any = document.querySelector('#step-alto-risco .check-item__input:checked:not(.check-item__input--none)') || (areaOutcome && areaOutcome.alto);
+        case 'step-alto-direto': {
+            const any = document.querySelector('#step-alto-direto .check-item__input:checked:not(.check-item__input--none)');
             risk = any ? 3 : Math.max(2, floor);
             break;
         }
         case 'step-baixo-bloco-a': {
             const any = document.querySelector('#step-baixo-bloco-a .check-item__input:checked:not(.check-item__input--none)');
             risk = any ? Math.max(1, floor) : Math.max(2, floor);
+            break;
+        }
+        case 'step-eventos': {
+            const { result } = evaluateEventosFlow();
+            risk = result === 3 ? 3 : Math.max(2, floor);
+            break;
+        }
+        case 'step-area': {
+            const { result } = evaluateAreaFlow();
+            risk = result === 3 ? 3 : Math.max(2, floor);
             break;
         }
         case 'step-hospedagem': {
@@ -773,12 +725,21 @@ function updateDebugLiveRisk() {
 document.addEventListener('DOMContentLoaded', () => {
     const initial = document.querySelector('.step.active');
     if (initial) updateProgressUI(initial);
-    setupEventosFlow();
     setupAreaFlow();
+    setupEventosFlow();
     setupHospedagemFlow();
     EXCLUSIVE_CHECK_STEPS.forEach(setupExclusiveCheckGroup);
 });
 
+// INVARIANTE P2 — O RISCO NUNCA DIMINUI:
+//   (a) todo resultado de Risco II ou III encerra o questionário aqui; nenhuma etapa
+//       posterior é executada;
+//   (b) o piso do CNAE de Risco Médio (Art. 3º, II c/c Anexo II) é aplicado por Math.max,
+//       e nenhum resultado fica abaixo dele;
+//   (c) Risco I só é atribuído (Etapas 3 e 7) depois de descartadas todas as situações
+//       diretas de Risco III (Etapas 1 e 2) — e, na Etapa 7, também eventos e área/andares;
+//   (d) como (a) encerra o percurso no primeiro nível II/III apurado, nenhuma chamada pode
+//       vir com nível menor que um já apurado; o único nível "herdado" é o piso do CNAE.
 function showResult(risk, reason) {
     // Aplica o piso mínimo definido pelo(s) CNAE(s) (etapa 1)
     const finalRisk = Math.max(risk, getRiskFloor());
@@ -792,14 +753,6 @@ function showResult(risk, reason) {
         } else {
             finalReason = `${reason} Classificação também respaldada pelo CNAE ${cnaeState.matched} (Risco Médio, Art. 3º, II c/c Anexo II).`;
         }
-    }
-
-    if (eventoTemporarioPequeno && risk < 2) {
-        finalReason += " Classificação mínima de Risco II aplicada por se tratar de evento temporário que reúne público (Art. 5º, VII, 'm', c/c Art. 7º, caput).";
-    }
-
-    if (excecaoTerreoAplicada && finalRisk === 2) {
-        finalReason += ' Também respaldado pela exceção do Art. 7º, §3º (unidade autônoma no pavimento térreo, com até 930 m², sem compartilhamento de sistemas preventivos, sem acesso às áreas comuns e com saída direta para a via pública), que afasta os critérios de área (Art. 6º, I) e de pavimentos (Art. 6º, II) da edificação principal.';
     }
 
     // Esconde a etapa atual (com a mesma animação de saída das demais transições)
