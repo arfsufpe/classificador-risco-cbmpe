@@ -128,19 +128,290 @@ function normalizeCnae(str) {
     return str.replace(/\D/g, '');
 }
 
+// --- BUSCA DE CNAE (Etapa 1) ---
+// Combobox ARIA: o usuário digita a atividade (ou parte do código) e escolhe na lista; também
+// pode digitar/colar uma lista de códigos. Dados em cnaes.js (gerado por tools/gerar_cnaes.py).
+// Código fora da planilha do decreto é aceito com aviso e tratado como nível I (sem piso).
+const CNAE_MAX_RESULTADOS = 20;
+const cnaeSelecionados = []; // { code, fmt, desc } — desc null quando o código não consta na planilha
+let cnaeIndice = [];
+let cnaeResultados = [];
+let cnaeAtivo = -1;
+let cnaeStatusTimer = null;
+
+function normalizeText(str) {
+    return str.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+}
+
+function formatCnae(code) {
+    return `${code.slice(0, 4)}-${code.slice(4, 5)}/${code.slice(5)}`;
+}
+
+// Devolve os códigos (7 dígitos) se o texto for só uma lista de códigos; senão, null.
+function parseCnaeList(str) {
+    const tokens = str.split(/[\s,;]+/).filter(Boolean);
+    if (tokens.length === 0) return null;
+    const codes = tokens.map(normalizeCnae);
+    return codes.every(c => c.length === 7) && tokens.every(t => /^[\d.\-\/]+$/.test(t)) ? codes : null;
+}
+
+// Todas as palavras precisam aparecer (em qualquer ordem, sem acento); números casam com o
+// início do código. Descrições que começam com a 1ª palavra buscada vêm primeiro; depois,
+// aquelas em que as palavras começam uma palavra da descrição.
+function searchCnae(query) {
+    const tokens = normalizeText(query).split(/\s+/).filter(Boolean);
+    if (tokens.length === 0) return [];
+    const selecionados = new Set(cnaeSelecionados.map(s => s.code));
+    const achados = [];
+    for (const item of cnaeIndice) {
+        if (selecionados.has(item.code)) continue;
+        let score = item.norm.startsWith(tokens[0]) ? -1 : 0;
+        const ok = tokens.every(token => {
+            const digits = token.replace(/[.\-\/]/g, '');
+            if (/^\d+$/.test(digits)) return item.code.startsWith(digits);
+            if (!item.norm.includes(token)) return false;
+            if (!(' ' + item.norm).includes(' ' + token)) score += 1;
+            return true;
+        });
+        if (ok) achados.push({ item, score });
+    }
+    achados.sort((a, b) => a.score - b.score || a.item.code.localeCompare(b.item.code));
+    return achados.map(a => a.item);
+}
+
+function setCnaeStatus(text, delay = 0) {
+    const status = document.getElementById('cnae-status');
+    if (!status) return;
+    clearTimeout(cnaeStatusTimer);
+    cnaeStatusTimer = setTimeout(() => { status.textContent = text; }, delay);
+}
+
+function setCnaeActive(index) {
+    const input = document.getElementById('cnae-input');
+    const options = document.querySelectorAll('#cnae-listbox .cnae-option');
+    cnaeAtivo = index;
+    options.forEach((opt, i) => opt.setAttribute('aria-selected', String(i === index)));
+    if (index >= 0 && options[index]) {
+        input.setAttribute('aria-activedescendant', options[index].id);
+        options[index].scrollIntoView({ block: 'nearest' });
+    } else {
+        input.removeAttribute('aria-activedescendant');
+    }
+}
+
+function closeCnaeList() {
+    const listbox = document.getElementById('cnae-listbox');
+    const input = document.getElementById('cnae-input');
+    listbox.hidden = true;
+    listbox.innerHTML = '';
+    input.setAttribute('aria-expanded', 'false');
+    cnaeResultados = [];
+    setCnaeActive(-1);
+}
+
+function renderCnaeList() {
+    const input = document.getElementById('cnae-input');
+    const listbox = document.getElementById('cnae-listbox');
+    const query = input.value.trim();
+
+    const lista = parseCnaeList(query);
+    if (!query || (lista && lista.length > 1)) {
+        closeCnaeList();
+        if (lista) setCnaeStatus(`${lista.length} códigos digitados. Pressione Enter ou Adicionar para incluí-los.`, 400);
+        return;
+    }
+
+    const todos = searchCnae(query);
+    cnaeResultados = todos.slice(0, CNAE_MAX_RESULTADOS);
+    listbox.innerHTML = '';
+    cnaeResultados.forEach((item, i) => {
+        const li = document.createElement('li');
+        li.className = 'cnae-option';
+        li.id = `cnae-opt-${i}`;
+        li.setAttribute('role', 'option');
+        li.setAttribute('aria-selected', 'false');
+        li.dataset.code = item.code;
+        const code = document.createElement('span');
+        code.className = 'cnae-option__code';
+        code.textContent = item.fmt;
+        const desc = document.createElement('span');
+        desc.textContent = item.desc;
+        li.append(code, desc);
+        listbox.appendChild(li);
+    });
+    if (todos.length > cnaeResultados.length) {
+        const mais = document.createElement('li');
+        mais.className = 'cnae-listbox__more';
+        mais.setAttribute('role', 'presentation');
+        mais.textContent = `Mostrando ${cnaeResultados.length} de ${todos.length} resultados. Digite mais palavras para refinar a busca.`;
+        listbox.appendChild(mais);
+    }
+
+    const aberto = cnaeResultados.length > 0;
+    listbox.hidden = !aberto;
+    input.setAttribute('aria-expanded', String(aberto));
+    setCnaeActive(-1);
+    setCnaeStatus(aberto
+        ? `${todos.length} ${todos.length === 1 ? 'atividade encontrada' : 'atividades encontradas'}. Use as setas para navegar e Enter para adicionar.`
+        : 'Nenhuma atividade encontrada. Tente outras palavras ou o código CNAE.', 400);
+}
+
+function renderCnaeSelecionados() {
+    const ul = document.getElementById('cnae-selected');
+    const empty = document.getElementById('cnae-empty');
+    ul.innerHTML = '';
+    cnaeSelecionados.forEach(sel => {
+        const li = document.createElement('li');
+        li.className = 'cnae-chip' + (sel.desc ? '' : ' cnae-chip--unknown');
+        const code = document.createElement('span');
+        code.className = 'cnae-chip__code';
+        code.textContent = sel.fmt;
+        const desc = document.createElement('span');
+        desc.className = 'cnae-chip__desc';
+        desc.textContent = sel.desc || 'Código não encontrado nos Anexos do decreto — tratado como nível I (sem piso de risco pelo CNAE). Confira se foi digitado corretamente.';
+        const remove = document.createElement('button');
+        remove.type = 'button';
+        remove.className = 'cnae-chip__remove';
+        remove.dataset.code = sel.code;
+        remove.setAttribute('aria-label', `Remover CNAE ${sel.fmt}`);
+        remove.textContent = '×';
+        li.append(code, desc, remove);
+        ul.appendChild(li);
+    });
+    empty.hidden = cnaeSelecionados.length > 0;
+}
+
+// Adiciona um código; devolve false se já estava na lista.
+function addCnae(code) {
+    if (cnaeSelecionados.some(s => s.code === code)) return false;
+    const item = cnaeIndice.find(i => i.code === code);
+    cnaeSelecionados.push({ code, fmt: item ? item.fmt : formatCnae(code), desc: item ? item.desc : null });
+    return true;
+}
+
+function selectCnaeOption(index) {
+    selectCnaeItem(cnaeResultados[index]);
+}
+
+function selectCnaeItem(item) {
+    if (!item) return;
+    const input = document.getElementById('cnae-input');
+    addCnae(item.code);
+    input.value = '';
+    closeCnaeList();
+    renderCnaeSelecionados();
+    document.getElementById('cnae-error').textContent = '';
+    setCnaeStatus(`CNAE ${item.fmt} adicionado. ${cnaeSelecionados.length} selecionado(s).`);
+    input.focus();
+}
+
+// Botão "Adicionar" / Enter sem opção destacada: lista de códigos ou resultado único.
+function addCnaeFromInput() {
+    const input = document.getElementById('cnae-input');
+    const errorEl = document.getElementById('cnae-error');
+    const query = input.value.trim();
+    errorEl.textContent = '';
+
+    const codes = parseCnaeList(query);
+    if (codes) {
+        const novos = codes.filter(addCnae);
+        const desconhecidos = novos.filter(c => !cnaeIndice.some(i => i.code === c));
+        input.value = '';
+        closeCnaeList();
+        renderCnaeSelecionados();
+        let msg = `${novos.length} CNAE(s) adicionado(s).`;
+        if (desconhecidos.length) msg += ` ${desconhecidos.length} não consta(m) nos Anexos do decreto e será(ão) tratado(s) como nível I.`;
+        setCnaeStatus(msg);
+        return;
+    }
+    // Refaz a busca: a lista pode ter sido fechada quando o campo perdeu o foco para o botão.
+    const resultados = query ? searchCnae(query) : [];
+    if (!query) {
+        errorEl.textContent = 'Digite uma atividade ou um código CNAE.';
+    } else if (resultados.length === 1) {
+        selectCnaeItem(resultados[0]);
+        return;
+    } else if (resultados.length > 1) {
+        errorEl.textContent = 'Escolha uma atividade na lista (clique nela ou use as setas e Enter).';
+    } else {
+        errorEl.textContent = 'Nenhuma atividade encontrada. Tente outras palavras ou digite o código CNAE com 7 dígitos.';
+    }
+    input.focus();
+}
+
+function setupCnaeSearch() {
+    const input = document.getElementById('cnae-input');
+    const listbox = document.getElementById('cnae-listbox');
+    const selected = document.getElementById('cnae-selected');
+    if (!input || !listbox || !selected) return;
+
+    cnaeIndice = (typeof CNAE_DADOS !== 'undefined' ? CNAE_DADOS : [])
+        .map(([code, fmt, desc]) => ({ code, fmt, desc, norm: normalizeText(desc) }));
+
+    input.addEventListener('input', () => {
+        document.getElementById('cnae-error').textContent = '';
+        renderCnaeList();
+    });
+
+    input.addEventListener('keydown', e => {
+        if (e.key === 'ArrowDown' && listbox.hidden && input.value.trim()) renderCnaeList();
+        const n = cnaeResultados.length;
+        if (e.key === 'ArrowDown' && n) {
+            e.preventDefault();
+            setCnaeActive((cnaeAtivo + 1) % n);
+        } else if (e.key === 'ArrowUp' && n) {
+            e.preventDefault();
+            setCnaeActive(cnaeAtivo <= 0 ? n - 1 : cnaeAtivo - 1);
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (!listbox.hidden && cnaeAtivo >= 0) selectCnaeOption(cnaeAtivo);
+            else addCnaeFromInput();
+        } else if (e.key === 'Escape') {
+            if (!listbox.hidden) closeCnaeList();
+            else input.value = '';
+        }
+    });
+
+    input.addEventListener('blur', () => { setTimeout(() => { if (document.activeElement !== input) closeCnaeList(); }, 150); });
+
+    // mousedown sem preventDefault tiraria o foco do campo antes do clique.
+    listbox.addEventListener('mousedown', e => e.preventDefault());
+    listbox.addEventListener('click', e => {
+        const opt = e.target.closest('.cnae-option');
+        if (opt) selectCnaeOption(Array.from(listbox.querySelectorAll('.cnae-option')).indexOf(opt));
+    });
+
+    document.getElementById('cnae-add').addEventListener('click', addCnaeFromInput);
+
+    selected.addEventListener('click', e => {
+        const btn = e.target.closest('.cnae-chip__remove');
+        if (!btn) return;
+        const index = cnaeSelecionados.findIndex(s => s.code === btn.dataset.code);
+        const [removido] = cnaeSelecionados.splice(index, 1);
+        renderCnaeSelecionados();
+        const botoes = selected.querySelectorAll('.cnae-chip__remove');
+        (botoes[index] || botoes[index - 1] || input).focus();
+        setCnaeStatus(`CNAE ${removido.fmt} removido. ${cnaeSelecionados.length} selecionado(s).`);
+    });
+
+    renderCnaeSelecionados();
+}
+
 function submitCnae() {
-    const raw = document.getElementById('cnae-input').value;
+    const input = document.getElementById('cnae-input');
     const errorEl = document.getElementById('cnae-error');
     errorEl.textContent = '';
 
-    const codes = raw
-        .split(/[\s,;]+/)
-        .map(normalizeCnae)
-        .filter(c => c.length > 0);
+    // Códigos digitados e ainda não adicionados também contam.
+    if (parseCnaeList(input.value.trim())) addCnaeFromInput();
+
+    const codes = cnaeSelecionados.map(s => s.code);
 
     if (codes.length === 0) {
-        errorEl.textContent = 'Informe pelo menos um CNAE.';
-        document.getElementById('cnae-input').focus();
+        errorEl.textContent = input.value.trim()
+            ? 'Escolha a atividade na lista para adicioná-la antes de continuar.'
+            : 'Selecione pelo menos um CNAE.';
+        input.focus();
         return;
     }
 
@@ -739,6 +1010,7 @@ function updateDebugLiveRisk() {
 document.addEventListener('DOMContentLoaded', () => {
     const initial = document.querySelector('.step.active');
     if (initial) updateProgressUI(initial);
+    setupCnaeSearch();
     setupAreaFlow();
     setupEventosFlow();
     setupHospedagemFlow();

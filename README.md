@@ -12,8 +12,10 @@ Basta abrir o arquivo [`index.html`](index.html) diretamente no navegador (duplo
 |---|---|
 | `index.html` | Markup das etapas do questionário e da tela de resultado |
 | `style.css` | Estilos visuais — sem dependências externas, inclusive fontes (usa apenas fontes do sistema) |
-| `script.js` | Lógica do questionário, listas de CNAE e regras de classificação |
-| `Classificacao de risco - CNAEs consolidados (Decreto 61.082-2026).csv` | Base de dados oficial dos CNAEs, usada para gerar as listas em `script.js` |
+| `script.js` | Lógica do questionário, busca de CNAE, listas de CNAE e regras de classificação |
+| `cnaes.js` | Lista pesquisável de CNAEs da Etapa 1 (código e descrição), **gerada** por `tools/gerar_cnaes.py` — não editar à mão |
+| `tools/gerar_cnaes.py` | Gera `cnaes.js` a partir do CSV, corrigindo as palavras partidas pela extração do PDF |
+| `Classificacao de risco - CNAEs consolidados (Decreto 61.082-2026).csv` | Base de dados oficial dos CNAEs, usada para gerar `cnaes.js` e as listas de risco em `script.js` |
 
 O visual segue o **Padrão Digital de Pernambuco** (azul `#0034B7`, amarelo `#FFB60C`, azul médio `#4067C9`), com os níveis de risco mantendo cores semânticas próprias (verde/âmbar/vermelho) para leitura imediata do resultado.
 
@@ -26,7 +28,7 @@ O visual segue o **Padrão Digital de Pernambuco** (azul `#0034B7`, amarelo `#FF
 
 ### Etapas
 
-1. **Etapa 1 — CNAE:** o usuário informa o(s) código(s) CNAE da empresa.
+1. **Etapa 1 — CNAE:** o usuário busca a atividade da empresa pelo nome (ou parte dele, sem precisar de acentos) ou pelo código, e escolhe na lista; também pode digitar ou colar vários códigos de uma vez. Código que não consta na planilha do decreto é aceito com aviso e tratado como nível I.
    - Se algum CNAE constar em `CNAE_ALTO_RISCO` (Anexo II), o resultado é **Risco III** imediatamente.
    - Se algum CNAE constar em `CNAE_MEDIO_RISCO`, é aplicado um **piso mínimo de Risco II** (Art. 3º, II c/c Anexo II): o questionário continua, mas o resultado final nunca fica abaixo disso.
    - CNAEs fora das duas listas (nível I no decreto) não aplicam piso algum.
@@ -49,7 +51,7 @@ Nas etapas 2, 3 e 7, o botão de avançar só habilita depois de uma escolha exp
 
 As listas `CNAE_ALTO_RISCO` e `CNAE_MEDIO_RISCO` em `script.js` foram geradas a partir da coluna **`CBMPE_nivel`** do CSV consolidado (não usar `Nivel_de_risco`, que traz valores ambíguos como "II ou III" para parte das linhas). Para atualizar:
 
-1. Substitua o CSV na raiz do projeto por uma versão mais recente, mantendo as mesmas colunas (`;` como delimitador).
+1. Substitua o CSV na raiz do projeto por uma versão mais recente, mantendo as mesmas colunas (`;` como delimitador), e rode `python tools/gerar_cnaes.py` para regenerar `cnaes.js`. Confira a lista "Não corrigidos" que o script imprime: são possíveis palavras partidas ainda não tratadas em `FRAGMENTOS`.
 2. Filtre as linhas com `CBMPE_nivel = III` (alto risco) e `CBMPE_nivel = II` (médio risco) e gere os arrays de `CNAE_numerico` correspondentes — CNAEs de nível I não precisam ser listados, pois "baixo" é o piso padrão do código.
 3. Um mesmo CNAE não deve constar em mais de uma lista.
 
