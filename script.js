@@ -665,10 +665,10 @@ function setupExclusiveCheckGroup(stepId) {
 // ============================================================================
 // DEBUG TEMPORÁRIO — remover esta função, suas chamadas (em activateStep, nos
 // render*Flow e no updateState de setupExclusiveCheckGroup) e o HTML/CSS
-// correspondentes antes de publicar. Mostra, no topo de cada etapa, a
-// classificação que resultaria se o usuário parasse de responder agora e
-// dissesse "não" a tudo o que ainda não foi respondido — só para facilitar
-// teste manual do fluxo.
+// correspondentes antes de publicar. Mostra, no topo de cada etapa, os níveis
+// de risco ainda possíveis com as respostas dadas até agora: um nível só quando
+// ele já está definido; senão, o intervalo que as próximas respostas podem
+// alcançar — só para facilitar teste manual do fluxo.
 // ============================================================================
 function updateDebugLiveRisk() {
     const step = document.querySelector('.step.active');
@@ -676,38 +676,44 @@ function updateDebugLiveRisk() {
     if (!badge) return;
 
     const floor = getRiskFloor();
-    let risk;
+    // [mínimo, máximo] ainda possíveis; o piso do CNAE vale para os dois extremos.
+    const range = (min, max) => [Math.max(min, floor), Math.max(max, floor)];
+    let possible;
 
     switch (step.id) {
         case 'step-alto-direto': {
             const any = document.querySelector('#step-alto-direto .check-item__input:checked:not(.check-item__input--none)');
-            risk = any ? 3 : Math.max(2, floor);
+            possible = any ? range(3, 3) : range(1, 3);
             break;
         }
         case 'step-baixo-bloco-a': {
             const any = document.querySelector('#step-baixo-bloco-a .check-item__input:checked:not(.check-item__input--none)');
-            risk = any ? Math.max(1, floor) : Math.max(2, floor);
+            possible = any ? range(1, 1) : range(1, 3);
             break;
         }
         case 'step-eventos': {
             const { result } = evaluateEventosFlow();
-            risk = result === 3 ? 3 : Math.max(2, floor);
+            if (result) possible = range(result, result);
+            else possible = evtAnswer('e1') === 'sim' ? range(2, 3) : range(1, 3);
             break;
         }
         case 'step-area': {
-            const { result } = evaluateAreaFlow();
-            risk = result === 3 ? 3 : Math.max(2, floor);
+            const { resolved, result } = evaluateAreaFlow();
+            if (result) possible = range(result, result);
+            else possible = resolved ? range(1, 2) : range(1, 3);
             break;
         }
         case 'step-hospedagem': {
             const { excedeLeitos } = evaluateHospedagemFlow();
-            risk = excedeLeitos ? 2 : Math.max(2, floor);
+            possible = excedeLeitos ? range(2, 2) : range(1, 2);
             break;
         }
         case 'step-baixo-bloco-b': {
             const inputs = document.querySelectorAll('#step-baixo-bloco-b .check-item__input:not(.check-item__input--none)');
             const todosMarcados = Array.from(inputs).every(input => input.checked);
-            risk = todosMarcados ? Math.max(1, floor) : Math.max(2, floor);
+            const nenhuma = document.querySelector('#step-baixo-bloco-b .check-item__input--none:checked');
+            if (todosMarcados) possible = range(1, 1);
+            else possible = nenhuma ? range(2, 2) : range(1, 2);
             break;
         }
         default:
@@ -717,8 +723,16 @@ function updateDebugLiveRisk() {
     }
 
     const labels = { 1: 'RISCO I (BAIXO)', 2: 'RISCO II (MÉDIO)', 3: 'RISCO III (ALTO)' };
-    badge.textContent = `🧪 Prévia (teste): ${labels[risk]} — supondo "não" ao que ainda não foi respondido`;
-    badge.dataset.risk = String(risk);
+    const [min, max] = possible;
+    if (min === max) {
+        badge.textContent = `🧪 Prévia (teste): ${labels[min]}`;
+        badge.dataset.risk = String(min);
+        return;
+    }
+    const levels = [];
+    for (let r = min; r <= max; r++) levels.push(labels[r]);
+    badge.textContent = `🧪 Prévia (teste): ainda depende das próximas respostas — pode ser ${levels.slice(0, -1).join(', ')} ou ${levels[levels.length - 1]}`;
+    badge.removeAttribute('data-risk');
 }
 // ============================================================================
 
