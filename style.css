@@ -429,6 +429,96 @@ ul.details-list {
     border-radius: 4px;
 }
 
+/* Fluxo condicional de área (Etapa 3): perguntas Sim/Não reveladas progressivamente */
+.area-q {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+}
+
+.area-q:focus { outline: none; }
+
+.area-q + .area-q,
+.area-q + .area-q-group,
+.area-q-group + .area-q,
+.area-q-group .area-q {
+    margin-top: var(--space-4);
+}
+
+.area-q__legend {
+    padding: 0;
+    margin-bottom: var(--space-2);
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--color-text);
+}
+
+.area-q__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.area-q__option {
+    flex: 1 1 200px;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 44px;
+    padding: 10px 14px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+.area-q__option:has(input:checked) {
+    border-color: var(--color-primary);
+    background-color: var(--color-surface-muted);
+    font-weight: 600;
+}
+
+.area-q__option input {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+}
+
+.area-q__option input:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+    border-radius: 50%;
+}
+
+.area-q .check-item__warning {
+    margin-left: 0;
+}
+
+.area-q-group__intro {
+    margin-top: var(--space-4);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--color-text);
+}
+
+.area-flow__status {
+    margin-top: var(--space-3);
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--color-text-muted);
+}
+
+.area-flow__status:empty { display: none; }
+.area-flow__status[data-tone="alto"] { color: var(--color-high-text); }
+.area-flow__status[data-tone="ok"] { color: var(--color-low-text); }
+
 /* "Como responder": texto de ajuda sempre visível dentro de um check-item (não é mais
    um <details> colapsável) — quem nunca respondeu o questionário precisa ler sem clicar. */
 .check-item__warning {
@@ -986,4 +1076,43 @@ ul.details-list li::before {
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
     }
+    .debug-live-risk { display: none !important; }
 }
+
+/* ==========================================================================
+   DEBUG TEMPORÁRIO — remover este bloco inteiro antes de publicar.
+   Prévia da classificação de risco "se eu parar de responder agora", para
+   facilitar teste manual do fluxo. Não é a classificação final.
+   ========================================================================== */
+.debug-live-risk {
+    display: inline-block;
+    margin-bottom: var(--space-3);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    background-color: var(--color-surface-muted);
+    border: 1px dashed var(--color-border);
+    color: var(--color-text-muted);
+}
+
+.debug-live-risk:empty { display: none; }
+
+.debug-live-risk[data-risk="1"] {
+    background-color: var(--color-low-bg);
+    border-color: var(--color-low-border);
+    color: var(--color-low-text);
+}
+
+.debug-live-risk[data-risk="2"] {
+    background-color: var(--color-medium-bg);
+    border-color: var(--color-medium-border);
+    color: var(--color-medium-text);
+}
+
+.debug-live-risk[data-risk="3"] {
+    background-color: var(--color-high-bg);
+    border-color: var(--color-high-border);
+    color: var(--color-high-text);
+}
+/* ========================================================================== */

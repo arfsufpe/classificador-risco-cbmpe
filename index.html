@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Ferramenta gratuita do Corpo de Bombeiros Militar de Pernambuco para identificar a classificação de risco de incêndio (Risco I, II ou III) do seu estabelecimento, conforme o Decreto Estadual 61.082/2026.">
+    <meta name="description" content="Ferramenta gratuita do Corpo de Bombeiros Militar de Pernambuco para identificar a classificação de risco de incêndio (Risco I, II ou III) do seu estabelecimento, conforme o Decreto Estadual nº 52.005/2021 (atualizado pelo Decreto nº 61.082/2026).">
     <meta name="theme-color" content="#0034B7">
     <title>Classificador de Risco de Incêndio | CBMPE</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230034B7'/%3E%3Cpath d='M12 20.5c3.6 0 5.6-2.4 5.6-5.4 0-2.6-1.6-4-2.6-5.8-.6 1.3-1.4 2.1-2.2 2.1-1.2 0-1.1-1.6-1.1-2.7C11.4 6.9 10.4 5 9.2 5c.5 1.6-.2 2.6-1.1 3.8C7.1 10 6.2 11.6 6.2 13.6c0 3.6 2 6.9 5.8 6.9Z' fill='%23FFB60C'/%3E%3C/svg%3E">
@@ -74,6 +74,8 @@
             </div>
 
             <div id="step-eventos" class="step" data-step="2" data-total="5" data-label="Etapa 2 de 5 · Eventos e Casas de Festas">
+                <!-- DEBUG TEMPORÁRIO (remover antes de publicar): prévia de classificação para facilitar teste -->
+                <p class="debug-live-risk" aria-live="polite"></p>
                 <h2 class="question-text">O seu estabelecimento envolve casas de festas, eventos ou público temporário?</h2>
 
                 <div class="info-box">
@@ -151,6 +153,8 @@
             </div>
 
             <div id="step-alto-risco" class="step" data-step="3" data-total="5" data-label="Etapa 3 de 5 · Risco Alto">
+                <!-- DEBUG TEMPORÁRIO (remover antes de publicar): prévia de classificação para facilitar teste -->
+                <p class="debug-live-risk" aria-live="polite"></p>
                 <h2 class="question-text">O seu estabelecimento se enquadra em ALGUMA das situações de Alto Risco abaixo?</h2>
 
                 <div class="info-box">
@@ -163,20 +167,94 @@
                 <div class="risk-block">
                     <p class="risk-block__label">Tamanho, altura e ocupação do imóvel</p>
 
-                    <div class="check-item">
-                        <label class="check-item__label">
-                            <input type="checkbox" class="check-item__input" data-reason="área construída superior a 930 m²">
-                            <span>A área construída onde a empresa vai funcionar tem mais de 930 metros quadrados?</span>
-                        </label>
-                        <div class="check-item__warning">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
-                            </svg>
-                            <div>
-                                <strong>Como responder:</strong>
-                                <p>Caso a empresa esteja inserida em uma outra edificação maior (shopping, galeria, prédio comercial), você DEVE considerar a área total do condomínio. Para o CBMPE, área construída é qualquer espaço coberto com teto sob piso trabalhado (soma de todos os cômodos, andares, garagens cobertas, galpões, depósitos, varandas, marquises e mezaninos) — diferente da Prefeitura, o CBMPE não desconta garagens ou coberturas na soma.</p>
+                    <div class="check-item area-flow" id="area-flow">
+                        <fieldset class="area-q" data-q="p1">
+                            <legend class="area-q__legend">O local onde a empresa funciona é o prédio inteiro, ou é apenas uma unidade dentro de um prédio maior (ex.: uma loja em shopping, uma sala em edifício comercial, um box em galeria)?</legend>
+                            <div class="area-q__options">
+                                <label class="area-q__option"><input type="radio" name="area-p1" value="inteiro"> Ocupa o prédio inteiro</label>
+                                <label class="area-q__option"><input type="radio" name="area-p1" value="unidade"> É uma unidade dentro de um prédio maior</label>
                             </div>
+                        </fieldset>
+
+                        <fieldset class="area-q" data-q="area-imovel" aria-describedby="area-help-imovel" hidden>
+                            <legend class="area-q__legend">A área construída do imóvel é superior a 930 m²?</legend>
+                            <div class="area-q__options">
+                                <label class="area-q__option"><input type="radio" name="area-area-imovel" value="sim"> Sim</label>
+                                <label class="area-q__option"><input type="radio" name="area-area-imovel" value="nao"> Não</label>
+                            </div>
+                            <div class="check-item__warning" id="area-help-imovel">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                                </svg>
+                                <div>
+                                    <strong>Como responder:</strong>
+                                    <p>Para o CBMPE, área construída é qualquer espaço coberto com teto sob piso trabalhado (soma de todos os cômodos, andares, garagens cobertas, galpões, depósitos, varandas, marquises e mezaninos) — diferente da Prefeitura, o CBMPE não desconta garagens ou coberturas na soma.</p>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="area-q" data-q="p2" hidden>
+                            <legend class="area-q__legend">Sua empresa funciona SOMENTE no térreo, sem usar outros andares do prédio?</legend>
+                            <div class="area-q__options">
+                                <label class="area-q__option"><input type="radio" name="area-p2" value="sim"> Sim</label>
+                                <label class="area-q__option"><input type="radio" name="area-p2" value="nao"> Não</label>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="area-q" data-q="p3" hidden>
+                            <legend class="area-q__legend">A área da SUA unidade (não do prédio inteiro) é de até 930 m²?</legend>
+                            <div class="area-q__options">
+                                <label class="area-q__option"><input type="radio" name="area-p3" value="sim"> Sim</label>
+                                <label class="area-q__option"><input type="radio" name="area-p3" value="nao"> Não</label>
+                            </div>
+                        </fieldset>
+
+                        <div class="area-q-group" data-q-group="p4" hidden>
+                            <p class="area-q-group__intro" id="area-p4-intro">Lojas no térreo de prédios maiores podem ser tratadas separadamente do prédio (Art. 7º, §3º) se atenderem às três condições abaixo — <strong>TODAS</strong> precisam ser "Sim":</p>
+
+                            <fieldset class="area-q" data-q="p4a" aria-describedby="area-p4-intro" hidden>
+                                <legend class="area-q__legend">a) Sua unidade tem sistema de prevenção contra incêndio próprio e independente (não compartilha extintores, hidrantes, alarme etc. com o restante do prédio)?</legend>
+                                <div class="area-q__options">
+                                    <label class="area-q__option"><input type="radio" name="area-p4a" value="sim"> Sim</label>
+                                    <label class="area-q__option"><input type="radio" name="area-p4a" value="nao"> Não</label>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="area-q" data-q="p4b" hidden>
+                                <legend class="area-q__legend">b) Sua unidade NÃO tem acesso interno às áreas comuns do prédio (corredores, halls, elevadores compartilhados)?</legend>
+                                <div class="area-q__options">
+                                    <label class="area-q__option"><input type="radio" name="area-p4b" value="sim"> Sim</label>
+                                    <label class="area-q__option"><input type="radio" name="area-p4b" value="nao"> Não</label>
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="area-q" data-q="p4c" hidden>
+                                <legend class="area-q__legend">c) Sua unidade tem saída direta para a rua, sem precisar passar pelas áreas comuns do prédio?</legend>
+                                <div class="area-q__options">
+                                    <label class="area-q__option"><input type="radio" name="area-p4c" value="sim"> Sim</label>
+                                    <label class="area-q__option"><input type="radio" name="area-p4c" value="nao"> Não</label>
+                                </div>
+                            </fieldset>
                         </div>
+
+                        <fieldset class="area-q" data-q="area-predio" aria-describedby="area-help-predio" hidden>
+                            <legend class="area-q__legend">A área total do prédio (somando todas as unidades e andares) é superior a 930 m²?</legend>
+                            <div class="area-q__options">
+                                <label class="area-q__option"><input type="radio" name="area-area-predio" value="sim"> Sim</label>
+                                <label class="area-q__option"><input type="radio" name="area-area-predio" value="nao"> Não</label>
+                            </div>
+                            <div class="check-item__warning" id="area-help-predio">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                                </svg>
+                                <div>
+                                    <strong>Como responder:</strong>
+                                    <p>Considere a área total da edificação (shopping, galeria, prédio comercial), não só a da sua unidade. Para o CBMPE, área construída é qualquer espaço coberto com teto sob piso trabalhado (soma de todos os cômodos, andares, garagens cobertas, galpões, depósitos, varandas, marquises e mezaninos) — diferente da Prefeitura, o CBMPE não desconta garagens ou coberturas na soma.</p>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <p class="area-flow__status" role="status" aria-live="polite"></p>
                     </div>
 
                     <div class="check-item">
@@ -190,7 +268,7 @@
                             </svg>
                             <div>
                                 <strong>Como responder:</strong>
-                                <p>Conte o número total de pavimentos do prédio (térreo + andares superiores). Se houver subsolo utilizado exclusivamente para estacionamento de veículos (sem posto de combustível ou lavagem), esse subsolo não entra na contagem dos andares.</p>
+                                <p>Conte o número total de pavimentos do prédio (térreo + andares superiores). Se houver subsolo utilizado exclusivamente para estacionamento de veículos, sem abastecimento de combustível no local, esse subsolo não entra na contagem dos andares.</p>
                             </div>
                         </div>
                     </div>
@@ -265,8 +343,8 @@
 
                     <div class="check-item">
                         <label class="check-item__label">
-                            <input type="checkbox" class="check-item__input" data-reason="fabricação, armazenamento ou comércio de outros gases combustíveis, industriais ou medicinais">
-                            <span>O seu estabelecimento fabrica, armazena, utiliza em seus processos ou comercializa outros tipos de gases combustíveis, industriais ou medicinais (em cilindros, tanques ou tubulação encanada)?</span>
+                            <input type="checkbox" class="check-item__input" data-reason="fabricação, armazenamento, utilização ou comércio de gases combustíveis (além do GLP)">
+                            <span>O seu estabelecimento fabrica, armazena, utiliza ou comercializa gases combustíveis (além do GLP), em cilindros, tanques ou tubulação encanada?</span>
                         </label>
                         <div class="check-item__warning">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -274,12 +352,7 @@
                             </svg>
                             <div>
                                 <strong>Como responder:</strong>
-                                <p>Verifique se o seu negócio utiliza ou guarda algum dos gases abaixo:</p>
-                                <ul class="details-list">
-                                    <li><strong>Gases combustíveis</strong> (pegam fogo ou podem explodir facilmente): usados como combustível para veículos, máquinas, aquecimento ou solda. Exemplos: Gás Natural Encanado (GN) ou Veicular (GNV), acetileno (maçaricos de solda), hidrogênio, biogás e propano industrial.</li>
-                                    <li><strong>Gases industriais</strong> (usados em oficinas, fábricas, refrigeração ou processos técnicos): empregados no funcionamento de indústrias, oficinas mecânicas, corte de metais, envasamento de bebidas ou refrigeração de câmaras frias. Exemplos: oxigênio industrial, argônio, nitrogênio, amônia anidra (frigoríficos e fábricas de gelo) e dióxido de carbono (CO₂ industrial).</li>
-                                    <li><strong>Gases medicinais</strong> (uso hospitalar, odontológico ou terapêutico): gases com grau de pureza medicinal usados para tratamento de saúde, respiração assistida, anestesia ou equipamentos médicos e odontológicos. Exemplos: oxigênio medicinal, óxido nitroso (anestésico), ar comprimido medicinal e misturas gasosas para UTIs ou fisioterapia respiratória.</li>
-                                </ul>
+                                <p>Gases que pegam fogo ou explodem facilmente, usados como combustível ou em processos que geram chama — diferente do gás de cozinha (GLP), que já foi perguntado antes. Exemplos: gás natural encanado ou veicular (GNV, usado em carros e fogões industriais), acetileno (usado em maçaricos de solda), hidrogênio e biogás.</p>
                                 <p class="risk-block__note">Obs.: nitrogênio utilizado exclusivamente em dispensers de bebidas e chopeiras não se enquadra neste critério.</p>
                             </div>
                         </div>
@@ -351,6 +424,8 @@
             </div>
 
             <div id="step-baixo-bloco-a" class="step" data-step="4" data-total="5" data-label="Etapa 4 de 5 · Risco Baixo (Bloco A)">
+                <!-- DEBUG TEMPORÁRIO (remover antes de publicar): prévia de classificação para facilitar teste -->
+                <p class="debug-live-risk" aria-live="polite"></p>
                 <h2 class="question-text">O seu negócio se enquadra em ALGUMA das situações abaixo?</h2>
 
                 <div class="info-box">
@@ -417,6 +492,15 @@
                             <input type="checkbox" class="check-item__input" data-reason="estrutura provisória ou móvel de até 200 m²">
                             <span>O negócio funciona em local fixo sem construção permanente, utilizando tenda, barraca, quiosque móvel ou toldo, ocupando uma área total de apoio de no máximo 200 metros quadrados?</span>
                         </label>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <p>Aplica-se a estruturas que podem ser montadas e desmontadas, sem paredes ou telhado de construção permanente. Exemplos: barraca de feira, quiosque de praia, tenda de evento pequeno. Some toda a área usada pelo negócio (estrutura, balcão, mesas e espaço de apoio): o total não pode passar de 200 m².</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="check-item">
@@ -424,6 +508,15 @@
                             <input type="checkbox" class="check-item__input" data-reason="estrutura técnica desabitada de até 200 m²">
                             <span>A instalação é uma estrutura técnica sem trabalho humano permanente (como antena de celular, torre de transmissão, estação de bombeamento de água/esgoto ou placas de energia solar/eólica) com até 200 m² de área construída?</span>
                         </label>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <p>Aplica-se a instalações onde nenhuma pessoa trabalha no local de forma permanente — só há visitas eventuais para manutenção. Exemplos: torre de celular, estação de tratamento ou bombeamento de água isolada, pequena usina solar isolada. A área construída total não pode passar de 200 m².</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -445,6 +538,8 @@
             </div>
 
             <div id="step-baixo-bloco-b" class="step" data-step="5" data-total="5" data-label="Etapa 5 de 5 · Risco Baixo (Bloco B)">
+                <!-- DEBUG TEMPORÁRIO (remover antes de publicar): prévia de classificação para facilitar teste -->
+                <p class="debug-live-risk" aria-live="polite"></p>
                 <h2 class="question-text">Para ser Risco Baixo, seu estabelecimento precisa atender a TODOS os itens abaixo:</h2>
 
                 <div class="info-box">
@@ -556,7 +651,7 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
                         </svg>
-                        Prazo estimado: até <strong>2 semanas</strong> após a realização da vistoria.
+                        <span>Prazo médio observado na prática (não é um prazo previsto em lei): cerca de <strong>2 semanas</strong> após a vistoria, quando não há pendências.</span>
                     </p>
                     <a href="https://www.bombeiros.pe.gov.br" target="_blank" rel="noopener noreferrer" class="next-steps__cta">
                         Iniciar processo de vistoria no site do CBMPE
@@ -609,7 +704,7 @@
 </main>
 
 <footer class="site-footer">
-    <p>Corpo de Bombeiros Militar de Pernambuco &middot; Decreto Estadual 61.082/2026</p>
+    <p>Corpo de Bombeiros Militar de Pernambuco &middot; Decreto Estadual nº 52.005/2021 (atualizado pelo Decreto nº 61.082/2026)</p>
 </footer>
 
 <script src="script.js"></script>

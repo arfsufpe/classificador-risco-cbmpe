@@ -1,5 +1,7 @@
+// Regras de classificação: Decreto Estadual nº 52.005/2021 (atualizado pelo Decreto nº 61.082/2026).
 // --- LISTAS DE CNAE ---
-// Fonte: Decreto Estadual 61.082/2026 - CNAEs consolidados (coluna CBMPE_nivel).
+// Fonte das listas: Anexos I e II na versão consolidada pelo Decreto nº 61.082/2026 (coluna CBMPE_nivel),
+// único decreto que alterou os Anexos.
 // Códigos não listados aqui (nível I) usam o piso padrão 'baixo'.
 const CNAE_ALTO_RISCO = [
     '0600001', // Extração de petróleo e gás natural
@@ -152,15 +154,143 @@ function checkEventos() {
     nextStep('step-alto-risco');
 }
 
-// Bloco de Risco Alto: basta UMA situação marcada para classificar direto, sem prosseguir.
+// Bloco de Risco Alto: basta UMA situação marcada (ou o fluxo de área indicar Risco Alto)
+// para classificar direto, sem prosseguir.
 function checkAltoRisco() {
     const checked = Array.from(document.querySelectorAll('#step-alto-risco .check-item__input:checked:not(.check-item__input--none)'));
-    if (checked.length > 0) {
-        const motivos = checked.map(c => c.dataset.reason).join('; ');
-        showResult(3, `Classificado Risco III (Alto) por apresentar: ${motivos} (Art. 6º).`);
+    const motivos = checked.map(c => c.dataset.reason);
+    if (areaOutcome && areaOutcome.alto) motivos.unshift(areaOutcome.reason);
+    if (motivos.length > 0) {
+        showResult(3, `Classificado Risco III (Alto) por apresentar: ${motivos.join('; ')} (Art. 6º).`);
         return;
     }
     nextStep('step-baixo-bloco-a');
+}
+
+// --- FLUXO CONDICIONAL DE ÁREA (Etapa 3) ---
+// Art. 6º, I (área > 930 m²) com a exceção do Art. 7º, §3º: unidade exclusivamente no térreo,
+// com até 930 m², dentro de edificação maior, sem compartilhar sistemas preventivos, sem acesso
+// às áreas comuns e com saída direta para a via pública, não é enquadrada pela área do prédio.
+// A ordem importa: ao mudar uma resposta, todas as posteriores são apagadas.
+const AREA_Q_ORDER = ['p1', 'area-imovel', 'p2', 'p3', 'p4a', 'p4b', 'p4c', 'area-predio'];
+
+// null enquanto o fluxo não foi totalmente respondido; depois { alto, reason }.
+let areaOutcome = null;
+let excecaoTerreoAplicada = false;
+
+function areaAnswer(q) {
+    const input = document.querySelector(`#area-flow input[name="area-${q}"]:checked`);
+    return input ? input.value : null;
+}
+
+// Percorre a árvore de decisão e devolve as perguntas visíveis e o desfecho (se já houver).
+function evaluateAreaFlow() {
+    const a = {};
+    AREA_Q_ORDER.forEach(q => { a[q] = areaAnswer(q); });
+
+    const visible = ['p1'];
+    const pending = () => ({ visible, outcome: null, excecao: false });
+    const done = (alto, reason, excecao = false) => ({ visible, outcome: { alto, reason }, excecao });
+    const regraGeral = () => {
+        visible.push('area-predio');
+        if (!a['area-predio']) return pending();
+        return done(a['area-predio'] === 'sim', 'área total da edificação superior a 930 m²');
+    };
+
+    if (!a.p1) return pending();
+    if (a.p1 === 'inteiro') {
+        visible.push('area-imovel');
+        if (!a['area-imovel']) return pending();
+        return done(a['area-imovel'] === 'sim', 'área construída superior a 930 m²');
+    }
+
+    visible.push('p2');
+    if (!a.p2) return pending();
+    if (a.p2 === 'nao') return regraGeral();
+
+    visible.push('p3');
+    if (!a.p3) return pending();
+    if (a.p3 === 'nao') return done(true, 'unidade no térreo com área própria superior a 930 m²');
+
+    for (const q of ['p4a', 'p4b', 'p4c']) {
+        visible.push(q);
+        if (!a[q]) return pending();
+        if (a[q] === 'nao') return regraGeral();
+    }
+    return done(false, null, true);
+}
+
+function setAreaStatus(text, tone) {
+    const status = document.querySelector('#area-flow .area-flow__status');
+    if (!status) return;
+    status.textContent = text;
+    status.dataset.tone = tone || '';
+}
+
+// changedQ: pergunta que acabou de ser respondida (null na carga inicial).
+// moveFocus: false quando a resposta veio das setas do teclado — mover o foco ali
+// impediria o usuário de alternar entre as opções do mesmo grupo.
+function renderAreaFlow(changedQ, moveFocus) {
+    const flow = document.getElementById('area-flow');
+    if (!flow) return;
+
+    if (changedQ) {
+        AREA_Q_ORDER.slice(AREA_Q_ORDER.indexOf(changedQ) + 1).forEach(q => {
+            flow.querySelectorAll(`input[name="area-${q}"]`).forEach(input => { input.checked = false; });
+        });
+    }
+
+    const { visible, outcome, excecao } = evaluateAreaFlow();
+    let revealed = null;
+    flow.querySelectorAll('.area-q').forEach(fieldset => {
+        const show = visible.includes(fieldset.dataset.q);
+        if (show && fieldset.hidden) revealed = fieldset;
+        fieldset.hidden = !show;
+    });
+    flow.querySelector('[data-q-group="p4"]').hidden = !visible.includes('p4a');
+
+    areaOutcome = outcome;
+    excecaoTerreoAplicada = excecao;
+
+    if (outcome && outcome.alto) {
+        setAreaStatus('Critério de área respondido: enquadra em Risco Alto.', 'alto');
+    } else if (outcome && excecao) {
+        setAreaStatus('Critério de área respondido: exceção do Art. 7º, §3º aplicável — a área do prédio não gera Risco Alto para a sua unidade.', 'ok');
+    } else if (outcome) {
+        setAreaStatus('Critério de área respondido: não gera Risco Alto.', 'ok');
+    } else if (changedQ && revealed && !moveFocus) {
+        setAreaStatus(`Nova pergunta: ${revealed.querySelector('legend').textContent}`);
+    } else {
+        setAreaStatus('');
+    }
+
+    if (changedQ && revealed && moveFocus) {
+        revealed.setAttribute('tabindex', '-1');
+        revealed.focus();
+    }
+
+    // Área em Risco Alto conta como uma situação marcada: desfaz "Nenhuma das alternativas anteriores".
+    if (outcome && outcome.alto) {
+        const none = document.querySelector('#step-alto-risco .check-item__input--none');
+        if (none) none.checked = false;
+    }
+    if (groupUpdaters['step-alto-risco']) groupUpdaters['step-alto-risco']();
+}
+
+function setupAreaFlow() {
+    const flow = document.getElementById('area-flow');
+    if (!flow) return;
+
+    let arrowNav = false;
+    flow.addEventListener('keydown', e => { arrowNav = e.key.startsWith('Arrow'); });
+    flow.addEventListener('change', e => {
+        const q = (e.target.name || '').replace(/^area-/, '');
+        if (!AREA_Q_ORDER.includes(q)) return;
+        renderAreaFlow(q, !arrowNav);
+        arrowNav = false;
+    });
+
+    renderAreaFlow(null, false);
 }
 
 // Bloco A de Risco Baixo: hipóteses diretas de isenção — basta UMA marcada.
@@ -231,6 +361,7 @@ function activateStep(id) {
     target.classList.add('active');
     updateProgressUI(target);
     focusStep(target);
+    updateDebugLiveRisk();
 }
 
 function nextStep(id) {
@@ -248,9 +379,14 @@ function goBack() {
 // Etapas cujo bloco de checkboxes tem a opção exclusiva "Nenhuma das alternativas anteriores".
 const EXCLUSIVE_CHECK_STEPS = ['step-eventos', 'step-alto-risco', 'step-baixo-bloco-a', 'step-baixo-bloco-b'];
 
+// Recalcula o estado do botão de cada grupo; usado também pelo fluxo de área da Etapa 3.
+const groupUpdaters = {};
+
 // Ativa, para uma etapa de checkboxes, a exclusão mútua da opção "Nenhuma das alternativas
 // anteriores" (marcá-la desmarca as demais e vice-versa) e mantém o botão de avançar
 // desabilitado até haver ao menos uma marcação — evita que o usuário avance sem ler as opções.
+// Se a etapa tiver o fluxo de área, ele precisa estar totalmente respondido, e um desfecho
+// de Risco Alto conta como uma situação marcada.
 function setupExclusiveCheckGroup(stepId) {
     const stepEl = document.getElementById(stepId);
     if (!stepEl) return;
@@ -259,17 +395,29 @@ function setupExclusiveCheckGroup(stepId) {
     const noneInput = stepEl.querySelector('.check-item__input--none');
     const button = stepEl.querySelector('.actions .btn-primary');
     const hint = stepEl.querySelector('.selection-hint');
+    const hasAreaFlow = Boolean(stepEl.querySelector('#area-flow'));
 
     function updateState() {
-        const anyChecked = inputs.some(input => input.checked);
-        if (button) button.disabled = !anyChecked;
-        if (hint) hint.hidden = anyChecked;
+        const flowPending = hasAreaFlow && areaOutcome === null;
+        const areaAlto = hasAreaFlow && areaOutcome !== null && areaOutcome.alto;
+        const ready = !flowPending && (areaAlto || inputs.some(input => input.checked));
+        if (button) button.disabled = !ready;
+        if (hint) {
+            hint.hidden = ready;
+            hint.textContent = flowPending
+                ? 'Responda às perguntas sobre a área do imóvel para continuar.'
+                : 'Selecione ao menos uma opção acima para continuar.';
+        }
+        updateDebugLiveRisk();
     }
 
     inputs.forEach(input => {
         input.addEventListener('change', () => {
             if (input === noneInput) {
-                if (input.checked) {
+                if (input.checked && hasAreaFlow && areaOutcome && areaOutcome.alto) {
+                    input.checked = false;
+                    setAreaStatus('Sua resposta sobre a área já enquadra em Risco Alto. Para marcar "Nenhuma das alternativas anteriores", revise as perguntas sobre a área.', 'alto');
+                } else if (input.checked) {
                     inputs.forEach(other => { if (other !== noneInput) other.checked = false; });
                 }
             } else if (input.checked && noneInput) {
@@ -279,12 +427,63 @@ function setupExclusiveCheckGroup(stepId) {
         });
     });
 
+    groupUpdaters[stepId] = updateState;
     updateState();
 }
+
+// ============================================================================
+// DEBUG TEMPORÁRIO — remover esta função, suas chamadas (em activateStep e no
+// updateState de setupExclusiveCheckGroup) e o HTML/CSS correspondentes antes
+// de publicar. Mostra, no topo de cada etapa, a classificação que resultaria
+// se o usuário parasse de responder agora e dissesse "não" a tudo o que ainda
+// não foi respondido — só para facilitar teste manual do fluxo.
+// ============================================================================
+function updateDebugLiveRisk() {
+    const step = document.querySelector('.step.active');
+    const badge = step && step.querySelector('.debug-live-risk');
+    if (!badge) return;
+
+    const floor = cnaeState.floor;
+    let risk;
+
+    switch (step.id) {
+        case 'step-eventos': {
+            const any = document.querySelector('#step-eventos .check-item__input:checked:not(.check-item__input--none)');
+            risk = any ? 3 : Math.max(2, floor);
+            break;
+        }
+        case 'step-alto-risco': {
+            const any = document.querySelector('#step-alto-risco .check-item__input:checked:not(.check-item__input--none)') || (areaOutcome && areaOutcome.alto);
+            risk = any ? 3 : Math.max(2, floor);
+            break;
+        }
+        case 'step-baixo-bloco-a': {
+            const any = document.querySelector('#step-baixo-bloco-a .check-item__input:checked:not(.check-item__input--none)');
+            risk = any ? Math.max(1, floor) : Math.max(2, floor);
+            break;
+        }
+        case 'step-baixo-bloco-b': {
+            const inputs = document.querySelectorAll('#step-baixo-bloco-b .check-item__input:not(.check-item__input--none)');
+            const todosMarcados = Array.from(inputs).every(input => input.checked);
+            risk = todosMarcados ? Math.max(1, floor) : Math.max(2, floor);
+            break;
+        }
+        default:
+            badge.textContent = '';
+            badge.removeAttribute('data-risk');
+            return;
+    }
+
+    const labels = { 1: 'RISCO I (BAIXO)', 2: 'RISCO II (MÉDIO)', 3: 'RISCO III (ALTO)' };
+    badge.textContent = `🧪 Prévia (teste): ${labels[risk]} — supondo "não" ao que ainda não foi respondido`;
+    badge.dataset.risk = String(risk);
+}
+// ============================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
     const initial = document.querySelector('.step.active');
     if (initial) updateProgressUI(initial);
+    setupAreaFlow();
     EXCLUSIVE_CHECK_STEPS.forEach(setupExclusiveCheckGroup);
 });
 
@@ -295,12 +494,16 @@ function showResult(risk, reason) {
 
     if (cnaeState.floor === 2) {
         if (risk < 2) {
-            finalReason = `CNAE ${cnaeState.matched} classificado como Risco Médio (piso mínimo aplicado, Art. 6º). ${reason}`;
+            finalReason = `CNAE ${cnaeState.matched} classificado como Risco Médio (piso mínimo aplicado, Art. 3º, II c/c Anexo II). ${reason}`;
         } else if (risk > 2) {
             finalReason = `${reason} (O CNAE ${cnaeState.matched} já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)`;
         } else {
-            finalReason = `${reason} Classificação também respaldada pelo CNAE ${cnaeState.matched} (Risco Médio).`;
+            finalReason = `${reason} Classificação também respaldada pelo CNAE ${cnaeState.matched} (Risco Médio, Art. 3º, II c/c Anexo II).`;
         }
+    }
+
+    if (excecaoTerreoAplicada && finalRisk === 2) {
+        finalReason += ' Também respaldado pela exceção do Art. 7º, §3º (unidade autônoma no pavimento térreo, sem compartilhamento de sistemas preventivos, sem acesso às áreas comuns e com saída direta para a via pública).';
     }
 
     // Esconde a etapa atual (com a mesma animação de saída das demais transições)
