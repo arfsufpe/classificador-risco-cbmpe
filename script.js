@@ -313,6 +313,100 @@ function checkBaixoBlocoA() {
         showResult(1, `Classificado Risco I (Baixo) por apresentar: ${motivos} (Art. 5º).`);
         return;
     }
+    nextStep('step-hospedagem');
+}
+
+// --- FLUXO CONDICIONAL DE HOSPEDAGEM (Etapa 6) ---
+// Art. 5º, VII, "e": condição cumulativa do pequeno estabelecimento, mas só se aplica a
+// hotéis, pousadas e pensões — para quem não é hospedagem, está automaticamente cumprida.
+const HOSP_Q_ORDER = ['h1', 'h2'];
+
+function hospAnswer(q) {
+    const input = document.querySelector(`#hospedagem-flow input[name="hosp-${q}"]:checked`);
+    return input ? input.value : null;
+}
+
+// Devolve as perguntas visíveis e se o fluxo já está resolvido.
+function evaluateHospedagemFlow() {
+    const h1 = hospAnswer('h1');
+    const h2 = hospAnswer('h2');
+    if (h1 !== 'sim') return { visible: ['h1'], resolved: h1 === 'nao', excedeLeitos: false };
+    return { visible: ['h1', 'h2'], resolved: h2 !== null, excedeLeitos: h2 === 'nao' };
+}
+
+function setHospedagemStatus(text, tone) {
+    const status = document.querySelector('#hospedagem-flow .area-flow__status');
+    if (!status) return;
+    status.textContent = text;
+    status.dataset.tone = tone || '';
+}
+
+// Mesma convenção de renderAreaFlow: limpa as respostas posteriores à alterada e só move
+// o foco para a pergunta revelada quando a resposta não veio das setas do teclado.
+function renderHospedagemFlow(changedQ, moveFocus) {
+    const flow = document.getElementById('hospedagem-flow');
+    if (!flow) return;
+
+    if (changedQ) {
+        HOSP_Q_ORDER.slice(HOSP_Q_ORDER.indexOf(changedQ) + 1).forEach(q => {
+            flow.querySelectorAll(`input[name="hosp-${q}"]`).forEach(input => { input.checked = false; });
+        });
+    }
+
+    const { visible, resolved, excedeLeitos } = evaluateHospedagemFlow();
+    let revealed = null;
+    flow.querySelectorAll('.area-q').forEach(fieldset => {
+        const show = visible.includes(fieldset.dataset.q);
+        if (show && fieldset.hidden) revealed = fieldset;
+        fieldset.hidden = !show;
+    });
+
+    if (resolved && excedeLeitos) {
+        setHospedagemStatus('Pergunta respondida: hospedagem com mais de 16 leitos não atende a este critério de Risco Baixo.');
+    } else if (resolved) {
+        setHospedagemStatus('Pergunta respondida: critério de hospedagem atendido.', 'ok');
+    } else if (changedQ && revealed && !moveFocus) {
+        setHospedagemStatus(`Nova pergunta: ${revealed.querySelector('legend').textContent}`);
+    } else {
+        setHospedagemStatus('');
+    }
+
+    if (changedQ && revealed && moveFocus) {
+        revealed.setAttribute('tabindex', '-1');
+        revealed.focus();
+    }
+
+    const stepEl = document.getElementById('step-hospedagem');
+    const button = stepEl.querySelector('.actions .btn-primary');
+    const hint = stepEl.querySelector('.selection-hint');
+    if (button) button.disabled = !resolved;
+    if (hint) hint.hidden = resolved;
+    updateDebugLiveRisk();
+}
+
+function setupHospedagemFlow() {
+    const flow = document.getElementById('hospedagem-flow');
+    if (!flow) return;
+
+    let arrowNav = false;
+    flow.addEventListener('keydown', e => { arrowNav = e.key.startsWith('Arrow'); });
+    flow.addEventListener('change', e => {
+        const q = (e.target.name || '').replace(/^hosp-/, '');
+        if (!HOSP_Q_ORDER.includes(q)) return;
+        renderHospedagemFlow(q, !arrowNav);
+        arrowNav = false;
+    });
+
+    renderHospedagemFlow(null, false);
+}
+
+function checkHospedagem() {
+    const { resolved, excedeLeitos } = evaluateHospedagemFlow();
+    if (!resolved) return;
+    if (excedeLeitos) {
+        showResult(2, 'Classificado Risco II (Médio) por exclusão: estabelecimento de hospedagem com mais de 16 leitos não atende à condição da alínea "e" do Art. 5º, VII, exigida cumulativamente para o Risco Baixo.');
+        return;
+    }
     nextStep('step-baixo-bloco-b');
 }
 
@@ -479,6 +573,11 @@ function updateDebugLiveRisk() {
             risk = any ? Math.max(1, floor) : Math.max(2, floor);
             break;
         }
+        case 'step-hospedagem': {
+            const { excedeLeitos } = evaluateHospedagemFlow();
+            risk = excedeLeitos ? 2 : Math.max(2, floor);
+            break;
+        }
         case 'step-baixo-bloco-b': {
             const inputs = document.querySelectorAll('#step-baixo-bloco-b .check-item__input:not(.check-item__input--none)');
             const todosMarcados = Array.from(inputs).every(input => input.checked);
@@ -501,6 +600,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const initial = document.querySelector('.step.active');
     if (initial) updateProgressUI(initial);
     setupAreaFlow();
+    setupHospedagemFlow();
     EXCLUSIVE_CHECK_STEPS.forEach(setupExclusiveCheckGroup);
 });
 

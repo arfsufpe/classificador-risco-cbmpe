@@ -28,10 +28,11 @@ O visual segue o **Padrão Digital de Pernambuco** (azul `#0034B7`, amarelo `#FF
 4. **Etapa 4 — Risco Alto (Tamanho e Ocupação):** área, andares, público e hospedagem. Basta UMA para o resultado ser Risco III imediatamente.
    - A área é respondida por um fluxo de perguntas Sim/Não reveladas progressivamente, que aplica a exceção do **Art. 7º, §3º**: unidade exclusivamente no térreo, com até 930 m², dentro de prédio maior, sem compartilhar sistemas preventivos, sem acesso às áreas comuns e com saída direta para a rua não é enquadrada pela área do prédio. Quando a exceção se aplica e o resultado final é Risco II, a justificativa cita o artigo.
 5. **Etapa 5 — Bloco A de Risco Baixo:** hipóteses diretas de isenção (domicílio fiscal/digital, atividade em casa, ambulante isolado na via pública, tenda, estrutura técnica). Basta UMA marcada para o resultado ser Risco I.
-6. **Etapa 6 — Bloco B de Risco Baixo:** critérios do pequeno estabelecimento físico (≤200 m², térreo, isolado, limites de GLP/inflamáveis). Só é Risco I se **TODOS** os critérios forem marcados; caso contrário, o resultado é **Risco II por exclusão**.
-7. **Resultado final:** `Math.max()` entre o risco apurado pelo questionário e o piso definido pelo CNAE (quando houver).
+6. **Etapa 6 — Hospedagem (Risco Baixo):** condição cumulativa do **Art. 5º, VII, "e"**, perguntada à parte por só valer para hotéis, pousadas e pensões. Fluxo Sim/Não: se não é hospedagem, ou se é e tem no máximo 16 leitos, segue para o Bloco B; se é hospedagem com mais de 16 leitos, o resultado é **Risco II por exclusão** imediatamente.
+7. **Etapa 7 — Bloco B de Risco Baixo:** demais critérios do pequeno estabelecimento físico (≤200 m², térreo, isolado, limites de GLP/inflamáveis). Só é Risco I se **TODOS** os critérios forem marcados; caso contrário, o resultado é **Risco II por exclusão**.
+8. **Resultado final:** `Math.max()` entre o risco apurado pelo questionário e o piso definido pelo CNAE (quando houver).
 
-Nas etapas 2 a 6, o botão de avançar só habilita depois de uma escolha explícita: ao menos um item marcado ou a opção **"Nenhuma das alternativas anteriores"**, que é exclusiva (marcá-la desmarca as demais, e vice-versa). Os textos de ajuda ("Como responder") ficam sempre visíveis, sem precisar de clique.
+Nas etapas 2 a 5 e 7, o botão de avançar só habilita depois de uma escolha explícita: ao menos um item marcado ou a opção **"Nenhuma das alternativas anteriores"**, que é exclusiva (marcá-la desmarca as demais, e vice-versa). Na etapa 6, o botão só habilita quando o fluxo de hospedagem está totalmente respondido. Os textos de ajuda ("Como responder") ficam sempre visíveis, sem precisar de clique.
 
 ## Atualizando a lista de CNAEs
 

@@ -39,15 +39,15 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
                 Voltar
             </button>
-            <div class="progress__track" role="progressbar" aria-label="Progresso do questionário" aria-valuemin="0" aria-valuemax="100" aria-valuenow="17" id="progress-track">
+            <div class="progress__track" role="progressbar" aria-label="Progresso do questionário" aria-valuemin="0" aria-valuemax="100" aria-valuenow="14" id="progress-track">
                 <div id="progress-bar" class="progress__bar"></div>
             </div>
-            <span id="step-indicator" class="step-indicator">Etapa 1 de 6</span>
+            <span id="step-indicator" class="step-indicator">Etapa 1 de 7</span>
         </div>
 
         <div class="content-area">
 
-            <div id="step-cnae" class="step active" data-step="1" data-total="6" data-label="Etapa 1 de 6">
+            <div id="step-cnae" class="step active" data-step="1" data-total="7" data-label="Etapa 1 de 7">
                 <h2 class="question-text">Quais são os CNAEs (atividades econômicas) cadastrados para a empresa?</h2>
 
                 <div class="info-box">
@@ -73,7 +73,7 @@
                 </div>
             </div>
 
-            <div id="step-eventos" class="step" data-step="2" data-total="6" data-label="Etapa 2 de 6 · Eventos e Casas de Festas">
+            <div id="step-eventos" class="step" data-step="2" data-total="7" data-label="Etapa 2 de 7 · Eventos e Casas de Festas">
                 <!-- DEBUG TEMPORÁRIO (remover antes de publicar): prévia de classificação para facilitar teste -->
                 <p class="debug-live-risk" aria-live="polite"></p>
                 <h2 class="question-text">O seu estabelecimento envolve casas de festas, eventos ou público temporário?</h2>
@@ -152,7 +152,7 @@
                 </div>
             </div>
 
-            <div id="step-combustiveis-saude" class="step" data-step="3" data-total="6" data-label="Etapa 3 de 6 · Risco Alto (Combustíveis e Saúde)">
+            <div id="step-combustiveis-saude" class="step" data-step="3" data-total="7" data-label="Etapa 3 de 7 · Risco Alto (Combustíveis e Saúde)">
                 <!-- DEBUG TEMPORÁRIO (remover antes de publicar): prévia de classificação para facilitar teste -->
                 <p class="debug-live-risk" aria-live="polite"></p>
                 <h2 class="question-text">O seu estabelecimento se enquadra em ALGUMA das situações de Alto Risco abaixo?</h2>
@@ -281,7 +281,7 @@
                 </div>
             </div>
 
-            <div id="step-alto-risco" class="step" data-step="4" data-total="6" data-label="Etapa 4 de 6 · Risco Alto (Tamanho e Ocupação)">
+            <div id="step-alto-risco" class="step" data-step="4" data-total="7" data-label="Etapa 4 de 7 · Risco Alto (Tamanho e Ocupação)">
                 <!-- DEBUG TEMPORÁRIO (remover antes de publicar): prévia de classificação para facilitar teste -->
                 <p class="debug-live-risk" aria-live="polite"></p>
                 <h2 class="question-text">O seu estabelecimento se enquadra em ALGUMA das situações de Alto Risco abaixo?</h2>
@@ -452,7 +452,7 @@
                 </div>
             </div>
 
-            <div id="step-baixo-bloco-a" class="step" data-step="5" data-total="6" data-label="Etapa 5 de 6 · Risco Baixo (Bloco A)">
+            <div id="step-baixo-bloco-a" class="step" data-step="5" data-total="7" data-label="Etapa 5 de 7 · Risco Baixo (Bloco A)">
                 <!-- DEBUG TEMPORÁRIO (remover antes de publicar): prévia de classificação para facilitar teste -->
                 <p class="debug-live-risk" aria-live="polite"></p>
                 <h2 class="question-text">O seu negócio se enquadra em ALGUMA das situações abaixo?</h2>
@@ -566,7 +566,58 @@
                 </div>
             </div>
 
-            <div id="step-baixo-bloco-b" class="step" data-step="6" data-total="6" data-label="Etapa 6 de 6 · Risco Baixo (Bloco B)">
+            <div id="step-hospedagem" class="step" data-step="6" data-total="7" data-label="Etapa 6 de 7 · Risco Baixo (Hospedagem)">
+                <!-- DEBUG TEMPORÁRIO (remover antes de publicar): prévia de classificação para facilitar teste -->
+                <p class="debug-live-risk" aria-live="polite"></p>
+                <h2 class="question-text">O seu estabelecimento é de hospedagem?</h2>
+
+                <div class="info-box">
+                    <svg class="info-box__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="0.9" fill="currentColor" stroke="none"/>
+                    </svg>
+                    <span>Esta pergunta faz parte dos critérios de Risco Baixo para pequenos estabelecimentos (Art. 5º, VII). Se o seu negócio não é de hospedagem, basta responder 'Não' e seguir.</span>
+                </div>
+
+                <div class="risk-block risk-block--low">
+                    <div class="check-item area-flow" id="hospedagem-flow">
+                        <fieldset class="area-q" data-q="h1">
+                            <legend class="area-q__legend">O seu estabelecimento é um hotel, pousada, pensão ou outro tipo de hospedagem, com hóspedes pernoitando no local?</legend>
+                            <div class="area-q__options">
+                                <label class="area-q__option"><input type="radio" name="hosp-h1" value="sim"> Sim</label>
+                                <label class="area-q__option"><input type="radio" name="hosp-h1" value="nao"> Não</label>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="area-q" data-q="h2" aria-describedby="hosp-help-h2" hidden>
+                            <legend class="area-q__legend">Possui no máximo 16 camas (leitos) para hóspedes?</legend>
+                            <div class="area-q__options">
+                                <label class="area-q__option"><input type="radio" name="hosp-h2" value="sim"> Sim</label>
+                                <label class="area-q__option"><input type="radio" name="hosp-h2" value="nao"> Não</label>
+                            </div>
+                            <div class="check-item__warning" id="hosp-help-h2">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                                </svg>
+                                <div>
+                                    <strong>Como responder:</strong>
+                                    <p>Conte o número total de camas (leitos de solteiro e casal) disponíveis para os hóspedes.</p>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <p class="area-flow__status" role="status" aria-live="polite"></p>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <p class="selection-hint">Responda à pergunta acima para continuar.</p>
+                    <button type="button" class="btn btn-primary" onclick="checkHospedagem()" disabled>
+                        Continuar
+                    </button>
+                </div>
+            </div>
+
+            <div id="step-baixo-bloco-b" class="step" data-step="7" data-total="7" data-label="Etapa 7 de 7 · Risco Baixo (Bloco B)">
                 <!-- DEBUG TEMPORÁRIO (remover antes de publicar): prévia de classificação para facilitar teste -->
                 <p class="debug-live-risk" aria-live="polite"></p>
                 <h2 class="question-text">Para ser Risco Baixo, seu estabelecimento precisa atender a TODOS os itens abaixo:</h2>
@@ -590,13 +641,6 @@
                         <label class="check-item__label">
                             <input type="checkbox" class="check-item__input">
                             <span>O local possui porta com saída direta para a rua/calçada e NÃO possui portas, janelas ou vãos comunicando por dentro com outros comércios ou prédios vizinhos?</span>
-                        </label>
-                    </div>
-
-                    <div class="check-item">
-                        <label class="check-item__label">
-                            <input type="checkbox" class="check-item__input">
-                            <span>Se for uma pousada, hotel ou pensão, possui no máximo 16 camas (leitos) para hóspedes? (marque também se o negócio não é de hospedagem)</span>
                         </label>
                     </div>
 
