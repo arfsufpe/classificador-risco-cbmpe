@@ -24,13 +24,14 @@ O visual segue o **Padrão Digital de Pernambuco** (azul `#0034B7`, amarelo `#FF
    - Se algum CNAE constar em `CNAE_MEDIO_RISCO`, é aplicado um **piso mínimo de Risco II** — o questionário continua, mas o resultado final nunca fica abaixo disso.
    - CNAEs fora das duas listas (nível I no decreto) não aplicam piso algum.
 2. **Etapa 2 — Eventos e casas de festas:** casa de festas fixa, evento temporário com controle de acesso (Art. 6º, XV) ou evento temporário aberto com área montada > 930 m² ou camarotes/arquibancadas para mais de 100 pessoas (Art. 6º, XIV). Basta UMA marcada para o resultado ser Risco III imediatamente. Fica logo após o CNAE para quem organiza evento não precisar responder perguntas sobre edificações fixas.
-3. **Etapa 3 — Risco Alto:** situações que classificam o estabelecimento como Risco III (área, andares, público, hospedagem, GLP, inflamáveis, gases combustíveis, produtos perigosos, saúde). Basta UMA para o resultado ser Risco III imediatamente.
+3. **Etapa 3 — Risco Alto (Combustíveis e Saúde):** GLP, inflamáveis, gases combustíveis, produtos perigosos e estabelecimentos de saúde com internação/mobilidade reduzida. Basta UMA para o resultado ser Risco III imediatamente.
+4. **Etapa 4 — Risco Alto (Tamanho e Ocupação):** área, andares, público e hospedagem. Basta UMA para o resultado ser Risco III imediatamente.
    - A área é respondida por um fluxo de perguntas Sim/Não reveladas progressivamente, que aplica a exceção do **Art. 7º, §3º**: unidade exclusivamente no térreo, com até 930 m², dentro de prédio maior, sem compartilhar sistemas preventivos, sem acesso às áreas comuns e com saída direta para a rua não é enquadrada pela área do prédio. Quando a exceção se aplica e o resultado final é Risco II, a justificativa cita o artigo.
-4. **Etapa 4 — Bloco A de Risco Baixo:** hipóteses diretas de isenção (domicílio fiscal/digital, atividade em casa, ambulante isolado na via pública, tenda, estrutura técnica). Basta UMA marcada para o resultado ser Risco I.
-5. **Etapa 5 — Bloco B de Risco Baixo:** critérios do pequeno estabelecimento físico (≤200 m², térreo, isolado, limites de GLP/inflamáveis). Só é Risco I se **TODOS** os critérios forem marcados; caso contrário, o resultado é **Risco II por exclusão**.
-6. **Resultado final:** `Math.max()` entre o risco apurado pelo questionário e o piso definido pelo CNAE (quando houver).
+5. **Etapa 5 — Bloco A de Risco Baixo:** hipóteses diretas de isenção (domicílio fiscal/digital, atividade em casa, ambulante isolado na via pública, tenda, estrutura técnica). Basta UMA marcada para o resultado ser Risco I.
+6. **Etapa 6 — Bloco B de Risco Baixo:** critérios do pequeno estabelecimento físico (≤200 m², térreo, isolado, limites de GLP/inflamáveis). Só é Risco I se **TODOS** os critérios forem marcados; caso contrário, o resultado é **Risco II por exclusão**.
+7. **Resultado final:** `Math.max()` entre o risco apurado pelo questionário e o piso definido pelo CNAE (quando houver).
 
-Nas etapas 2 a 5, o botão de avançar só habilita depois de uma escolha explícita: ao menos um item marcado ou a opção **"Nenhuma das alternativas anteriores"**, que é exclusiva (marcá-la desmarca as demais, e vice-versa). Os textos de ajuda ("Como responder") ficam sempre visíveis, sem precisar de clique.
+Nas etapas 2 a 6, o botão de avançar só habilita depois de uma escolha explícita: ao menos um item marcado ou a opção **"Nenhuma das alternativas anteriores"**, que é exclusiva (marcá-la desmarca as demais, e vice-versa). Os textos de ajuda ("Como responder") ficam sempre visíveis, sem precisar de clique.
 
 ## Atualizando a lista de CNAEs
 

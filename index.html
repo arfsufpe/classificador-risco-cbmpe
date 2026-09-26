@@ -39,15 +39,15 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
                 Voltar
             </button>
-            <div class="progress__track" role="progressbar" aria-label="Progresso do questionário" aria-valuemin="0" aria-valuemax="100" aria-valuenow="14" id="progress-track">
+            <div class="progress__track" role="progressbar" aria-label="Progresso do questionário" aria-valuemin="0" aria-valuemax="100" aria-valuenow="17" id="progress-track">
                 <div id="progress-bar" class="progress__bar"></div>
             </div>
-            <span id="step-indicator" class="step-indicator">Etapa 1 de 5</span>
+            <span id="step-indicator" class="step-indicator">Etapa 1 de 6</span>
         </div>
 
         <div class="content-area">
 
-            <div id="step-cnae" class="step active" data-step="1" data-total="5" data-label="Etapa 1 de 5">
+            <div id="step-cnae" class="step active" data-step="1" data-total="6" data-label="Etapa 1 de 6">
                 <h2 class="question-text">Quais são os CNAEs (atividades econômicas) cadastrados para a empresa?</h2>
 
                 <div class="info-box">
@@ -73,7 +73,7 @@
                 </div>
             </div>
 
-            <div id="step-eventos" class="step" data-step="2" data-total="5" data-label="Etapa 2 de 5 · Eventos e Casas de Festas">
+            <div id="step-eventos" class="step" data-step="2" data-total="6" data-label="Etapa 2 de 6 · Eventos e Casas de Festas">
                 <!-- DEBUG TEMPORÁRIO (remover antes de publicar): prévia de classificação para facilitar teste -->
                 <p class="debug-live-risk" aria-live="polite"></p>
                 <h2 class="question-text">O seu estabelecimento envolve casas de festas, eventos ou público temporário?</h2>
@@ -152,7 +152,136 @@
                 </div>
             </div>
 
-            <div id="step-alto-risco" class="step" data-step="3" data-total="5" data-label="Etapa 3 de 5 · Risco Alto">
+            <div id="step-combustiveis-saude" class="step" data-step="3" data-total="6" data-label="Etapa 3 de 6 · Risco Alto (Combustíveis e Saúde)">
+                <!-- DEBUG TEMPORÁRIO (remover antes de publicar): prévia de classificação para facilitar teste -->
+                <p class="debug-live-risk" aria-live="polite"></p>
+                <h2 class="question-text">O seu estabelecimento se enquadra em ALGUMA das situações de Alto Risco abaixo?</h2>
+
+                <div class="info-box">
+                    <svg class="info-box__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="0.9" fill="currentColor" stroke="none"/>
+                    </svg>
+                    <span>Marque tudo o que se aplica ao seu negócio. Basta UMA situação marcada para o enquadramento em Risco Alto (Nível III).</span>
+                </div>
+
+                <div class="risk-block">
+                    <p class="risk-block__label">Combustíveis, gás e produtos perigosos</p>
+
+                    <div class="check-item">
+                        <label class="check-item__label">
+                            <input type="checkbox" class="check-item__input" data-reason="venda/revenda de botijões de GLP ou central fixa acima de 190 kg">
+                            <span>O negócio faz a venda ou revenda de botijões de gás de cozinha, ou possui central fixa de gás com mais de 190 kg?</span>
+                        </label>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <p>Aplica-se a depósitos/comércios que vendem botijões de gás e a estabelecimentos com centrais fixas de tubulação de gás com capacidade superior a 190 kg (como grandes padarias, restaurantes e indústrias).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="check-item">
+                        <label class="check-item__label">
+                            <input type="checkbox" class="check-item__input" data-reason="mais de 1.000 litros de líquidos inflamáveis">
+                            <span>O estabelecimento guarda ou utiliza mais de 1.000 litros de produtos líquidos que pegam fogo (como gasolina, álcool, óleo diesel, tintas ou solventes)?</span>
+                        </label>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <p>Some a quantidade total contida em todos os galões, tambores, latas de tinta, solventes ou tanques armazenados no seu espaço.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="check-item">
+                        <label class="check-item__label">
+                            <input type="checkbox" class="check-item__input" data-reason="fabricação, armazenamento, utilização ou comércio de gases combustíveis (além do GLP)">
+                            <span>O seu estabelecimento fabrica, armazena, utiliza ou comercializa gases combustíveis (além do GLP), em cilindros, tanques ou tubulação encanada?</span>
+                        </label>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <p>Gases que pegam fogo ou explodem facilmente, usados como combustível ou em processos que geram chama — diferente do gás de cozinha (GLP), que já foi perguntado antes. Exemplos: gás natural encanado ou veicular (GNV, usado em carros e fogões industriais), acetileno (usado em maçaricos de solda), hidrogênio e biogás.</p>
+                                <p class="risk-block__note">Obs.: nitrogênio utilizado exclusivamente em dispensers de bebidas e chopeiras não se enquadra neste critério.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="check-item">
+                        <label class="check-item__label">
+                            <input type="checkbox" class="check-item__input" data-reason="fabricação, guarda ou comércio de produtos perigosos, químicos ou explosivos">
+                            <span>O seu estabelecimento fabrica, guarda, comercializa ou manipula algum produto ou substância perigosa listada na ajuda abaixo?</span>
+                        </label>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <p>Verifique se possui algum destes itens:</p>
+                                <ul class="details-list">
+                                    <li>Explosivos e pirotecnia: pólvoras, dinamites, espoletas ou fogos de artifício</li>
+                                    <li>Gases perigosos ou tóxicos: acetileno, amônia, cloro ou hidrogênio</li>
+                                    <li>Sólidos inflamáveis: materiais que acendem facilmente por calor ou atrito (fósforos industriais, enxofre, magnésio)</li>
+                                    <li>Combustão espontânea: produtos que podem pegar fogo sozinhos no ar (carvão ativado, fósforo branco, trapos com óleo)</li>
+                                    <li>Reativos com água: substâncias que soltam gases perigosos se molhadas (sódio metálico, potássio, carbureto de cálcio)</li>
+                                    <li>Oxidantes e peróxidos: produtos que alimentam o fogo ou explodem com calor (água oxigenada industrial, cloro concentrado para piscinas, nitrato de amônio, peróxidos orgânicos)</li>
+                                    <li>Produtos tóxicos ou infectantes: agrotóxicos, pesticidas, venenos ou resíduos hospitalares infectantes</li>
+                                    <li>Produtos corrosivos: ácidos fortes (sulfúrico, clorídrico, nítrico), soda cáustica ou alvejantes industriais</li>
+                                    <li>Materiais radioativos: substâncias ou aparelhos que emitem radiação</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="risk-block">
+                    <p class="risk-block__label">Saúde</p>
+
+                    <div class="check-item">
+                        <label class="check-item__label">
+                            <input type="checkbox" class="check-item__input" data-reason="estabelecimento de saúde com internação ou pacientes de mobilidade reduzida">
+                            <span>O local é um hospital, pronto-socorro ou clínica onde os pacientes ficam internados ou têm dificuldade para andar e sair sozinhos em uma emergência?</span>
+                        </label>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <p>Aplica-se a estabelecimentos de saúde com leitos de internação ou atendimento a pessoas acamadas/com mobilidade reduzida.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="risk-block risk-block--neutral">
+                    <div class="check-item check-item--none">
+                        <label class="check-item__label">
+                            <input type="checkbox" class="check-item__input check-item__input--none">
+                            <span><strong>Nenhuma das alternativas anteriores</strong> — meu negócio não se enquadra em nenhuma das situações de Alto Risco acima.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <p class="selection-hint">Selecione ao menos uma opção acima para continuar.</p>
+                    <button type="button" class="btn btn-primary" onclick="checkCombustiveisSaude()" disabled>
+                        Verificar classificação
+                    </button>
+                </div>
+            </div>
+
+            <div id="step-alto-risco" class="step" data-step="4" data-total="6" data-label="Etapa 4 de 6 · Risco Alto (Tamanho e Ocupação)">
                 <!-- DEBUG TEMPORÁRIO (remover antes de publicar): prévia de classificação para facilitar teste -->
                 <p class="debug-live-risk" aria-live="polite"></p>
                 <h2 class="question-text">O seu estabelecimento se enquadra em ALGUMA das situações de Alto Risco abaixo?</h2>
@@ -306,106 +435,6 @@
                     </div>
                 </div>
 
-                <div class="risk-block">
-                    <p class="risk-block__label">Combustíveis, gás e produtos perigosos</p>
-
-                    <div class="check-item">
-                        <label class="check-item__label">
-                            <input type="checkbox" class="check-item__input" data-reason="venda/revenda de botijões de GLP ou central fixa acima de 190 kg">
-                            <span>O negócio faz a venda ou revenda de botijões de gás de cozinha, ou possui central fixa de gás com mais de 190 kg?</span>
-                        </label>
-                        <div class="check-item__warning">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
-                            </svg>
-                            <div>
-                                <strong>Como responder:</strong>
-                                <p>Aplica-se a depósitos/comércios que vendem botijões de gás e a estabelecimentos com centrais fixas de tubulação de gás com capacidade superior a 190 kg (como grandes padarias, restaurantes e indústrias).</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="check-item">
-                        <label class="check-item__label">
-                            <input type="checkbox" class="check-item__input" data-reason="mais de 1.000 litros de líquidos inflamáveis">
-                            <span>O estabelecimento guarda ou utiliza mais de 1.000 litros de produtos líquidos que pegam fogo (como gasolina, álcool, óleo diesel, tintas ou solventes)?</span>
-                        </label>
-                        <div class="check-item__warning">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
-                            </svg>
-                            <div>
-                                <strong>Como responder:</strong>
-                                <p>Some a quantidade total contida em todos os galões, tambores, latas de tinta, solventes ou tanques armazenados no seu espaço.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="check-item">
-                        <label class="check-item__label">
-                            <input type="checkbox" class="check-item__input" data-reason="fabricação, armazenamento, utilização ou comércio de gases combustíveis (além do GLP)">
-                            <span>O seu estabelecimento fabrica, armazena, utiliza ou comercializa gases combustíveis (além do GLP), em cilindros, tanques ou tubulação encanada?</span>
-                        </label>
-                        <div class="check-item__warning">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
-                            </svg>
-                            <div>
-                                <strong>Como responder:</strong>
-                                <p>Gases que pegam fogo ou explodem facilmente, usados como combustível ou em processos que geram chama — diferente do gás de cozinha (GLP), que já foi perguntado antes. Exemplos: gás natural encanado ou veicular (GNV, usado em carros e fogões industriais), acetileno (usado em maçaricos de solda), hidrogênio e biogás.</p>
-                                <p class="risk-block__note">Obs.: nitrogênio utilizado exclusivamente em dispensers de bebidas e chopeiras não se enquadra neste critério.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="check-item">
-                        <label class="check-item__label">
-                            <input type="checkbox" class="check-item__input" data-reason="fabricação, guarda ou comércio de produtos perigosos, químicos ou explosivos">
-                            <span>O seu estabelecimento fabrica, guarda, comercializa ou manipula algum produto ou substância perigosa listada na ajuda abaixo?</span>
-                        </label>
-                        <div class="check-item__warning">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
-                            </svg>
-                            <div>
-                                <strong>Como responder:</strong>
-                                <p>Verifique se possui algum destes itens:</p>
-                                <ul class="details-list">
-                                    <li>Explosivos e pirotecnia: pólvoras, dinamites, espoletas ou fogos de artifício</li>
-                                    <li>Gases perigosos ou tóxicos: acetileno, amônia, cloro ou hidrogênio</li>
-                                    <li>Sólidos inflamáveis: materiais que acendem facilmente por calor ou atrito (fósforos industriais, enxofre, magnésio)</li>
-                                    <li>Combustão espontânea: produtos que podem pegar fogo sozinhos no ar (carvão ativado, fósforo branco, trapos com óleo)</li>
-                                    <li>Reativos com água: substâncias que soltam gases perigosos se molhadas (sódio metálico, potássio, carbureto de cálcio)</li>
-                                    <li>Oxidantes e peróxidos: produtos que alimentam o fogo ou explodem com calor (água oxigenada industrial, cloro concentrado para piscinas, nitrato de amônio, peróxidos orgânicos)</li>
-                                    <li>Produtos tóxicos ou infectantes: agrotóxicos, pesticidas, venenos ou resíduos hospitalares infectantes</li>
-                                    <li>Produtos corrosivos: ácidos fortes (sulfúrico, clorídrico, nítrico), soda cáustica ou alvejantes industriais</li>
-                                    <li>Materiais radioativos: substâncias ou aparelhos que emitem radiação</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="risk-block">
-                    <p class="risk-block__label">Saúde</p>
-
-                    <div class="check-item">
-                        <label class="check-item__label">
-                            <input type="checkbox" class="check-item__input" data-reason="estabelecimento de saúde com internação ou pacientes de mobilidade reduzida">
-                            <span>O local é um hospital, pronto-socorro ou clínica onde os pacientes ficam internados ou têm dificuldade para andar e sair sozinhos em uma emergência?</span>
-                        </label>
-                        <div class="check-item__warning">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
-                            </svg>
-                            <div>
-                                <strong>Como responder:</strong>
-                                <p>Aplica-se a estabelecimentos de saúde com leitos de internação ou atendimento a pessoas acamadas/com mobilidade reduzida.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="risk-block risk-block--neutral">
                     <div class="check-item check-item--none">
                         <label class="check-item__label">
@@ -423,7 +452,7 @@
                 </div>
             </div>
 
-            <div id="step-baixo-bloco-a" class="step" data-step="4" data-total="5" data-label="Etapa 4 de 5 · Risco Baixo (Bloco A)">
+            <div id="step-baixo-bloco-a" class="step" data-step="5" data-total="6" data-label="Etapa 5 de 6 · Risco Baixo (Bloco A)">
                 <!-- DEBUG TEMPORÁRIO (remover antes de publicar): prévia de classificação para facilitar teste -->
                 <p class="debug-live-risk" aria-live="polite"></p>
                 <h2 class="question-text">O seu negócio se enquadra em ALGUMA das situações abaixo?</h2>
@@ -537,7 +566,7 @@
                 </div>
             </div>
 
-            <div id="step-baixo-bloco-b" class="step" data-step="5" data-total="5" data-label="Etapa 5 de 5 · Risco Baixo (Bloco B)">
+            <div id="step-baixo-bloco-b" class="step" data-step="6" data-total="6" data-label="Etapa 6 de 6 · Risco Baixo (Bloco B)">
                 <!-- DEBUG TEMPORÁRIO (remover antes de publicar): prévia de classificação para facilitar teste -->
                 <p class="debug-live-risk" aria-live="polite"></p>
                 <h2 class="question-text">Para ser Risco Baixo, seu estabelecimento precisa atender a TODOS os itens abaixo:</h2>

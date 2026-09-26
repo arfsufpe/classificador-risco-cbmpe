@@ -151,6 +151,18 @@ function checkEventos() {
         showResult(3, `Classificado Risco III (Alto) por apresentar: ${motivos}.`);
         return;
     }
+    nextStep('step-combustiveis-saude');
+}
+
+// Etapa de Combustíveis, Gás, Produtos Perigosos e Saúde: basta UMA situação marcada
+// para classificar direto, sem prosseguir.
+function checkCombustiveisSaude() {
+    const checked = Array.from(document.querySelectorAll('#step-combustiveis-saude .check-item__input:checked:not(.check-item__input--none)'));
+    const motivos = checked.map(c => c.dataset.reason);
+    if (motivos.length > 0) {
+        showResult(3, `Classificado Risco III (Alto) por apresentar: ${motivos.join('; ')} (Art. 6º).`);
+        return;
+    }
     nextStep('step-alto-risco');
 }
 
@@ -167,7 +179,7 @@ function checkAltoRisco() {
     nextStep('step-baixo-bloco-a');
 }
 
-// --- FLUXO CONDICIONAL DE ÁREA (Etapa 3) ---
+// --- FLUXO CONDICIONAL DE ÁREA (Etapa 4) ---
 // Art. 6º, I (área > 930 m²) com a exceção do Art. 7º, §3º: unidade exclusivamente no térreo,
 // com até 930 m², dentro de edificação maior, sem compartilhar sistemas preventivos, sem acesso
 // às áreas comuns e com saída direta para a via pública, não é enquadrada pela área do prédio.
@@ -377,9 +389,9 @@ function goBack() {
 }
 
 // Etapas cujo bloco de checkboxes tem a opção exclusiva "Nenhuma das alternativas anteriores".
-const EXCLUSIVE_CHECK_STEPS = ['step-eventos', 'step-alto-risco', 'step-baixo-bloco-a', 'step-baixo-bloco-b'];
+const EXCLUSIVE_CHECK_STEPS = ['step-eventos', 'step-combustiveis-saude', 'step-alto-risco', 'step-baixo-bloco-a', 'step-baixo-bloco-b'];
 
-// Recalcula o estado do botão de cada grupo; usado também pelo fluxo de área da Etapa 3.
+// Recalcula o estado do botão de cada grupo; usado também pelo fluxo de área da Etapa 4.
 const groupUpdaters = {};
 
 // Ativa, para uma etapa de checkboxes, a exclusão mútua da opção "Nenhuma das alternativas
@@ -449,6 +461,11 @@ function updateDebugLiveRisk() {
     switch (step.id) {
         case 'step-eventos': {
             const any = document.querySelector('#step-eventos .check-item__input:checked:not(.check-item__input--none)');
+            risk = any ? 3 : Math.max(2, floor);
+            break;
+        }
+        case 'step-combustiveis-saude': {
+            const any = document.querySelector('#step-combustiveis-saude .check-item__input:checked:not(.check-item__input--none)');
             risk = any ? 3 : Math.max(2, floor);
             break;
         }
