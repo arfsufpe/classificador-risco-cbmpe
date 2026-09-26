@@ -82,70 +82,87 @@
                     <svg class="info-box__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="0.9" fill="currentColor" stroke="none"/>
                     </svg>
-                    <span>Marque tudo o que se aplica. Se o seu negócio não tem nenhuma relação com festas ou eventos, pode deixar tudo desmarcado e avançar.</span>
+                    <span>Responda às perguntas abaixo. Se o seu negócio não tem relação com festas ou eventos, basta responder 'Não' às duas primeiras e seguir.</span>
                 </div>
 
                 <div class="risk-block">
-                    <div class="check-item">
-                        <label class="check-item__label">
-                            <input type="checkbox" class="check-item__input" data-reason="casa de festas/eventos (local fixo/permanente destinado a festas e eventos)">
-                            <span>O seu estabelecimento é um local fixo/permanente voltado para festas, eventos, shows, recepções, casas noturnas ou salões de bailes?</span>
-                        </label>
-                        <div class="check-item__warning">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
-                            </svg>
-                            <div>
-                                <strong>Como responder:</strong>
-                                <p>Aplica-se a imóveis comerciais permanentes destinados à locação ou realização de festas e eventos.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <p class="risk-block__label">Eventos e casas de festas</p>
 
-                    <div class="check-item">
-                        <label class="check-item__label">
-                            <input type="checkbox" class="check-item__input" data-reason="evento temporário com controle/restrição de acesso de público, independente da área ou do público (Art. 6º, XV)">
-                            <span>Trata-se de um evento temporário que terá controle ou restrição de acesso de público (cobrança de ingressos, bilheteria, catracas, portaria com lista ou contagem de pessoas), independentemente do tamanho do espaço ou da quantidade de público?</span>
-                        </label>
-                        <div class="check-item__warning">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
-                            </svg>
-                            <div>
-                                <strong>Como responder:</strong>
-                                <p>Inclui qualquer festa temporária, show, feira, circo, parque ou festival fechado que exija ingresso, convite, cadastro ou contagem na entrada, mesmo que seja em área pequena.</p>
+                    <div class="check-item area-flow" id="eventos-flow">
+                        <fieldset class="area-q" data-q="e0" aria-describedby="evt-help-e0">
+                            <legend class="area-q__legend">O seu estabelecimento é um local fixo/permanente voltado para festas, eventos, shows, recepções, casas noturnas ou salões de bailes?</legend>
+                            <div class="area-q__options">
+                                <label class="area-q__option"><input type="radio" name="evt-e0" value="sim"> Sim</label>
+                                <label class="area-q__option"><input type="radio" name="evt-e0" value="nao"> Não</label>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="check-item">
-                        <label class="check-item__label">
-                            <input type="checkbox" class="check-item__input" data-reason="evento temporário sem controle de acesso com área montada superior a 930 m² ou camarotes/arquibancadas para mais de 100 pessoas (Art. 6º, XIV)">
-                            <span>Trata-se de um evento temporário livre e aberto ao público (sem bilheteria ou controle de entrada) que possua área montada/ocupada superior a 930 metros quadrados OU camarotes/arquibancadas para mais de 100 pessoas?</span>
-                        </label>
-                        <div class="check-item__warning">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
-                            </svg>
-                            <div>
-                                <strong>Como responder:</strong>
-                                <p>Aplica-se a eventos em praças públicas, ruas ou espaços abertos sem cobrança/catraca, mas que utilizem grandes estruturas (tendas/palcos acima de 930 m²) ou arquibancadas/camarotes significativos.</p>
+                            <div class="check-item__warning" id="evt-help-e0">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                                </svg>
+                                <div>
+                                    <strong>Como responder:</strong>
+                                    <p>Aplica-se a imóveis comerciais permanentes destinados à locação ou realização de festas e eventos.</p>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </fieldset>
 
-                <div class="risk-block risk-block--neutral">
-                    <div class="check-item check-item--none">
-                        <label class="check-item__label">
-                            <input type="checkbox" class="check-item__input check-item__input--none">
-                            <span><strong>Nenhuma das alternativas anteriores</strong> — meu negócio não tem relação com casas de festas, eventos ou público temporário.</span>
-                        </label>
+                        <fieldset class="area-q" data-q="e1" aria-describedby="evt-help-e1" hidden>
+                            <legend class="area-q__legend">O seu negócio é um evento temporário (festa, show, feira, quermesse, circo, parque, festival ou similar, montado por período determinado)?</legend>
+                            <div class="area-q__options">
+                                <label class="area-q__option"><input type="radio" name="evt-e1" value="sim"> Sim</label>
+                                <label class="area-q__option"><input type="radio" name="evt-e1" value="nao"> Não</label>
+                            </div>
+                            <div class="check-item__warning" id="evt-help-e1">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                                </svg>
+                                <div>
+                                    <strong>Como responder:</strong>
+                                    <p>Se o seu negócio funciona de forma permanente (loja, restaurante, bar, escritório etc.), responda Não.</p>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="area-q" data-q="e2" aria-describedby="evt-help-e2" hidden>
+                            <legend class="area-q__legend">Haverá controle ou restrição de acesso de público (cobrança de ingresso, bilheteria, catracas, portaria com lista, convite, cadastro ou contagem de pessoas na entrada)?</legend>
+                            <div class="area-q__options">
+                                <label class="area-q__option"><input type="radio" name="evt-e2" value="sim"> Sim</label>
+                                <label class="area-q__option"><input type="radio" name="evt-e2" value="nao"> Não</label>
+                            </div>
+                            <div class="check-item__warning" id="evt-help-e2">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                                </svg>
+                                <div>
+                                    <strong>Como responder:</strong>
+                                    <p>Inclui qualquer festa temporária, show, feira, circo, parque ou festival fechado que exija ingresso, convite, cadastro ou contagem na entrada, mesmo que seja em área pequena.</p>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="area-q" data-q="e3" aria-describedby="evt-help-e3" hidden>
+                            <legend class="area-q__legend">A área montada/ocupada pelo evento passa de 930 m², OU haverá camarotes ou arquibancadas com capacidade para mais de 100 pessoas?</legend>
+                            <div class="area-q__options">
+                                <label class="area-q__option"><input type="radio" name="evt-e3" value="sim"> Sim</label>
+                                <label class="area-q__option"><input type="radio" name="evt-e3" value="nao"> Não</label>
+                            </div>
+                            <div class="check-item__warning" id="evt-help-e3">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                                </svg>
+                                <div>
+                                    <strong>Como responder:</strong>
+                                    <p>Considere toda a área usada pelo evento (palcos, tendas, estruturas e área delimitada para o público). Exemplos de evento que costuma ficar abaixo desses limites: feira de artesanato em praça, quermesse, pequeno show gratuito, evento de rua. Mesmo nesses casos, o evento temporário não pode ser Risco I (Art. 5º, VII, 'm'); a classificação mínima é Risco II, e as próximas etapas ainda podem elevá-la para Alto (por exemplo, pelo uso de gás ou de inflamáveis).</p>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <p class="area-flow__status" role="status" aria-live="polite"></p>
                     </div>
                 </div>
 
                 <div class="actions">
-                    <p class="selection-hint">Selecione ao menos uma opção acima para continuar.</p>
+                    <p class="selection-hint">Responda às perguntas acima para continuar.</p>
                     <button type="button" class="btn btn-primary" onclick="checkEventos()" disabled>
                         Continuar
                     </button>
@@ -386,10 +403,12 @@
                         <p class="area-flow__status" role="status" aria-live="polite"></p>
                     </div>
 
-                    <div class="check-item">
+                    <!-- Pavimentos (Art. 6º, II): oculto até o fluxo de área ser resolvido; texto e
+                         data-reason variam conforme o modo (ver PAVIMENTOS_MODES em script.js). -->
+                    <div class="check-item" id="pavimentos-item" hidden>
                         <label class="check-item__label">
-                            <input type="checkbox" class="check-item__input" data-reason="edificação com mais de 3 pavimentos">
-                            <span>O imóvel onde a empresa vai funcionar possui mais de 3 andares (pavimentos)?</span>
+                            <input type="checkbox" class="check-item__input" id="pavimentos-input" data-reason="edificação com mais de 3 pavimentos (Art. 6º, II)">
+                            <span id="pavimentos-text">O imóvel onde a empresa funciona possui mais de 3 andares (pavimentos)?</span>
                         </label>
                         <div class="check-item__warning">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -397,9 +416,13 @@
                             </svg>
                             <div>
                                 <strong>Como responder:</strong>
-                                <p>Conte o número total de pavimentos do prédio (térreo + andares superiores). Se houver subsolo utilizado exclusivamente para estacionamento de veículos, sem abastecimento de combustível no local, esse subsolo não entra na contagem dos andares.</p>
+                                <p id="pavimentos-help">Conte o número total de pavimentos do imóvel (térreo + andares superiores). O subsolo usado exclusivamente como estacionamento de veículos, sem abastecimento de combustível no local, não entra na contagem (Art. 6º, II).</p>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="check-item" id="pavimentos-excecao" hidden>
+                        <p class="risk-block__note">Como a sua unidade se enquadra na exceção do Art. 7º, §3º (unidade autônoma no térreo), a quantidade de andares do prédio (Art. 6º, II) não é considerada na sua classificação.</p>
                     </div>
 
                     <div class="check-item">
@@ -633,8 +656,20 @@
                     <div class="check-item">
                         <label class="check-item__label">
                             <input type="checkbox" class="check-item__input">
-                            <span>O imóvel comercial funciona exclusivamente no andar térreo e possui área construída total menor ou igual a 200 metros quadrados?</span>
+                            <span>A edificação onde a empresa funciona tem área total construída de até 200 m² e é exclusivamente térrea (sem andares acima do térreo)? Se a sua empresa é uma loja ou sala dentro de um prédio, galeria ou shopping, considere o prédio inteiro, e não só a sua unidade.</span>
                         </label>
+                        <div class="check-item__warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                            </svg>
+                            <div>
+                                <strong>Como responder:</strong>
+                                <ul class="details-list">
+                                    <li>Some toda a área coberta da edificação (todos os cômodos, garagens cobertas, depósitos, varandas e mezaninos). Na área total, pode desconsiderar uma casa (residência unifamiliar) que tenha acesso independente do estabelecimento (Art. 5º, VII).</li>
+                                    <li>Na contagem de andares, podem ser desconsiderados: (1) o subsolo usado exclusivamente como estacionamento, sem abastecimento de combustível (Art. 5º, VII, 'a', 1); (2) uma casa (residência unifamiliar) no mesmo imóvel, térrea ou em andar superior, desde que tenha acesso independente do estabelecimento (Art. 5º, VII, 'a', 2).</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="check-item">
