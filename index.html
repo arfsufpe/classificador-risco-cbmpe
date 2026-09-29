@@ -75,6 +75,15 @@
                     <p>O código CNAE está registrado no Cartão CNPJ da empresa, emitido pela Receita Federal. Ele também costuma aparecer no contrato social ou no alvará de funcionamento.</p>
                 </details>
 
+                <!-- Orientação sobre outras atividades no mesmo imóvel (Decreto 52.005/2021, Art. 5º, §5º; COSCIP-PE, Art. 25, §4º, e Arts. 253-254; NT 1.04, itens 2.1, 4.1.13 e 6.3.1.1). PENDENTE DE VALIDAÇÃO PELA DIESP: alcance do isolamento em unidades da mesma edificação; exceção das classes N, L, O e Q à regra dos 8 m; aplicação do limite de 750 m² ou 10% (NT 1.04, item 5.1.2). -->
+                <details class="disclosure">
+                    <summary>Há outras atividades ou outros negócios no mesmo imóvel ou terreno?</summary>
+                    <p>Se o seu estabelecimento divide o imóvel, a edificação ou o terreno com outra atividade de risco maior e as duas não estiverem isoladas, a classificação é feita pela atividade de maior risco (Decreto 52.005/2021, Art. 5º, §5º). Por isso, adicione também, na lista acima, os CNAEs das outras atividades que você conhece, mesmo que sejam de outra empresa. Residência (casa ou apartamento) não tem CNAE e não precisa ser informada.</p>
+                    <p>Você só pode deixar de informar outra atividade se ela estiver: (a) em propriedade distinta, ou seja, em outro lote, com planta aprovada separadamente pela Prefeitura e sem nenhuma abertura ou comunicação com o seu imóvel; ou (b) em outra edificação, separada da sua por espaço aberto de pelo menos 8 metros, medidos entre fachadas ou coberturas.</p>
+                    <p>A separação por distância não vale se a outra atividade for depósito ou galpão, indústria, produção ou armazenamento de inflamáveis ou de produtos perigosos, ou uma ocupação especial: nesses casos, informe. Lojas ou salas dentro do mesmo prédio ou galeria só são consideradas separadas quando há paredes e portas corta-fogo, o que só o CBMPE verifica. Na dúvida, informe.</p>
+                    <p>Esta orientação é simplificada. A análise técnica do isolamento de riscos é feita pelo CBMPE (COSCIP-PE, Arts. 253 e 254).</p>
+                </details>
+
                 <div class="actions">
                     <button type="button" class="btn btn-primary" onclick="submitCnae()">
                         Continuar
@@ -325,8 +334,8 @@
 
                     <div class="check-item">
                         <label class="check-item__label">
-                            <input type="checkbox" class="check-item__input" data-reason="estrutura provisória ou móvel de até 200 m² (Art. 5º, IV)">
-                            <span>O negócio funciona em local fixo sem construção permanente, utilizando tenda, barraca, quiosque móvel ou toldo, ocupando uma área total de apoio de no máximo 200 metros quadrados, e não se trata de evento temporário?</span>
+                            <input type="checkbox" class="check-item__input" data-reason="estrutura provisória ou móvel de até 200 m², sem endereço formal (Art. 5º, IV)">
+                            <span>O negócio funciona em local fixo, sem endereço formal e sem construção permanente, utilizando tenda, barraca, quiosque móvel ou toldo, ocupando uma área total de apoio de no máximo 200 metros quadrados, e não se trata de evento temporário?</span>
                         </label>
                         <div class="check-item__warning">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -334,7 +343,7 @@
                             </svg>
                             <div>
                                 <strong>Como responder:</strong>
-                                <p>Aplica-se a estruturas que podem ser montadas e desmontadas, sem paredes ou telhado de construção permanente. Exemplos: barraca de feira, quiosque de praia, tenda de evento pequeno. Some toda a área usada pelo negócio (estrutura, balcão, mesas e espaço de apoio): o total não pode passar de 200 m².</p>
+                                <p>Aplica-se a estruturas que podem ser montadas e desmontadas, sem paredes ou telhado de construção permanente. Exemplos: barraca de feira, quiosque de praia, tenda de evento pequeno. Some toda a área usada pelo negócio (estrutura, balcão, mesas e espaço de apoio): o total não pode passar de 200 m². Se o estabelecimento tiver endereço formal (CNPJ com endereço fixo cadastrado), não marque este item: a classificação segue pelas próximas etapas do questionário.</p>
                             </div>
                         </div>
                     </div>
@@ -488,7 +497,7 @@
                                 </svg>
                                 <div>
                                     <strong>Como responder:</strong>
-                                    <p>Para o CBMPE, área construída é qualquer espaço coberto com teto sob piso trabalhado (soma de todos os cômodos, andares, garagens cobertas, galpões, depósitos, varandas, marquises e mezaninos) — diferente da Prefeitura, o CBMPE não desconta garagens ou coberturas na soma. Pode ser desconsiderada da soma a área de uma casa (residência unifamiliar) com acesso independente direto para a via pública (Art. 6º, I).</p>
+                                    <p>Para o CBMPE, área construída é qualquer espaço coberto com teto sob piso trabalhado (soma de todos os cômodos, andares, garagens cobertas, galpões, depósitos, varandas, marquises e mezaninos) — diferente da Prefeitura, o CBMPE não desconta garagens ou coberturas na soma. Pode ser desconsiderada da soma a área de uma casa (residência unifamiliar) somente se ela tiver acesso independente direto para a via pública E não houver comunicação entre a residência e a atividade econômica (porta, janela, escada ou qualquer vão que ligue os dois espaços). Se houver comunicação, a área da residência deve ser somada (Art. 6º, I).</p>
                                 </div>
                             </div>
                         </fieldset>
@@ -522,7 +531,7 @@
                                 </svg>
                                 <div>
                                     <strong>Como responder:</strong>
-                                    <p>Considere a área total da edificação (shopping, galeria, prédio comercial), não só a da sua unidade. Para o CBMPE, área construída é qualquer espaço coberto com teto sob piso trabalhado (soma de todos os cômodos, andares, garagens cobertas, galpões, depósitos, varandas, marquises e mezaninos) — diferente da Prefeitura, o CBMPE não desconta garagens ou coberturas na soma. Pode ser desconsiderada da soma a área de uma casa (residência unifamiliar) com acesso independente direto para a via pública (Art. 6º, I).</p>
+                                    <p>Considere a área total da edificação (shopping, galeria, prédio comercial), não só a da sua unidade. Para o CBMPE, área construída é qualquer espaço coberto com teto sob piso trabalhado (soma de todos os cômodos, andares, garagens cobertas, galpões, depósitos, varandas, marquises e mezaninos) — diferente da Prefeitura, o CBMPE não desconta garagens ou coberturas na soma. Pode ser desconsiderada da soma a área de uma casa (residência unifamiliar) somente se ela tiver acesso independente direto para a via pública E não houver comunicação entre a residência e a atividade econômica (porta, janela, escada ou qualquer vão que ligue os dois espaços). Se houver comunicação, a área da residência deve ser somada (Art. 6º, I).</p>
                                 </div>
                             </div>
                         </fieldset>
@@ -676,8 +685,8 @@
                             <div>
                                 <strong>Como responder:</strong>
                                 <ul class="details-list">
-                                    <li>Some toda a área coberta da edificação (todos os cômodos, garagens cobertas, depósitos, varandas e mezaninos). Na área total, pode desconsiderar uma casa (residência unifamiliar) que tenha acesso independente do estabelecimento (Art. 5º, VII).</li>
-                                    <li>Na contagem de andares, podem ser desconsiderados: (1) o subsolo usado exclusivamente como estacionamento, sem abastecimento de combustível (Art. 5º, VII, 'a', 1); (2) uma casa (residência unifamiliar) no mesmo imóvel, térrea ou em andar superior, desde que tenha acesso independente do estabelecimento (Art. 5º, VII, 'a', 2).</li>
+                                    <li>Some toda a área coberta da edificação (todos os cômodos, garagens cobertas, depósitos, varandas e mezaninos). Na área total, pode desconsiderar uma casa (residência unifamiliar) que tenha acesso independente e sem comunicação com o estabelecimento (Art. 5º, VII). Se houver comunicação, a área da residência deve ser somada.</li>
+                                    <li>Na contagem de andares, podem ser desconsiderados: (1) o subsolo usado exclusivamente como estacionamento, sem abastecimento de combustível (Art. 5º, VII, 'a', 1); (2) uma casa (residência unifamiliar) no mesmo imóvel, térrea ou em andar superior, desde que tenha acesso independente e não haja comunicação entre ela e o estabelecimento (Art. 5º, VII, 'a', 2).</li>
                                 </ul>
                             </div>
                         </div>
@@ -686,7 +695,7 @@
                     <div class="check-item">
                         <label class="check-item__label">
                             <input type="checkbox" class="check-item__input">
-                            <span>O local possui porta com saída direta para a rua/calçada e NÃO possui portas, janelas ou vãos comunicando por dentro com outros comércios ou prédios vizinhos?</span>
+                            <span>O local possui porta com saída direta para a rua, calçada ou área de dispersão e NÃO possui portas, janelas ou vãos comunicando por dentro com outras edificações comerciais adjacentes (outros comércios ou prédios vizinhos)?</span>
                         </label>
                     </div>
 
