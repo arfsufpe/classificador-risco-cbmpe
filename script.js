@@ -415,6 +415,10 @@ function submitCnae() {
         return;
     }
 
+    // Zera o piso de uma submissão anterior: o caminho de Risco Alto retorna antes de
+    // reatribuir cnaeState, e showResult() citaria um CNAE que já foi removido.
+    cnaeState = { floor: 1, matched: null, level: 'baixo' };
+
     // Risco Alto tem prioridade máxima: classifica de imediato, sem passar pelas perguntas.
     const altoEncontrado = codes.find(c => CNAE_ALTO_RISCO.includes(c));
     if (altoEncontrado) {
@@ -971,7 +975,10 @@ function updateDebugLiveRisk() {
         case 'step-area': {
             const { resolved, result } = evaluateAreaFlow();
             if (result) possible = range(result, result);
-            else possible = resolved ? range(1, 2) : range(1, 3);
+            else if (resolved) possible = range(1, 2);
+            // Prédio já aciona o Art. 6º, I ou II: só resta II (exceção do §3º) ou III.
+            else if (areaAnswer('area-predio') === 'sim' || areaAnswer('pav-predio') === 'sim') possible = range(2, 3);
+            else possible = range(1, 3);
             break;
         }
         case 'step-hospedagem': {
