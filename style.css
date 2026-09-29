@@ -1207,43 +1207,5 @@ ul.details-list li::before {
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
     }
-    .debug-live-risk { display: none !important; }
 }
 
-/* ==========================================================================
-   DEBUG TEMPORÁRIO — remover este bloco inteiro antes de publicar.
-   Prévia da classificação de risco "se eu parar de responder agora", para
-   facilitar teste manual do fluxo. Não é a classificação final.
-   ========================================================================== */
-.debug-live-risk {
-    display: inline-block;
-    margin-bottom: var(--space-3);
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    background-color: var(--color-surface-muted);
-    border: 1px dashed var(--color-border);
-    color: var(--color-text-muted);
-}
-
-.debug-live-risk:empty { display: none; }
-
-.debug-live-risk[data-risk="1"] {
-    background-color: var(--color-low-bg);
-    border-color: var(--color-low-border);
-    color: var(--color-low-text);
-}
-
-.debug-live-risk[data-risk="2"] {
-    background-color: var(--color-medium-bg);
-    border-color: var(--color-medium-border);
-    color: var(--color-medium-text);
-}
-
-.debug-live-risk[data-risk="3"] {
-    background-color: var(--color-high-bg);
-    border-color: var(--color-high-border);
-    color: var(--color-high-text);
-}
-/* ========================================================================== */

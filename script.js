@@ -547,7 +547,6 @@ function renderEventosFlow(changedQ, moveFocus) {
     const hint = stepEl.querySelector('.selection-hint');
     if (button) button.disabled = !resolved;
     if (hint) hint.hidden = resolved;
-    updateDebugLiveRisk();
 }
 
 function setupEventosFlow() {
@@ -687,7 +686,6 @@ function renderAreaFlow(changedQ, moveFocus) {
     const hint = stepEl.querySelector('.selection-hint');
     if (button) button.disabled = !resolved;
     if (hint) hint.hidden = resolved;
-    updateDebugLiveRisk();
 }
 
 function setupAreaFlow() {
@@ -786,7 +784,6 @@ function renderHospedagemFlow(changedQ, moveFocus) {
     const hint = stepEl.querySelector('.selection-hint');
     if (button) button.disabled = !resolved;
     if (hint) hint.hidden = resolved;
-    updateDebugLiveRisk();
 }
 
 function setupHospedagemFlow() {
@@ -886,7 +883,6 @@ function activateStep(id) {
     target.classList.add('active');
     updateProgressUI(target);
     focusStep(target);
-    updateDebugLiveRisk();
 }
 
 function nextStep(id) {
@@ -920,7 +916,6 @@ function setupExclusiveCheckGroup(stepId) {
         const ready = inputs.some(input => input.checked);
         if (button) button.disabled = !ready;
         if (hint) hint.hidden = ready;
-        updateDebugLiveRisk();
     }
 
     inputs.forEach(input => {
@@ -936,83 +931,6 @@ function setupExclusiveCheckGroup(stepId) {
 
     updateState();
 }
-
-// ============================================================================
-// DEBUG TEMPORÁRIO — remover esta função, suas chamadas (em activateStep, nos
-// render*Flow e no updateState de setupExclusiveCheckGroup) e o HTML/CSS
-// correspondentes antes de publicar. Mostra, no topo de cada etapa, os níveis
-// de risco ainda possíveis com as respostas dadas até agora: um nível só quando
-// ele já está definido; senão, o intervalo que as próximas respostas podem
-// alcançar — só para facilitar teste manual do fluxo.
-// ============================================================================
-function updateDebugLiveRisk() {
-    const step = document.querySelector('.step.active');
-    const badge = step && step.querySelector('.debug-live-risk');
-    if (!badge) return;
-
-    const floor = getRiskFloor();
-    // [mínimo, máximo] ainda possíveis; o piso do CNAE vale para os dois extremos.
-    const range = (min, max) => [Math.max(min, floor), Math.max(max, floor)];
-    let possible;
-
-    switch (step.id) {
-        case 'step-alto-direto': {
-            const any = document.querySelector('#step-alto-direto .check-item__input:checked:not(.check-item__input--none)');
-            possible = any ? range(3, 3) : range(1, 3);
-            break;
-        }
-        case 'step-baixo-bloco-a': {
-            const any = document.querySelector('#step-baixo-bloco-a .check-item__input:checked:not(.check-item__input--none)');
-            possible = any ? range(1, 1) : range(1, 3);
-            break;
-        }
-        case 'step-eventos': {
-            const { result } = evaluateEventosFlow();
-            if (result) possible = range(result, result);
-            else possible = evtAnswer('e1') === 'sim' ? range(2, 3) : range(1, 3);
-            break;
-        }
-        case 'step-area': {
-            const { resolved, result } = evaluateAreaFlow();
-            if (result) possible = range(result, result);
-            else if (resolved) possible = range(1, 2);
-            // Prédio já aciona o Art. 6º, I ou II: só resta II (exceção do §3º) ou III.
-            else if (areaAnswer('area-predio') === 'sim' || areaAnswer('pav-predio') === 'sim') possible = range(2, 3);
-            else possible = range(1, 3);
-            break;
-        }
-        case 'step-hospedagem': {
-            const { excedeLeitos } = evaluateHospedagemFlow();
-            possible = excedeLeitos ? range(2, 2) : range(1, 2);
-            break;
-        }
-        case 'step-baixo-bloco-b': {
-            const inputs = document.querySelectorAll('#step-baixo-bloco-b .check-item__input:not(.check-item__input--none)');
-            const todosMarcados = Array.from(inputs).every(input => input.checked);
-            const nenhuma = document.querySelector('#step-baixo-bloco-b .check-item__input--none:checked');
-            if (todosMarcados) possible = range(1, 1);
-            else possible = nenhuma ? range(2, 2) : range(1, 2);
-            break;
-        }
-        default:
-            badge.textContent = '';
-            badge.removeAttribute('data-risk');
-            return;
-    }
-
-    const labels = { 1: 'RISCO I (BAIXO)', 2: 'RISCO II (MÉDIO)', 3: 'RISCO III (ALTO)' };
-    const [min, max] = possible;
-    if (min === max) {
-        badge.textContent = `🧪 Prévia (teste): ${labels[min]}`;
-        badge.dataset.risk = String(min);
-        return;
-    }
-    const levels = [];
-    for (let r = min; r <= max; r++) levels.push(labels[r]);
-    badge.textContent = `🧪 Prévia (teste): ainda depende das próximas respostas — pode ser ${levels.slice(0, -1).join(', ')} ou ${levels[levels.length - 1]}`;
-    badge.removeAttribute('data-risk');
-}
-// ============================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
     const initial = document.querySelector('.step.active');
