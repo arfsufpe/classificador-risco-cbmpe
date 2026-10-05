@@ -437,11 +437,23 @@ function submitCnae() {
     nextStep('step-alto-direto');
 }
 
-// Etapa 2 — situações que, sozinhas, já caracterizam Risco III sem depender de contexto
-// (Art. 6º, caput c/c Anexo II; III; IV; V; VI; VIII; X; XI; XII). Basta UMA marcada.
-// Cada data-reason já cita o inciso correspondente.
+// Etapas 2 e 3 — situações que, sozinhas, já caracterizam Risco III sem depender de contexto
+// (Art. 6º, caput c/c Anexo II; III; IV; V; VI; VIII; X; XI; XII). Basta UMA marcada em
+// qualquer uma das duas etapas. Cada data-reason já cita o inciso correspondente.
+// Dividida em duas telas (atividade/público e combustíveis/produtos perigosos) só para reduzir
+// a quantidade de itens por tela; a regra em si é uma única lista plana de "OU".
 function checkAltoDireto() {
     const checked = Array.from(document.querySelectorAll('#step-alto-direto .check-item__input:checked:not(.check-item__input--none)'));
+    if (checked.length > 0) {
+        const motivos = checked.map(c => c.dataset.reason).join('; ');
+        showResult(3, `Classificado Risco III (Alto) por apresentar: ${motivos}.`);
+        return;
+    }
+    nextStep('step-alto-perigosos');
+}
+
+function checkAltoPerigosos() {
+    const checked = Array.from(document.querySelectorAll('#step-alto-perigosos .check-item__input:checked:not(.check-item__input--none)'));
     if (checked.length > 0) {
         const motivos = checked.map(c => c.dataset.reason).join('; ');
         showResult(3, `Classificado Risco III (Alto) por apresentar: ${motivos}.`);
@@ -849,12 +861,28 @@ function updateProgressUI(stepEl) {
     const track = document.getElementById('progress-track');
     const indicator = document.getElementById('step-indicator');
     const backBtn = document.getElementById('back-btn');
+    const stickyBar = document.getElementById('sticky-progress-bar');
 
     const percent = Math.min(100, Math.round((step / total) * 100));
     if (bar) bar.style.transform = `scaleX(${percent / 100})`;
+    if (stickyBar) stickyBar.style.transform = `scaleX(${percent / 100})`;
     if (track) track.setAttribute('aria-valuenow', String(percent));
     if (indicator) indicator.textContent = label;
     if (backBtn) backBtn.hidden = stepHistory.length === 0;
+}
+
+// Mostra a mini-barra de progresso fixa (topo da tela) só quando a barra original, dentro do
+// card, sai da área visível — assim quem rola uma etapa longa no celular não perde a noção de
+// quanto falta, sem duplicar a barra enquanto a original ainda está à vista.
+function setupStickyProgress() {
+    const progressRow = document.getElementById('progress-row');
+    const sticky = document.getElementById('sticky-progress');
+    if (!progressRow || !sticky || typeof IntersectionObserver === 'undefined') return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+        sticky.classList.toggle('is-visible', !entry.isIntersecting && !progressRow.hidden);
+    }, { threshold: 0 });
+    observer.observe(progressRow);
 }
 
 // Move o foco do teclado/leitor de tela para a nova etapa exibida.
@@ -898,7 +926,7 @@ function goBack() {
 }
 
 // Etapas cujo bloco de checkboxes tem a opção exclusiva "Nenhuma das alternativas anteriores".
-const EXCLUSIVE_CHECK_STEPS = ['step-alto-direto', 'step-baixo-bloco-a', 'step-baixo-bloco-b'];
+const EXCLUSIVE_CHECK_STEPS = ['step-alto-direto', 'step-alto-perigosos', 'step-baixo-bloco-a', 'step-baixo-bloco-b'];
 
 // Ativa, para uma etapa de checkboxes, a exclusão mútua da opção "Nenhuma das alternativas
 // anteriores" (marcá-la desmarca as demais e vice-versa) e mantém o botão de avançar
@@ -939,6 +967,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupAreaFlow();
     setupEventosFlow();
     setupHospedagemFlow();
+    setupStickyProgress();
     EXCLUSIVE_CHECK_STEPS.forEach(setupExclusiveCheckGroup);
 });
 
@@ -971,6 +1000,9 @@ function showResult(risk, reason) {
 
     const progressRow = document.getElementById('progress-row');
     if (progressRow) progressRow.hidden = true;
+
+    const stickyProgress = document.getElementById('sticky-progress');
+    if (stickyProgress) stickyProgress.classList.remove('is-visible');
 
     const box = document.getElementById('result');
     const title = document.getElementById('res-title');

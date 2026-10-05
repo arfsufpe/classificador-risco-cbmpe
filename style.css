@@ -262,6 +262,39 @@ button { font-family: inherit; }
     transition: transform var(--dur-progress-fill) var(--ease-in-out);
 }
 
+/* Mini-barra de progresso fixa: aparece só quando a barra original (dentro do card) já saiu
+   da tela, para quem rola uma etapa longa no celular não perder a noção de quanto falta. */
+.sticky-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--color-border);
+    z-index: 50;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+}
+
+.sticky-progress.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sticky-progress__bar {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-mid) 100%);
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform var(--dur-progress-fill) var(--ease-in-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sticky-progress { transition: none; }
+}
+
 .step-indicator {
     order: 2;
     margin-left: auto;
@@ -395,6 +428,16 @@ ul.details-list {
     background-color: var(--color-surface-muted);
     border: 1px dashed var(--color-border);
 }
+
+/* Bloco "a apurar": perguntas cujo resultado ainda não foi determinado (eventos
+   temporários, área e andares) — não usa vermelho de alto risco porque a resposta
+   pode seguir em qualquer direção; evita alarmar antes de haver algo a alarmar. */
+.risk-block--pending {
+    background-color: var(--color-surface-muted);
+    border-color: var(--color-border);
+}
+
+.risk-block--pending .risk-block__label { color: var(--color-primary-mid); }
 
 /* --- ITENS DE MARCAÇÃO (checklists de Alto Risco / Baixo Risco) --- */
 .check-item {
@@ -552,6 +595,35 @@ ul.details-list {
 .check-item__warning .details-list li {
     color: inherit;
     font-size: 0.9rem;
+}
+
+/* Variante neutra de "Como responder": para texto puramente descritivo (exemplos, forma de
+   contar/somar) que não muda a resposta — sem o laranja/triângulo de alerta, reservados para
+   ressalvas condicionais que realmente podem inverter a marcação ("se X, não marque"). */
+.check-item__note {
+    display: flex;
+    gap: var(--space-2);
+    align-items: flex-start;
+    background-color: var(--color-surface-muted);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-3);
+    margin: var(--space-2) 0 0 34px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-text-muted);
+}
+
+.check-item__note svg {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    color: var(--color-primary-mid);
+}
+
+.area-q .check-item__note {
+    margin-left: 0;
 }
 
 ul.details-list li {

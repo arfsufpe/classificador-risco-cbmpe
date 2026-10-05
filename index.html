@@ -11,6 +11,10 @@
 </head>
 <body>
 
+<div id="sticky-progress" class="sticky-progress" aria-hidden="true">
+    <div id="sticky-progress-bar" class="sticky-progress__bar"></div>
+</div>
+
 <a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
 
 <header class="site-header">
@@ -42,12 +46,12 @@
             <div class="progress__track" role="progressbar" aria-label="Progresso do questionário" aria-valuemin="0" aria-valuemax="100" aria-valuenow="14" id="progress-track">
                 <div id="progress-bar" class="progress__bar"></div>
             </div>
-            <span id="step-indicator" class="step-indicator">Etapa 1 de 7</span>
+            <span id="step-indicator" class="step-indicator">Etapa 1 de 8</span>
         </div>
 
         <div class="content-area">
 
-            <div id="step-cnae" class="step active" data-step="1" data-total="7" data-label="Etapa 1 de 7">
+            <div id="step-cnae" class="step active" data-step="1" data-total="8" data-label="Etapa 1 de 8">
                 <h2 class="question-text">Quais são os CNAEs (atividades econômicas) cadastrados para a empresa?</h2>
 
                 <div class="info-box">
@@ -82,7 +86,7 @@
                 </div>
             </div>
 
-            <div id="step-alto-direto" class="step" data-step="2" data-total="7" data-label="Etapa 2 de 7 · Risco Alto (situações diretas)">
+            <div id="step-alto-direto" class="step" data-step="2" data-total="8" data-label="Etapa 2 de 8 · Risco Alto (atividade e público)">
                 <h2 class="question-text">O seu estabelecimento se enquadra em ALGUMA das situações abaixo?</h2>
 
                 <div class="info-box">
@@ -116,9 +120,9 @@
                             <input type="checkbox" class="check-item__input" data-reason="atividade destinada à reunião de público com lotação superior a 100 pessoas (Art. 6º, III)">
                             <span>O local ou evento é destinado a reunir pessoas (restaurante, bar, igreja/templo, academia, auditório, escola, cinema, salão de festas, show, festa ou evento de rua com palco montado etc.) e tem capacidade ou público previsto de mais de 100 pessoas ao mesmo tempo?</span>
                         </label>
-                        <div class="check-item__warning">
+                        <div class="check-item__note">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                                <circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="0.9" fill="currentColor" stroke="none"/>
                             </svg>
                             <div>
                                 <strong>Como responder:</strong>
@@ -132,9 +136,9 @@
                             <input type="checkbox" class="check-item__input" data-reason="estabelecimento de saúde com internação ou pacientes com locomoção dificultada (Art. 6º, VI)">
                             <span>O local é um hospital, pronto-socorro ou clínica onde os pacientes ficam internados ou têm dificuldade para andar e sair sozinhos em uma emergência?</span>
                         </label>
-                        <div class="check-item__warning">
+                        <div class="check-item__note">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                                <circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="0.9" fill="currentColor" stroke="none"/>
                             </svg>
                             <div>
                                 <strong>Como responder:</strong>
@@ -148,9 +152,9 @@
                             <input type="checkbox" class="check-item__input" data-reason="hotel, pousada ou pensão com mais de 40 leitos (Art. 6º, IV)">
                             <span>Se o local for um hotel, pousada, pensão ou alojamento: possui mais de 40 camas (leitos) para hóspedes?</span>
                         </label>
-                        <div class="check-item__warning">
+                        <div class="check-item__note">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                                <circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="0.9" fill="currentColor" stroke="none"/>
                             </svg>
                             <div>
                                 <strong>Como responder:</strong>
@@ -158,6 +162,33 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="risk-block risk-block--neutral">
+                    <div class="check-item check-item--none">
+                        <label class="check-item__label">
+                            <input type="checkbox" class="check-item__input check-item__input--none">
+                            <span><strong>Nenhuma das alternativas anteriores</strong> — meu negócio não se enquadra em nenhuma das situações acima.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <p class="selection-hint" role="status" aria-live="polite">Selecione ao menos uma opção acima para continuar.</p>
+                    <button type="button" class="btn btn-primary" onclick="checkAltoDireto()" disabled>
+                        Verificar classificação
+                    </button>
+                </div>
+            </div>
+
+            <div id="step-alto-perigosos" class="step" data-step="3" data-total="8" data-label="Etapa 3 de 8 · Risco Alto (combustíveis e produtos perigosos)">
+                <h2 class="question-text">O seu estabelecimento também se enquadra em ALGUMA destas situações?</h2>
+
+                <div class="info-box">
+                    <svg class="info-box__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="0.9" fill="currentColor" stroke="none"/>
+                    </svg>
+                    <span>Estas situações, assim como as da etapa anterior, também enquadram sozinhas o estabelecimento em Risco Alto (Nível III). Marque tudo o que se aplica.</span>
                 </div>
 
                 <div class="risk-block">
@@ -184,9 +215,9 @@
                             <input type="checkbox" class="check-item__input" data-reason="mais de 1.000 litros de líquidos combustíveis ou inflamáveis (Art. 6º, V)">
                             <span>O estabelecimento guarda ou utiliza mais de 1.000 litros de líquidos combustíveis ou inflamáveis (que pegam fogo), como gasolina, álcool, óleo diesel, tintas ou solventes?</span>
                         </label>
-                        <div class="check-item__warning">
+                        <div class="check-item__note">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                                <circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="0.9" fill="currentColor" stroke="none"/>
                             </svg>
                             <div>
                                 <strong>Como responder:</strong>
@@ -250,14 +281,14 @@
                 </div>
 
                 <div class="actions">
-                    <p class="selection-hint">Selecione ao menos uma opção acima para continuar.</p>
-                    <button type="button" class="btn btn-primary" onclick="checkAltoDireto()" disabled>
+                    <p class="selection-hint" role="status" aria-live="polite">Selecione ao menos uma opção acima para continuar.</p>
+                    <button type="button" class="btn btn-primary" onclick="checkAltoPerigosos()" disabled>
                         Verificar classificação
                     </button>
                 </div>
             </div>
 
-            <div id="step-baixo-bloco-a" class="step" data-step="3" data-total="7" data-label="Etapa 3 de 7 · Risco Baixo (hipóteses diretas)">
+            <div id="step-baixo-bloco-a" class="step" data-step="4" data-total="8" data-label="Etapa 4 de 8 · Risco Baixo (hipóteses diretas)">
                 <h2 class="question-text">O seu negócio se enquadra em ALGUMA das situações abaixo?</h2>
 
                 <div class="info-box">
@@ -268,14 +299,16 @@
                 </div>
 
                 <div class="risk-block risk-block--low">
+                    <p class="risk-block__label">Atividade em casa, remota ou ambulante</p>
+
                     <div class="check-item">
                         <label class="check-item__label">
                             <input type="checkbox" class="check-item__input" data-reason="domicílio fiscal / trabalho digital ou externo, sem atendimento presencial no local (Art. 5º, II)">
                             <span>O endereço cadastrado serve apenas como ponto de contato fiscal (para impostos e correspondências), SEM atendimento presencial de clientes, SEM estoque de mercadorias e SEM funcionários no local, sendo o serviço prestado exclusivamente pela internet ou no endereço dos clientes?</span>
                         </label>
-                        <div class="check-item__warning">
+                        <div class="check-item__note">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                                <circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="0.9" fill="currentColor" stroke="none"/>
                             </svg>
                             <div>
                                 <strong>Como responder:</strong>
@@ -318,6 +351,10 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="risk-block risk-block--low">
+                    <p class="risk-block__label">Tendas e estruturas técnicas</p>
 
                     <div class="check-item">
                         <label class="check-item__label">
@@ -362,14 +399,14 @@
                 </div>
 
                 <div class="actions">
-                    <p class="selection-hint">Selecione ao menos uma opção acima para continuar.</p>
+                    <p class="selection-hint" role="status" aria-live="polite">Selecione ao menos uma opção acima para continuar.</p>
                     <button type="button" class="btn btn-primary" onclick="checkBaixoBlocoA()" disabled>
                         Verificar classificação
                     </button>
                 </div>
             </div>
 
-            <div id="step-eventos" class="step" data-step="4" data-total="7" data-label="Etapa 4 de 7 · Eventos temporários">
+            <div id="step-eventos" class="step" data-step="5" data-total="8" data-label="Etapa 5 de 8 · Eventos temporários">
                 <h2 class="question-text">O seu negócio é um evento temporário?</h2>
 
                 <div class="info-box">
@@ -379,7 +416,7 @@
                     <span>Responda às perguntas abaixo. Se o seu negócio não é um evento temporário, basta responder 'Não' à primeira e seguir.</span>
                 </div>
 
-                <div class="risk-block">
+                <div class="risk-block risk-block--pending">
                     <p class="risk-block__label">Evento temporário</p>
 
                     <div class="check-item area-flow" id="eventos-flow">
@@ -406,9 +443,9 @@
                                 <label class="area-q__option"><input type="radio" name="evt-e2" value="sim"> Sim</label>
                                 <label class="area-q__option"><input type="radio" name="evt-e2" value="nao"> Não</label>
                             </div>
-                            <div class="check-item__warning" id="evt-help-e2">
+                            <div class="check-item__note" id="evt-help-e2">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                                    <circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="0.9" fill="currentColor" stroke="none"/>
                                 </svg>
                                 <div>
                                     <strong>Como responder:</strong>
@@ -423,9 +460,9 @@
                                 <label class="area-q__option"><input type="radio" name="evt-e3" value="sim"> Sim</label>
                                 <label class="area-q__option"><input type="radio" name="evt-e3" value="nao"> Não</label>
                             </div>
-                            <div class="check-item__warning" id="evt-help-e3">
+                            <div class="check-item__note" id="evt-help-e3">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                                    <circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="0.9" fill="currentColor" stroke="none"/>
                                 </svg>
                                 <div>
                                     <strong>Como responder:</strong>
@@ -439,14 +476,14 @@
                 </div>
 
                 <div class="actions">
-                    <p class="selection-hint">Responda às perguntas acima para continuar.</p>
+                    <p class="selection-hint" role="status" aria-live="polite">Responda às perguntas acima para continuar.</p>
                     <button type="button" class="btn btn-primary" onclick="checkEventos()" disabled>
                         Continuar
                     </button>
                 </div>
             </div>
 
-            <div id="step-area" class="step" data-step="5" data-total="7" data-label="Etapa 5 de 7 · Área e andares">
+            <div id="step-area" class="step" data-step="6" data-total="8" data-label="Etapa 6 de 8 · Área e andares">
                 <h2 class="question-text">Área e quantidade de andares do imóvel</h2>
 
                 <div class="info-box">
@@ -456,7 +493,7 @@
                     <span>Responda às perguntas abaixo, uma a uma. A área e a quantidade de andares da edificação podem enquadrar o estabelecimento em Risco Alto (Art. 6º, I e II). Se a sua empresa é uma unidade no térreo de um prédio maior, pode se aplicar a exceção do Art. 7º, §3º.</span>
                 </div>
 
-                <div class="risk-block">
+                <div class="risk-block risk-block--pending">
                     <p class="risk-block__label">Área e andares da edificação</p>
 
                     <div class="check-item area-flow" id="area-flow">
@@ -585,14 +622,14 @@
                 </div>
 
                 <div class="actions">
-                    <p class="selection-hint">Responda às perguntas acima para continuar.</p>
+                    <p class="selection-hint" role="status" aria-live="polite">Responda às perguntas acima para continuar.</p>
                     <button type="button" class="btn btn-primary" onclick="checkArea()" disabled>
                         Continuar
                     </button>
                 </div>
             </div>
 
-            <div id="step-hospedagem" class="step" data-step="6" data-total="7" data-label="Etapa 6 de 7 · Hospedagem">
+            <div id="step-hospedagem" class="step" data-step="7" data-total="8" data-label="Etapa 7 de 8 · Hospedagem">
                 <h2 class="question-text">O seu estabelecimento é de hospedagem?</h2>
 
                 <div class="info-box">
@@ -618,9 +655,9 @@
                                 <label class="area-q__option"><input type="radio" name="hosp-h2" value="sim"> Sim</label>
                                 <label class="area-q__option"><input type="radio" name="hosp-h2" value="nao"> Não</label>
                             </div>
-                            <div class="check-item__warning" id="hosp-help-h2">
+                            <div class="check-item__note" id="hosp-help-h2">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                                    <circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="0.9" fill="currentColor" stroke="none"/>
                                 </svg>
                                 <div>
                                     <strong>Como responder:</strong>
@@ -634,14 +671,14 @@
                 </div>
 
                 <div class="actions">
-                    <p class="selection-hint">Responda à pergunta acima para continuar.</p>
+                    <p class="selection-hint" role="status" aria-live="polite">Responda à pergunta acima para continuar.</p>
                     <button type="button" class="btn btn-primary" onclick="checkHospedagem()" disabled>
                         Continuar
                     </button>
                 </div>
             </div>
 
-            <div id="step-baixo-bloco-b" class="step" data-step="7" data-total="7" data-label="Etapa 7 de 7 · Pequeno estabelecimento">
+            <div id="step-baixo-bloco-b" class="step" data-step="8" data-total="8" data-label="Etapa 8 de 8 · Pequeno estabelecimento">
                 <h2 class="question-text">Para ser Risco Baixo, seu estabelecimento precisa atender a TODOS os itens abaixo:</h2>
 
                 <div class="info-box">
@@ -712,7 +749,7 @@
                 </div>
 
                 <div class="actions">
-                    <p class="selection-hint">Selecione ao menos uma opção acima para continuar.</p>
+                    <p class="selection-hint" role="status" aria-live="polite">Selecione ao menos uma opção acima para continuar.</p>
                     <button type="button" class="btn btn-primary" onclick="checkBaixoBlocoB()" disabled>
                         Verificar classificação
                     </button>
