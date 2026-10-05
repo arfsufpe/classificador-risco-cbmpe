@@ -3,6 +3,24 @@
     --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --font-heading: var(--font-body);
 
+    /* Escala por papel (não por valor). Poucos degraus, bem separados:
+       veredito > marca > pergunta > subtítulo > corpo > apoio > meta/rótulo. */
+    --text-verdict: 1.75rem;
+    --text-display: 1.5rem;
+    --text-heading: 1.3rem;
+    --text-subheading: 1.0625rem;
+    --text-body: 1rem;
+    --text-support: 0.9375rem;
+    --text-meta: 0.8125rem;
+    --text-label: 0.8125rem;   /* rótulos em caixa-alta */
+
+    --leading-tight: 1.25;
+    --leading-heading: 1.35;
+    --leading-body: 1.6;
+    --leading-support: 1.55;
+
+    --tracking-label: 0.06em;
+
     /* Marca institucional (Governo de Pernambuco) */
     --color-primary: #0034B7;
     --color-primary-dark: #00268A;
@@ -22,9 +40,14 @@
     --color-bg: #F5FAFF;
     --color-surface: #FFFFFF;
     --color-surface-muted: #EEF4FD;
-    --color-text: #3A3A3A;
-    --color-text-muted: #6B6E74;
-    --color-border: #C2C5CA;
+    /* Neutros puxados para o azul-marinho da marca (o fundo e as sombras já eram azulados).
+       Contrastes sobre branco: texto 13:1, texto secundário 6,6:1 (≥5,8:1 em todos os
+       fundos coloridos), borda de campo 3,6:1 (mínimo de 3:1 para limite de controle). */
+    --color-text: #2B3140;
+    --color-text-muted: #565D6B;
+    --color-border: #C5CEDC;
+    --color-border-control: #7F889A;
+    --color-separator: rgba(43, 49, 64, 0.1);
 
     /* Risco: Baixo (verde) / Médio (âmbar institucional) / Alto (vermelho) */
     --color-low-bg: #E7F8EF;
@@ -38,6 +61,7 @@
     --color-high-bg: #FDECEC;
     --color-high-border: #D93025;
     --color-high-text: #9E241D;
+    --color-high-text-muted: #7A4A45; /* secundário sobre --color-high-bg: 6,4:1 */
 
     --radius-sm: 10px;
     --radius-md: 16px;
@@ -53,6 +77,12 @@
     --space-5: 24px;
     --space-6: 32px;
     --space-7: 48px;
+
+    /* Estrutura: largura da coluna, margem lateral da página e recuo interno do card.
+       O cabeçalho usa a soma dos dois últimos para alinhar o título ao texto do card. */
+    --page-max: 780px;
+    --page-gutter: var(--space-4);
+    --card-pad: var(--space-5);
 
     /* Movimento */
     --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -87,12 +117,23 @@ body {
     font-family: var(--font-body);
     background-color: var(--color-bg);
     color: var(--color-text);
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
     min-height: 100vh;
 }
 
 h1, h2, h3 { font-family: var(--font-heading); text-wrap: balance; }
+
+/* Evita palavra sozinha na última linha dos textos corridos. */
+p, li, legend, .check-item__label span { text-wrap: pretty; }
+
+::selection { background: rgba(255, 182, 12, 0.4); color: var(--color-text); }
+.site-header ::selection { background: var(--color-accent); color: var(--color-on-accent); }
+
+input { caret-color: var(--color-primary); }
+
+/* Rótulos clicáveis já têm estado próprio de seleção; o flash azul do toque só polui. */
+label { -webkit-tap-highlight-color: transparent; }
 
 button { font-family: inherit; }
 
@@ -119,7 +160,7 @@ button { font-family: inherit; }
     position: relative;
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-mid) 100%);
     color: var(--color-on-primary);
-    padding: var(--space-6) var(--space-4) 64px;
+    padding: var(--space-6) 0 64px;
 }
 
 .site-header::after {
@@ -133,8 +174,9 @@ button { font-family: inherit; }
 }
 
 .site-header__inner {
-    max-width: 780px;
+    max-width: var(--page-max);
     margin: 0 auto;
+    padding-inline: calc(var(--page-gutter) + var(--card-pad));
 }
 
 .brand {
@@ -164,33 +206,33 @@ button { font-family: inherit; }
 
 .brand__org {
     display: block;
-    font-size: 0.8rem;
+    font-size: var(--text-label);
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: var(--tracking-label);
     opacity: 0.88;
     margin-bottom: 2px;
 }
 
 .brand__title {
-    font-size: 1.5rem;
+    font-size: var(--text-display);
     font-weight: 800;
     letter-spacing: -0.01em;
-    line-height: 1.25;
+    line-height: var(--leading-tight);
 }
 
 .brand__subtitle {
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
     max-width: 58ch;
     opacity: 0.96;
 }
 
 /* --- LAYOUT PRINCIPAL --- */
 .page {
-    max-width: 780px;
+    max-width: var(--page-max);
     margin: 0 auto;
-    padding: 0 var(--space-4) var(--space-7);
+    padding: 0 var(--page-gutter) var(--space-7);
 }
 
 .card {
@@ -200,6 +242,10 @@ button { font-family: inherit; }
     overflow: hidden;
     margin-top: -40px;
     border: 1px solid rgba(0, 52, 183, 0.06);
+    /* Acima do cabeçalho (que é position: relative); sem isso a sobreposição some
+       por baixo da faixa amarela. */
+    position: relative;
+    z-index: 1;
 }
 
 /* --- PROGRESSO --- */
@@ -208,10 +254,13 @@ button { font-family: inherit; }
     flex-wrap: wrap;
     align-items: center;
     gap: var(--space-2) var(--space-3);
-    padding: var(--space-4) var(--space-5) var(--space-4);
+    padding: var(--space-4) var(--card-pad);
     background: var(--color-surface-muted);
     border-bottom: 1px solid rgba(0, 52, 183, 0.08);
 }
+
+/* O display:flex acima anularia o atributo hidden usado na tela de resultado. */
+.progress[hidden] { display: none; }
 
 .btn-back {
     order: 1;
@@ -223,7 +272,7 @@ button { font-family: inherit; }
     border: none;
     color: var(--color-primary);
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: var(--text-support);
     padding: 8px 10px;
     min-height: 44px;
     cursor: pointer;
@@ -249,7 +298,7 @@ button { font-family: inherit; }
     border-radius: 999px;
     background: var(--color-border);
     overflow: hidden;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+    box-shadow: inset 0 1px 2px rgba(0, 38, 138, 0.1);
 }
 
 .progress__bar {
@@ -299,19 +348,21 @@ button { font-family: inherit; }
     order: 2;
     margin-left: auto;
     max-width: 60%;
-    font-size: 0.8rem;
-    font-weight: 800;
+    font-size: var(--text-meta);
+    font-weight: 700;
     color: var(--color-primary-dark);
     text-align: right;
     background: rgba(0, 52, 183, 0.08);
     padding: 6px 12px;
-    border-radius: 999px;
+    border-radius: var(--radius-sm);
+    line-height: 1.4;
     letter-spacing: 0.01em;
+    font-variant-numeric: tabular-nums;
 }
 
 /* --- CONTEÚDO DAS ETAPAS --- */
 .content-area {
-    padding: var(--space-5);
+    padding: var(--card-pad);
 }
 
 .step {
@@ -346,25 +397,30 @@ button { font-family: inherit; }
 }
 
 .question-text {
-    font-size: 1.3rem;
+    font-size: var(--text-heading);
     font-weight: 700;
     letter-spacing: -0.01em;
     color: var(--color-text);
-    line-height: 1.4;
-    margin-bottom: var(--space-4);
+    line-height: var(--leading-heading);
+    margin-bottom: var(--space-3);
 }
+
+/* Ritmo da etapa: pergunta e orientação formam um grupo (intervalo curto), a área de
+   resposta vem depois de um respiro maior e a ação fica separada do conteúdo. */
+.step > .actions { margin-top: var(--space-5); }
 
 .info-box {
     display: flex;
     gap: var(--space-3);
     align-items: flex-start;
     background-color: var(--color-surface-muted);
-    border-left: 4px solid var(--color-primary-mid);
+    border: 1px solid rgba(64, 103, 201, 0.22);
     padding: var(--space-3) var(--space-4);
     border-radius: var(--radius-sm);
-    font-size: 0.95rem;
+    font-size: var(--text-support);
     color: var(--color-text-muted);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-5);
+    line-height: var(--leading-support);
 }
 
 .info-box__icon {
@@ -395,23 +451,23 @@ ul.details-list {
 .risk-block__label {
     font-family: var(--font-heading);
     font-weight: 800;
-    font-size: 0.95rem;
+    font-size: var(--text-label);
     color: var(--color-high-text);
     margin-bottom: var(--space-3);
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+    letter-spacing: var(--tracking-label);
 }
 
 .risk-block__intro {
-    font-size: 1rem;
+    font-size: var(--text-body);
     color: var(--color-text-muted);
     margin-bottom: var(--space-2);
 }
 
 .risk-block__note {
-    font-size: 0.9rem;
+    font-size: var(--text-support);
     font-style: italic;
-    color: var(--color-text-muted);
+    color: inherit;
     margin-top: var(--space-2);
     margin-bottom: 0;
 }
@@ -441,12 +497,18 @@ ul.details-list {
 
 /* --- ITENS DE MARCAÇÃO (checklists de Alto Risco / Baixo Risco) --- */
 .check-item {
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(58, 58, 58, 0.1);
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid var(--color-separator);
 }
+
+/* A borda do bloco já marca início e fim: o primeiro e o último item não somam
+   respiro extra ao padding do bloco. */
+.risk-block > .check-item:first-child,
+.risk-block__label + .check-item { padding-top: 0; }
 
 .check-item:last-child {
     border-bottom: none;
+    padding-bottom: 0;
 }
 
 .check-item__label {
@@ -454,8 +516,8 @@ ul.details-list {
     align-items: flex-start;
     gap: var(--space-3);
     cursor: pointer;
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: var(--text-body);
+    line-height: var(--leading-support);
     color: var(--color-text);
 }
 
@@ -494,8 +556,8 @@ ul.details-list {
 .area-q__legend {
     padding: 0;
     margin-bottom: var(--space-2);
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: var(--text-body);
+    line-height: var(--leading-support);
     color: var(--color-text);
 }
 
@@ -515,9 +577,16 @@ ul.details-list {
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
-    font-size: 1rem;
+    font-size: var(--text-body);
     line-height: 1.4;
     cursor: pointer;
+}
+
+.area-q__option:hover { border-color: var(--color-primary-mid); }
+
+.area-q__option:has(input:focus-visible) {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-focus);
 }
 
 .area-q__option:has(input:checked) {
@@ -535,11 +604,7 @@ ul.details-list {
     cursor: pointer;
 }
 
-.area-q__option input:focus-visible {
-    outline: none;
-    box-shadow: var(--shadow-focus);
-    border-radius: 50%;
-}
+.area-q__option input:focus-visible { outline: none; }
 
 .area-q .check-item__warning {
     margin-left: 0;
@@ -547,16 +612,16 @@ ul.details-list {
 
 .area-q-group__intro {
     margin-top: var(--space-4);
-    font-size: 0.95rem;
-    line-height: 1.5;
+    font-size: var(--text-support);
+    line-height: var(--leading-support);
     color: var(--color-text);
 }
 
 .area-flow__status {
     margin-top: var(--space-3);
-    font-size: 0.9rem;
+    font-size: var(--text-support);
     font-weight: 700;
-    line-height: 1.5;
+    line-height: var(--leading-support);
     color: var(--color-text-muted);
 }
 
@@ -567,24 +632,33 @@ ul.details-list {
 /* "Como responder": texto de ajuda sempre visível dentro de um check-item (não é mais
    um <details> colapsável) — quem nunca respondeu o questionário precisa ler sem clicar. */
 .check-item__warning {
-    display: flex;
-    gap: var(--space-2);
-    align-items: flex-start;
+    position: relative;
     background-color: var(--color-medium-bg);
     border: 1px solid var(--color-medium-border);
     border-radius: var(--radius-sm);
     padding: var(--space-3);
     margin: var(--space-2) 0 0 34px;
-    font-size: 0.9rem;
-    line-height: 1.5;
+    font-size: var(--text-support);
+    line-height: var(--leading-support);
     color: var(--color-medium-text);
 }
 
-.check-item__warning svg {
-    flex-shrink: 0;
+/* "Como responder": ícone e rótulo formam a linha de título; o texto da ajuda ocupa a
+   largura toda do quadro, em vez de correr numa coluna estreita ao lado do ícone. */
+.check-item__warning svg,
+.check-item__note svg {
+    position: absolute;
+    top: calc(var(--space-3) + 2px);
+    left: var(--space-3);
     width: 18px;
     height: 18px;
-    margin-top: 1px;
+}
+
+.check-item__warning > div > strong:first-child,
+.check-item__note > div > strong:first-child {
+    display: block;
+    padding-left: 26px;
+    margin-bottom: 2px;
 }
 
 .check-item__warning .details-list {
@@ -594,33 +668,25 @@ ul.details-list {
 
 .check-item__warning .details-list li {
     color: inherit;
-    font-size: 0.9rem;
+    font-size: inherit;
 }
 
 /* Variante neutra de "Como responder": para texto puramente descritivo (exemplos, forma de
    contar/somar) que não muda a resposta — sem o laranja/triângulo de alerta, reservados para
    ressalvas condicionais que realmente podem inverter a marcação ("se X, não marque"). */
 .check-item__note {
-    display: flex;
-    gap: var(--space-2);
-    align-items: flex-start;
+    position: relative;
     background-color: var(--color-surface-muted);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     padding: var(--space-3);
     margin: var(--space-2) 0 0 34px;
-    font-size: 0.9rem;
-    line-height: 1.5;
+    font-size: var(--text-support);
+    line-height: var(--leading-support);
     color: var(--color-text-muted);
 }
 
-.check-item__note svg {
-    flex-shrink: 0;
-    width: 18px;
-    height: 18px;
-    margin-top: 1px;
-    color: var(--color-primary-mid);
-}
+.check-item__note svg { color: var(--color-primary-mid); }
 
 .area-q .check-item__note {
     margin-left: 0;
@@ -630,8 +696,8 @@ ul.details-list li {
     position: relative;
     padding-left: 22px;
     margin-bottom: 10px;
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: var(--text-body);
+    line-height: var(--leading-support);
     color: var(--color-text-muted);
 }
 
@@ -649,7 +715,7 @@ ul.details-list li::before {
 /* --- CAMPO CNAE --- */
 .field-label {
     display: block;
-    font-size: 0.9rem;
+    font-size: var(--text-support);
     font-weight: 700;
     color: var(--color-text);
     margin-bottom: 6px;
@@ -664,14 +730,16 @@ ul.details-list li::before {
 }
 
 .cnae-input {
-    flex: 1 1 240px;
+    /* Cresce bem mais que o botão na mesma linha; quando o botão quebra para baixo
+       (celular), é ele quem ocupa a linha inteira. */
+    flex: 999 1 240px;
     min-width: 0;
     min-height: 52px;
     padding: var(--space-3) var(--space-4);
-    border: 2px solid var(--color-border);
+    border: 2px solid var(--color-border-control);
     border-radius: var(--radius-sm);
     font-family: inherit;
-    font-size: 1rem;
+    font-size: var(--text-body);
     color: var(--color-text);
     background-color: var(--color-surface);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -683,8 +751,12 @@ ul.details-list li::before {
     box-shadow: var(--shadow-focus);
 }
 
+.cnae-input[aria-invalid="true"] { border-color: var(--color-high-border); }
+
+.cnae-input::placeholder { color: var(--color-text-muted); opacity: 1; }
+
 .btn.cnae-add {
-    flex: 0 0 auto;
+    flex: 1 0 auto;
     width: auto;
     min-height: 52px;
     padding: 10px 20px;
@@ -700,6 +772,8 @@ ul.details-list li::before {
     background-color: var(--color-surface);
     border: 2px solid var(--color-primary);
     border-radius: var(--radius-sm);
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
 }
 
 .cnae-option {
@@ -709,7 +783,7 @@ ul.details-list li::before {
     min-height: 44px;
     padding: 10px 12px;
     border-radius: 8px;
-    font-size: 0.95rem;
+    font-size: var(--text-support);
     line-height: 1.4;
     color: var(--color-text);
     cursor: pointer;
@@ -731,12 +805,12 @@ ul.details-list li::before {
 
 .cnae-listbox__more {
     padding: 8px 12px;
-    font-size: 0.85rem;
+    font-size: var(--text-meta);
     color: var(--color-text-muted);
 }
 
 .cnae-empty {
-    font-size: 0.9rem;
+    font-size: var(--text-support);
     color: var(--color-text-muted);
     margin-bottom: var(--space-4);
 }
@@ -755,16 +829,21 @@ ul.details-list li::before {
 .cnae-chip {
     display: flex;
     gap: var(--space-3);
-    align-items: center;
+    align-items: flex-start;
     padding: 8px 8px 8px 14px;
     background-color: var(--color-surface-muted);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
-    font-size: 0.95rem;
+    font-size: var(--text-support);
     line-height: 1.4;
 }
 
 .cnae-chip__desc { flex: 1 1 auto; min-width: 0; }
+
+/* Código e descrição ficam na primeira linha (alinhados entre si quando a descrição quebra)
+   e, com uma linha só, centralizados na altura de 44px do botão de remover. */
+.cnae-chip__code,
+.cnae-chip__desc { padding-block: 11px; }
 
 .cnae-chip--unknown {
     background-color: var(--color-medium-bg);
@@ -781,10 +860,13 @@ ul.details-list li::before {
     border-radius: 8px;
     background: transparent;
     color: var(--color-text-muted);
-    font-size: 1.4rem;
-    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
 }
+
+.cnae-chip__remove svg { width: 18px; height: 18px; }
 
 .cnae-chip__remove:hover { background-color: rgba(0, 52, 183, 0.08); color: var(--color-primary); }
 
@@ -808,7 +890,7 @@ ul.details-list li::before {
 .cnae-error {
     color: var(--color-high-text);
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: var(--text-support);
     margin-bottom: var(--space-3);
     min-height: 1.2em;
 }
@@ -816,14 +898,15 @@ ul.details-list li::before {
 /* --- DISCLOSURE (ajuda progressiva) --- */
 .disclosure {
     margin-bottom: var(--space-4);
-    font-size: 0.9rem;
+    font-size: var(--text-support);
 }
 
 .disclosure summary {
     cursor: pointer;
     color: var(--color-primary-mid);
     font-weight: 700;
-    padding: 8px 4px;
+    padding: 8px;
+    margin-inline: -8px;
     min-height: 44px;
     display: flex;
     align-items: center;
@@ -844,8 +927,8 @@ ul.details-list li::before {
 
 .disclosure p {
     color: var(--color-text-muted);
-    padding: 4px 4px 4px 4px;
-    line-height: 1.55;
+    padding-block: 4px;
+    line-height: var(--leading-support);
 }
 
 /* --- BOTÕES --- */
@@ -857,7 +940,7 @@ ul.details-list li::before {
 
 /* Texto auxiliar exibido enquanto o botão de avançar está desabilitado por falta de seleção */
 .selection-hint {
-    font-size: 0.85rem;
+    font-size: var(--text-meta);
     color: var(--color-text-muted);
     text-align: center;
     margin: 0;
@@ -866,7 +949,7 @@ ul.details-list li::before {
 .btn {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: var(--space-3);
     width: 100%;
     min-height: 56px;
@@ -875,25 +958,12 @@ ul.details-list li::before {
     border: 2px solid var(--color-border);
     border-radius: var(--radius-md);
     color: var(--color-text);
-    font-size: 1rem;
+    font-size: var(--text-body);
     font-weight: 600;
     line-height: 1.4;
     cursor: pointer;
-    text-align: left;
+    text-align: center;
     transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, transform 150ms ease;
-}
-
-.btn::after {
-    content: "";
-    flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230034B7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l6 6-6 6'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    opacity: 0.3;
-    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .btn:hover {
@@ -901,16 +971,11 @@ ul.details-list li::before {
     background-color: var(--color-surface-muted);
 }
 
-/* Elevação e seta só reagem em dispositivos com hover real, evitando "hover preso" no toque. */
+/* Elevação só em dispositivos com hover real, evitando "hover preso" no toque. */
 @media (hover: hover) and (pointer: fine) {
     .btn:hover {
         transform: translateY(-2px);
         box-shadow: 0 8px 20px -8px rgba(0, 52, 183, 0.35);
-    }
-
-    .btn:hover::after {
-        opacity: 1;
-        transform: translateX(2px);
     }
 }
 
@@ -942,12 +1007,9 @@ ul.details-list li::before {
     background-color: var(--color-action);
     color: var(--color-on-action);
     border-color: var(--color-action);
-    justify-content: center;
-    text-align: center;
     font-weight: 700;
 }
 .btn-primary:hover { background-color: var(--color-action-hover); border-color: var(--color-action-hover); }
-.btn-primary::after { content: none; }
 .btn-primary:focus-visible { box-shadow: var(--shadow-focus); }
 
 /* Botão secundário com contorno (ex: Nova consulta) */
@@ -955,11 +1017,8 @@ ul.details-list li::before {
     background-color: transparent;
     color: var(--color-primary);
     border-color: var(--color-primary);
-    justify-content: center;
-    text-align: center;
 }
 .btn-outline:hover { background-color: var(--color-surface-muted); }
-.btn-outline::after { content: none; }
 
 /* --- RESULTADO --- */
 .result-box {
@@ -997,7 +1056,7 @@ ul.details-list li::before {
 .result-icon {
     width: 104px;
     height: 104px;
-    margin: 0 auto var(--space-4);
+    margin: 0 auto var(--space-3);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1022,10 +1081,11 @@ ul.details-list li::before {
 }
 
 .result-title {
-    font-size: 1.6rem;
+    font-size: var(--text-verdict);
     font-weight: 800;
-    letter-spacing: -0.01em;
-    margin-bottom: var(--space-5);
+    letter-spacing: 0;
+    margin-bottom: var(--space-4);
+    line-height: var(--leading-tight);
 }
 
 .res-low .result-title { color: var(--color-low-text); }
@@ -1037,7 +1097,7 @@ ul.details-list li::before {
     border: 2px solid var(--color-border);
     border-radius: var(--radius-md);
     padding: var(--space-4);
-    margin-bottom: var(--space-5);
+    margin-bottom: var(--space-6);
 }
 
 .res-low .result-reason { background: var(--color-low-bg); border-color: var(--color-low-border); }
@@ -1046,10 +1106,10 @@ ul.details-list li::before {
 
 .result-reason__label {
     display: block;
-    font-size: 0.75rem;
+    font-size: var(--text-label);
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: var(--tracking-label);
     margin-bottom: 6px;
 }
 
@@ -1059,7 +1119,7 @@ ul.details-list li::before {
 
 .result-reason p {
     color: var(--color-text);
-    line-height: 1.55;
+    line-height: var(--leading-support);
 }
 
 /* --- PRÓXIMOS PASSOS --- */
@@ -1075,7 +1135,7 @@ ul.details-list li::before {
     text-align: left;
     border-radius: var(--radius-md);
     padding: var(--space-5);
-    margin-bottom: var(--space-5);
+    margin-bottom: var(--space-4);
     border: 2px solid transparent;
 }
 
@@ -1085,8 +1145,8 @@ ul.details-list li::before {
 
 .next-steps__title {
     font-family: var(--font-heading);
-    font-size: 1.05rem;
-    font-weight: 800;
+    font-size: var(--text-subheading);
+    font-weight: 700;
     margin-bottom: var(--space-3);
 }
 
@@ -1095,9 +1155,9 @@ ul.details-list li::before {
 .res-high   .next-steps__title { color: var(--color-high-text); }
 
 .next-steps__body {
-    font-size: 0.95rem;
+    font-size: var(--text-support);
     color: var(--color-text);
-    line-height: 1.6;
+    line-height: var(--leading-support);
     margin-bottom: var(--space-3);
 }
 
@@ -1111,9 +1171,9 @@ ul.details-list li::before {
     border-radius: var(--radius-sm);
     padding: var(--space-3) var(--space-4);
     margin-bottom: var(--space-3);
-    font-size: 0.9rem;
+    font-size: var(--text-support);
     color: var(--color-on-accent);
-    line-height: 1.5;
+    line-height: var(--leading-support);
 }
 
 .next-steps__alert svg {
@@ -1129,10 +1189,11 @@ ul.details-list li::before {
     display: flex;
     align-items: center;
     gap: var(--space-2);
-    font-size: 0.9rem;
+    font-size: var(--text-support);
     color: var(--color-medium-text);
     margin-bottom: var(--space-4);
     font-weight: 700;
+    line-height: var(--leading-support);
 }
 
 .next-steps__highlight svg {
@@ -1163,12 +1224,13 @@ ul.details-list li::before {
     border-radius: 50%;
     background: var(--color-high-text);
     color: #fff;
-    font-size: 0.85rem;
+    font-size: var(--text-meta);
     font-weight: 800;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 1px;
+    font-variant-numeric: tabular-nums;
 }
 
 .next-steps__steps li div {
@@ -1178,14 +1240,14 @@ ul.details-list li::before {
 }
 
 .next-steps__steps li strong {
-    font-size: 0.95rem;
+    font-size: var(--text-body);
     color: var(--color-text);
 }
 
-.next-steps__steps li span {
-    font-size: 0.9rem;
-    color: var(--color-text-muted);
-    line-height: 1.5;
+.next-steps__steps li div > span {
+    font-size: var(--text-support);
+    color: var(--color-high-text-muted);
+    line-height: var(--leading-support);
 }
 
 /* CTA link para o site do CBMPE */
@@ -1195,8 +1257,8 @@ ul.details-list li::before {
     gap: 6px;
     padding: 12px 20px;
     border-radius: var(--radius-sm);
-    font-size: 0.9rem;
-    font-weight: 800;
+    font-size: var(--text-support);
+    font-weight: 700;
     text-decoration: none;
     transition: background-color 0.2s ease, transform 150ms ease;
     color: var(--color-on-primary);
@@ -1223,13 +1285,13 @@ ul.details-list li::before {
 /* --- FIM PRÓXIMOS PASSOS --- */
 
 .actions--result {
-    margin-top: var(--space-5);
+    margin-top: var(--space-4);
 }
 
 .disclaimer {
-    font-size: 0.85rem;
+    font-size: var(--text-meta);
     color: var(--color-text-muted);
-    line-height: 1.5;
+    line-height: var(--leading-support);
 }
 
 .disclaimer--result {
@@ -1242,40 +1304,57 @@ ul.details-list li::before {
     text-align: center;
     padding: var(--space-5) var(--space-4) var(--space-6);
     color: var(--color-text-muted);
-    font-size: 0.85rem;
+    font-size: var(--text-meta);
 }
 
 /* --- RESPONSIVIDADE --- */
 @media (min-width: 640px) {
-    .page { padding-top: var(--space-6); }
-    .content-area { padding: var(--space-6); }
-    .progress { padding: var(--space-4) var(--space-6); }
-    .brand__title { font-size: 1.75rem; }
-    .question-text { font-size: 1.45rem; }
-    .site-header { padding: var(--space-7) var(--space-5) 76px; }
-}
-
-@media (min-width: 900px) {
-    .page { max-width: 860px; }
-    .site-header__inner { max-width: 860px; }
+    :root { --card-pad: var(--space-6); }
+    .risk-block { padding: var(--space-5); }
+    :root {
+        --text-verdict: 2.125rem;
+        --text-display: 1.75rem;
+        --text-heading: 1.5rem;
+    }
+    .site-header { padding: var(--space-7) 0 76px; }
 }
 
 @media (max-width: 480px) {
-    .page { padding-left: 0; padding-right: 0; }
+    :root { --page-gutter: 0px; --card-pad: var(--space-4); }
+    /* Sem recuo sob a caixa de marcação: no celular cada 34px custa ~5 caracteres por linha. */
+    .check-item__warning, .check-item__note { margin-left: 0; }
+    .next-steps { padding: var(--space-4); }
     .card { border-radius: 20px 20px 0 0; margin-top: -28px; }
     .site-footer { padding-bottom: var(--space-5); }
 }
 
 /* --- IMPRESSÃO --- */
+@page { margin: 12mm; }
+
 @media print {
-    body { background: #fff; }
+    html { font-size: 90%; }
+    body { background: #fff; min-height: 0; }
     .skip-link, .progress, .step, .actions--result, .site-footer {
         display: none !important;
     }
     .card { box-shadow: none; margin-top: 0; border: none; }
     .result-box { display: block !important; }
-    .next-steps { display: none !important; }
-    .result-reason, .btn-primary, .icon-low, .icon-medium, .icon-high, .result-icon {
+    /* Compacta cabeçalho e selo para o resultado completo caber numa folha A4. */
+    .site-header { padding: var(--space-5) 0; }
+    /* Sem o respiro inferior da tela: sozinho ele empurrava o aviso final para uma 2ª folha. */
+    .page { padding-bottom: 0; }
+    .content-area { padding-top: var(--space-5); padding-bottom: 0; }
+    .result-icon { width: 64px; height: 64px; margin-bottom: var(--space-2); }
+    .result-icon svg { width: 36px; height: 36px; }
+    .result-reason, .next-steps { break-inside: avoid; }
+    .result-reason { margin-bottom: var(--space-4); }
+    /* No papel o link não é clicável: vira texto com o endereço ao lado, sem forma de botão. */
+    .next-steps__cta,
+    .next-steps__cta:hover { display: inline; padding: 0; background: none; color: var(--color-primary); }
+    .next-steps__cta svg { display: none; }
+    .next-steps__cta::after { content: ": " attr(href); font-weight: 400; }
+    .result-reason, .next-steps, .next-steps__alert, .next-steps__step-num,
+    .btn-primary, .icon-low, .icon-medium, .icon-high, .result-icon {
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
     }

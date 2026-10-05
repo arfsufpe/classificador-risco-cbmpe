@@ -179,6 +179,14 @@ function searchCnae(query) {
     return achados.map(a => a.item);
 }
 
+// Mensagem de erro do campo CNAE; marca o campo como inválido enquanto houver texto.
+function setCnaeError(text) {
+    document.getElementById('cnae-error').textContent = text;
+    const input = document.getElementById('cnae-input');
+    if (text) input.setAttribute('aria-invalid', 'true');
+    else input.removeAttribute('aria-invalid');
+}
+
 function setCnaeStatus(text, delay = 0) {
     const status = document.getElementById('cnae-status');
     if (!status) return;
@@ -274,7 +282,7 @@ function renderCnaeSelecionados() {
         remove.className = 'cnae-chip__remove';
         remove.dataset.code = sel.code;
         remove.setAttribute('aria-label', `Remover CNAE ${sel.fmt}`);
-        remove.textContent = '×';
+        remove.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>';
         li.append(code, desc, remove);
         ul.appendChild(li);
     });
@@ -300,7 +308,7 @@ function selectCnaeItem(item) {
     input.value = '';
     closeCnaeList();
     renderCnaeSelecionados();
-    document.getElementById('cnae-error').textContent = '';
+    setCnaeError('');
     setCnaeStatus(`CNAE ${item.fmt} adicionado. ${cnaeSelecionados.length} selecionado(s).`);
     input.focus();
 }
@@ -308,9 +316,8 @@ function selectCnaeItem(item) {
 // Botão "Adicionar" / Enter sem opção destacada: lista de códigos ou resultado único.
 function addCnaeFromInput() {
     const input = document.getElementById('cnae-input');
-    const errorEl = document.getElementById('cnae-error');
     const query = input.value.trim();
-    errorEl.textContent = '';
+    setCnaeError('');
 
     const codes = parseCnaeList(query);
     if (codes) {
@@ -327,14 +334,14 @@ function addCnaeFromInput() {
     // Refaz a busca: a lista pode ter sido fechada quando o campo perdeu o foco para o botão.
     const resultados = query ? searchCnae(query) : [];
     if (!query) {
-        errorEl.textContent = 'Digite uma atividade ou um código CNAE.';
+        setCnaeError('Digite uma atividade ou um código CNAE.');
     } else if (resultados.length === 1) {
         selectCnaeItem(resultados[0]);
         return;
     } else if (resultados.length > 1) {
-        errorEl.textContent = 'Escolha uma atividade na lista (clique nela ou use as setas e Enter).';
+        setCnaeError('Escolha uma atividade na lista (clique nela ou use as setas e Enter).');
     } else {
-        errorEl.textContent = 'Nenhuma atividade encontrada. Tente outras palavras ou digite o código CNAE com 7 dígitos.';
+        setCnaeError('Nenhuma atividade encontrada. Tente outras palavras ou digite o código CNAE com 7 dígitos.');
     }
     input.focus();
 }
@@ -349,7 +356,7 @@ function setupCnaeSearch() {
         .map(([code, fmt, desc]) => ({ code, fmt, desc, norm: normalizeText(desc) }));
 
     input.addEventListener('input', () => {
-        document.getElementById('cnae-error').textContent = '';
+        setCnaeError('');
         renderCnaeList();
     });
 
@@ -399,8 +406,7 @@ function setupCnaeSearch() {
 
 function submitCnae() {
     const input = document.getElementById('cnae-input');
-    const errorEl = document.getElementById('cnae-error');
-    errorEl.textContent = '';
+    setCnaeError('');
 
     // Códigos digitados e ainda não adicionados também contam.
     if (parseCnaeList(input.value.trim())) addCnaeFromInput();
@@ -408,9 +414,9 @@ function submitCnae() {
     const codes = cnaeSelecionados.map(s => s.code);
 
     if (codes.length === 0) {
-        errorEl.textContent = input.value.trim()
+        setCnaeError(input.value.trim()
             ? 'Escolha a atividade na lista para adicioná-la antes de continuar.'
-            : 'Selecione pelo menos um CNAE.';
+            : 'Selecione pelo menos um CNAE.');
         input.focus();
         return;
     }
