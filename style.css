@@ -18,6 +18,7 @@
     --leading-heading: 1.35;
     --leading-body: 1.6;
     --leading-support: 1.55;
+    --leading-control: 1.4;   /* textos dentro de botões, opções e chips */
 
     --tracking-label: 0.06em;
 
@@ -106,6 +107,11 @@
         --step-shift: 0px;
         --result-shift: 0px;
     }
+
+    /* Sem a "elevação" de botões e link no hover; a mudança de cor continua indicando o estado. */
+    .btn:hover,
+    .btn:active,
+    .next-steps__cta:hover { transform: none !important; }
 }
 
 /* --- RESET --- */
@@ -143,9 +149,9 @@ button { font-family: inherit; }
     left: -9999px;
     top: 0;
     background: var(--color-primary);
-    color: #fff;
-    padding: 12px 20px;
-    border-radius: 0 0 10px 0;
+    color: var(--color-on-primary);
+    padding: var(--space-3) var(--space-5);
+    border-radius: 0 0 var(--radius-sm) 0;
     z-index: 100;
     font-weight: 700;
     text-decoration: none;
@@ -355,7 +361,7 @@ button { font-family: inherit; }
     background: rgba(0, 52, 183, 0.08);
     padding: 6px 12px;
     border-radius: var(--radius-sm);
-    line-height: 1.4;
+    line-height: var(--leading-control);
     letter-spacing: 0.01em;
     font-variant-numeric: tabular-nums;
 }
@@ -456,12 +462,6 @@ ul.details-list {
     margin-bottom: var(--space-3);
     text-transform: uppercase;
     letter-spacing: var(--tracking-label);
-}
-
-.risk-block__intro {
-    font-size: var(--text-body);
-    color: var(--color-text-muted);
-    margin-bottom: var(--space-2);
 }
 
 .risk-block__note {
@@ -578,7 +578,7 @@ ul.details-list {
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     font-size: var(--text-body);
-    line-height: 1.4;
+    line-height: var(--leading-control);
     cursor: pointer;
 }
 
@@ -787,7 +787,7 @@ ul.details-list li::before {
     padding: 10px 12px;
     border-radius: 8px;
     font-size: var(--text-support);
-    line-height: 1.4;
+    line-height: var(--leading-control);
     color: var(--color-text);
     cursor: pointer;
 }
@@ -838,7 +838,7 @@ ul.details-list li::before {
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     font-size: var(--text-support);
-    line-height: 1.4;
+    line-height: var(--leading-control);
 }
 
 .cnae-chip__desc { flex: 1 1 auto; min-width: 0; }
@@ -895,7 +895,8 @@ ul.details-list li::before {
     font-weight: 700;
     font-size: var(--text-support);
     margin-bottom: var(--space-3);
-    min-height: 1.2em;
+    line-height: var(--leading-body);
+    min-height: calc(var(--leading-body) * 1em);
 }
 
 /* --- DISCLOSURE (ajuda progressiva) --- */
@@ -963,7 +964,7 @@ ul.details-list li::before {
     color: var(--color-text);
     font-size: var(--text-body);
     font-weight: 600;
-    line-height: 1.4;
+    line-height: var(--leading-control);
     cursor: pointer;
     text-align: center;
     transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, transform 150ms ease;
@@ -1013,7 +1014,6 @@ ul.details-list li::before {
     font-weight: 700;
 }
 .btn-primary:hover { background-color: var(--color-action-hover); border-color: var(--color-action-hover); }
-.btn-primary:focus-visible { box-shadow: var(--shadow-focus); }
 
 /* Botão secundário com contorno (ex: Nova consulta) */
 .btn-outline {
@@ -1227,7 +1227,7 @@ ul.details-list li::before {
     height: 28px;
     border-radius: 50%;
     background: var(--color-high-text);
-    color: #fff;
+    color: var(--color-on-primary);
     font-size: var(--text-meta);
     font-weight: 800;
     display: flex;
@@ -1313,13 +1313,13 @@ ul.details-list li::before {
 
 /* --- RESPONSIVIDADE --- */
 @media (min-width: 640px) {
-    :root { --card-pad: var(--space-6); }
-    .risk-block { padding: var(--space-5); }
     :root {
+        --card-pad: var(--space-6);
         --text-verdict: 2.125rem;
         --text-display: 1.75rem;
         --text-heading: 1.5rem;
     }
+    .risk-block { padding: var(--space-5); }
     .site-header { padding: var(--space-7) 0 76px; }
 }
 
