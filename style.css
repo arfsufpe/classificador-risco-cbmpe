@@ -671,6 +671,9 @@ ul.details-list {
     font-size: inherit;
 }
 
+/* Marcadores no tom do quadro âmbar, não no azul da marca. */
+.check-item__warning .details-list li::before { background: currentColor; }
+
 /* Variante neutra de "Como responder": para texto puramente descritivo (exemplos, forma de
    contar/somar) que não muda a resposta — sem o laranja/triângulo de alerta, reservados para
    ressalvas condicionais que realmente podem inverter a marcação ("se X, não marque"). */
@@ -1166,7 +1169,8 @@ ul.details-list li::before {
     display: flex;
     gap: var(--space-2);
     align-items: flex-start;
-    background: rgba(255, 182, 12, 0.18);
+    /* Fundo sólido: o âmbar translúcido sobre o verde do Risco I virava oliva. */
+    background: var(--color-medium-bg);
     border: 1px solid var(--color-accent-dark);
     border-radius: var(--radius-sm);
     padding: var(--space-3) var(--space-4);
@@ -1321,6 +1325,12 @@ ul.details-list li::before {
 
 @media (max-width: 480px) {
     :root { --page-gutter: 0px; --card-pad: var(--space-4); }
+    /* A apresentação só serve na Etapa 1; depois, no celular, ela empurrava cada pergunta
+       ~100px para baixo repetindo o que a pessoa já leu. */
+    body:has(#step-cnae:not(.active)) .brand__subtitle { display: none; }
+    body:has(#step-cnae:not(.active)) .site-header { padding-bottom: var(--space-7); }
+    /* Usa todo o espaço ao lado de "Voltar" (antes limitado a 60%, quebrava em 3 linhas). */
+    .step-indicator { max-width: calc(100% - 6.5rem); }
     /* Sem recuo sob a caixa de marcação: no celular cada 34px custa ~5 caracteres por linha. */
     .check-item__warning, .check-item__note { margin-left: 0; }
     .next-steps { padding: var(--space-4); }
