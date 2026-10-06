@@ -411,6 +411,11 @@ button { font-family: inherit; }
     margin-bottom: var(--space-3);
 }
 
+/* Título da Etapa 1: o texto comum fica leve para que os trechos em caixa alta (<strong>)
+   se destaquem; os títulos das demais etapas seguem com 700. */
+#step-cnae .question-text { font-weight: 500; }
+#step-cnae .question-text strong { font-weight: 800; }
+
 /* Ritmo da etapa: pergunta e orientação formam um grupo (intervalo curto), a área de
    resposta vem depois de um respiro maior e a ação fica separada do conteúdo. */
 .step > .actions { margin-top: var(--space-5); }
@@ -428,6 +433,10 @@ button { font-family: inherit; }
     margin-bottom: var(--space-5);
     line-height: var(--leading-support);
 }
+
+/* Orientação em mais de um parágrafo (Etapa 1): o reset zera as margens, então o
+   intervalo entre parágrafos é explícito; o último continua sem margem. */
+.info-box p:not(:last-child) { margin-bottom: var(--space-2); }
 
 .info-box__icon {
     flex-shrink: 0;
@@ -722,6 +731,29 @@ ul.details-list li::before {
     font-weight: 700;
     color: var(--color-text);
     margin-bottom: 6px;
+}
+
+/* Etapa 1: cada campo (principal / secundárias) é um quadro com rótulo em cima, como as
+   células do Cartão CNPJ. */
+.cnae-field {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    margin-bottom: var(--space-4);
+}
+
+.cnae-field .cnae-empty,
+.cnae-field .cnae-chips { margin-bottom: 0; }
+
+/* Dentro do quadro, a área de erro só ocupa espaço quando há mensagem (o erro aparece ao
+   tentar avançar; reservar a linha sempre abria um vão entre o campo e a lista). */
+.cnae-field .cnae-error:empty { min-height: 0; margin-bottom: 0; }
+
+.field-hint {
+    font-size: var(--text-meta);
+    color: var(--color-text-muted);
+    line-height: var(--leading-support);
+    margin-bottom: var(--space-1);
 }
 
 /* Busca de CNAE por atividade ou código (combobox ARIA) */
