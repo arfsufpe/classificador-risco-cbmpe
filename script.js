@@ -287,7 +287,7 @@ function renderCnaeSelecionados(campo) {
         code.textContent = sel.fmt;
         const desc = document.createElement('span');
         desc.className = 'cnae-chip__desc';
-        desc.textContent = sel.desc || 'Código não encontrado nos Anexos do decreto — tratado como nível I (sem piso de risco pelo CNAE). Confira se foi digitado corretamente.';
+        desc.textContent = sel.desc || 'Código não encontrado nos Anexos do Decreto Estadual nº 52.005/2021 — tratado como nível I (sem piso de risco pelo CNAE). Confira se foi digitado corretamente.';
         const remove = document.createElement('button');
         remove.type = 'button';
         remove.className = 'cnae-chip__remove';
@@ -348,7 +348,7 @@ function addCnaeCodes(campo, codes) {
     closeCnaeList(campo);
     renderCnaeSelecionados(campo);
     let msg = `${novos.length} CNAE(s) adicionado(s) (${campo.nome}).`;
-    if (desconhecidos.length) msg += ` ${desconhecidos.length} não consta(m) nos Anexos do decreto e será(ão) tratado(s) como nível I.`;
+    if (desconhecidos.length) msg += ` ${desconhecidos.length} não consta(m) nos Anexos do Decreto Estadual nº 52.005/2021 e será(ão) tratado(s) como nível I.`;
     setCnaeStatus(msg);
     return true;
 }

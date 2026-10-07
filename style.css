@@ -234,6 +234,17 @@ button { font-family: inherit; }
     opacity: 0.96;
 }
 
+/* Base legal logo no início: quem responde é leigo e as ajudas citam artigos e anexos sem
+   repetir o nome do decreto. Fio âmbar destaca sem competir com o título. */
+.brand__legal {
+    font-size: var(--text-support);
+    line-height: var(--leading-support);
+    max-width: 58ch;
+    margin-top: var(--space-3);
+    border-left: 3px solid var(--color-accent);
+    padding-left: var(--space-3);
+}
+
 /* --- LAYOUT PRINCIPAL --- */
 .page {
     max-width: var(--page-max);
@@ -1157,6 +1168,12 @@ ul.details-list li::before {
     line-height: var(--leading-support);
 }
 
+.result-reason .result-reason__legal {
+    font-size: var(--text-meta);
+    margin-top: var(--space-3);
+    color: var(--color-text-muted);
+}
+
 /* --- PRÓXIMOS PASSOS --- */
 
 /* Oculto por padrão; exibido pela classe do resultado */
@@ -1359,7 +1376,8 @@ ul.details-list li::before {
     :root { --page-gutter: 0px; --card-pad: var(--space-4); }
     /* A apresentação só serve na Etapa 1; depois, no celular, ela empurrava cada pergunta
        ~100px para baixo repetindo o que a pessoa já leu. */
-    body:has(#step-cnae:not(.active)) .brand__subtitle { display: none; }
+    body:has(#step-cnae:not(.active)) .brand__subtitle,
+    body:has(#step-cnae:not(.active)) .brand__legal { display: none; }
     body:has(#step-cnae:not(.active)) .site-header { padding-bottom: var(--space-7); }
     /* Usa todo o espaço ao lado de "Voltar" (antes limitado a 60%, quebrava em 3 linhas). */
     .step-indicator { max-width: calc(100% - 6.5rem); }
@@ -1376,7 +1394,8 @@ ul.details-list li::before {
 @media print {
     html { font-size: 90%; }
     body { background: #fff; min-height: 0; }
-    .skip-link, .progress, .step, .actions--result, .site-footer {
+    /* A base legal sai no resultado; no cabeçalho ficaria duplicada no papel. */
+    .skip-link, .progress, .step, .actions--result, .site-footer, .brand__legal {
         display: none !important;
     }
     .card { box-shadow: none; margin-top: 0; border: none; }
