@@ -142,6 +142,24 @@ const MSG_CNAE_ESCOLHA_NA_LISTA = 'Escolha a atividade na lista para adicioná-l
 const MSG_CNAE_PRINCIPAL_VAZIO = 'Informe o código da atividade econômica principal.';
 const MSG_CNAE_PRINCIPAL_EXCESSO = 'Informe apenas um código neste campo. As demais atividades vão no campo de atividades secundárias.';
 
+// Código fora dos Anexos: o CNAE sozinho não eleva o risco ("Risco I (Baixo)", mesmo rótulo da
+// tela de resultado). O texto completo vai no chip e na mensagem falada; a versão curta só
+// aparece no chip em telas estreitas (CSS), e o leitor de tela continua lendo a completa.
+const MSG_CNAE_DESCONHECIDO = [
+    'Código não encontrado nos Anexos do Decreto Estadual nº 52.005/2021. Para o CNAE, será considerado ',
+    'Risco I (Baixo)',
+    '. O resultado final ainda depende das demais respostas. Confira se o código foi digitado corretamente.',
+];
+const MSG_CNAE_DESCONHECIDO_CURTA = ['Código não encontrado nos Anexos — considerado ', 'Risco I (Baixo)', ''];
+
+// Monta [antes, destaque, depois] num elemento, com o destaque em <strong>.
+function textoComDestaque(el, [antes, destaque, depois]) {
+    const strong = document.createElement('strong');
+    strong.textContent = destaque;
+    el.append(antes, strong, depois);
+    return el;
+}
+
 // Campos da Etapa 1, criados em setupCnaeSearch(). Cada um guarda seus próprios elementos,
 // selecionados e estado da lista; `max` limita a quantidade de CNAEs (null = sem limite).
 const cnaeCampos = {};
@@ -287,7 +305,16 @@ function renderCnaeSelecionados(campo) {
         code.textContent = sel.fmt;
         const desc = document.createElement('span');
         desc.className = 'cnae-chip__desc';
-        desc.textContent = sel.desc || 'Código não encontrado nos Anexos do Decreto Estadual nº 52.005/2021 — tratado como nível I (sem piso de risco pelo CNAE). Confira se foi digitado corretamente.';
+        if (sel.desc) {
+            desc.textContent = sel.desc;
+        } else {
+            const completo = textoComDestaque(document.createElement('span'), MSG_CNAE_DESCONHECIDO);
+            completo.className = 'cnae-chip__desc-full';
+            const curto = textoComDestaque(document.createElement('span'), MSG_CNAE_DESCONHECIDO_CURTA);
+            curto.className = 'cnae-chip__desc-short';
+            curto.setAttribute('aria-hidden', 'true');
+            desc.append(completo, curto);
+        }
         const remove = document.createElement('button');
         remove.type = 'button';
         remove.className = 'cnae-chip__remove';
@@ -348,7 +375,11 @@ function addCnaeCodes(campo, codes) {
     closeCnaeList(campo);
     renderCnaeSelecionados(campo);
     let msg = `${novos.length} CNAE(s) adicionado(s) (${campo.nome}).`;
-    if (desconhecidos.length) msg += ` ${desconhecidos.length} não consta(m) nos Anexos do Decreto Estadual nº 52.005/2021 e será(ão) tratado(s) como nível I.`;
+    if (desconhecidos.length === 1) {
+        msg += ' ' + MSG_CNAE_DESCONHECIDO.join('');
+    } else if (desconhecidos.length > 1) {
+        msg += ` ${desconhecidos.length} códigos não encontrados nos Anexos do Decreto Estadual nº 52.005/2021. Para o CNAE, serão considerados Risco I (Baixo). O resultado final ainda depende das demais respostas. Confira se os códigos foram digitados corretamente.`;
+    }
     setCnaeStatus(msg);
     return true;
 }

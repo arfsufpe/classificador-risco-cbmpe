@@ -898,6 +898,10 @@ ul.details-list li::before {
 
 .cnae-chip--unknown .cnae-chip__desc { color: var(--color-medium-text); }
 
+/* Código fora dos Anexos: versão curta só em telas estreitas (ver @media max-width 480px). */
+.cnae-chip__desc-short { display: none; }
+.cnae-chip--unknown strong { white-space: nowrap; } /* "Risco I (Baixo)" não quebra no meio */
+
 .cnae-chip__remove {
     flex-shrink: 0;
     width: 44px;
@@ -1383,6 +1387,16 @@ ul.details-list li::before {
     .step-indicator { max-width: calc(100% - 6.5rem); }
     /* Sem recuo sob a caixa de marcação: no celular cada 34px custa ~5 caracteres por linha. */
     .check-item__warning, .check-item__note { margin-left: 0; }
+    /* Chip estreito: mostra a versão curta; a completa continua para leitores de tela. */
+    .cnae-chip__desc-short { display: inline; }
+    .cnae-chip__desc-full {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+    }
     .next-steps { padding: var(--space-4); }
     .card { border-radius: 20px 20px 0 0; margin-top: -28px; }
     .site-footer { padding-bottom: var(--space-5); }
