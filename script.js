@@ -109,9 +109,19 @@ const CNAE_MEDIO_RISCO = [
 // level: 'baixo' | 'medio' (risco 'alto' nunca chega aqui, pois é resolvido direto em submitCnae)
 let cnaeState = { floor: 1, matched: null, level: 'baixo' };
 
-// Piso mínimo de risco do percurso: só o CNAE de Risco Médio (Art. 3º, II c/c Anexo II).
+// Entendimento DIESp (CAT RMR) — pendente de aprovação do Diretor. Qualquer comunicação com a área coberta de abastecimento eleva ao risco do posto. Se o Diretor decidir diferente, ajustar aqui e no texto do item.
+// Nível do item #chk-loja-posto (Etapa 3): 3 = Risco III direto, como os demais itens da etapa;
+// 2 = piso de Risco II (o questionário continua); 1 = sem efeito. Não consta do decreto.
+const RISCO_LOJA_EM_POSTO = 3;
+
+// Piso mínimo vindo de critério do questionário que não é Risco III direto. Só é usado se
+// RISCO_LOJA_EM_POSTO for 2; com o valor atual (3), fica sempre em 1.
+let criterioState = { floor: 1, reason: null };
+
+// Piso mínimo de risco do percurso: o CNAE de Risco Médio (Art. 3º, II c/c Anexo II) e, se
+// houver, o piso de critério acima.
 function getRiskFloor() {
-    return cnaeState.floor;
+    return Math.max(cnaeState.floor, criterioState.floor);
 }
 
 // Histórico de etapas visitadas, para permitir "Voltar".
@@ -523,6 +533,7 @@ function submitCnae() {
     // Zera o piso de uma submissão anterior: o caminho de Risco Alto retorna antes de
     // reatribuir cnaeState, e showResult() citaria um CNAE que já foi removido.
     cnaeState = { floor: 1, matched: null, level: 'baixo' };
+    criterioState = { floor: 1, reason: null };
 
     // Risco Alto tem prioridade máxima: classifica de imediato, sem passar pelas perguntas.
     const altoEncontrado = codes.find(c => CNAE_ALTO_RISCO.includes(c));
@@ -557,10 +568,17 @@ function checkAltoDireto() {
     nextStep('step-alto-perigosos');
 }
 
+// O item do posto (#chk-loja-posto) não é do decreto: entra como Risco III direto só enquanto
+// RISCO_LOJA_EM_POSTO for 3; abaixo disso vira piso (criterioState) e o percurso continua.
 function checkAltoPerigosos() {
     const checked = Array.from(document.querySelectorAll('#step-alto-perigosos .check-item__input:checked:not(.check-item__input--none)'));
-    if (checked.length > 0) {
-        const motivos = checked.map(c => c.dataset.reason).join('; ');
+    const lojaPosto = checked.find(c => c.id === 'chk-loja-posto');
+    const altos = (lojaPosto && RISCO_LOJA_EM_POSTO < 3) ? checked.filter(c => c !== lojaPosto) : checked;
+    criterioState = (lojaPosto && RISCO_LOJA_EM_POSTO === 2)
+        ? { floor: 2, reason: lojaPosto.dataset.reason }
+        : { floor: 1, reason: null };
+    if (altos.length > 0) {
+        const motivos = altos.map(c => c.dataset.reason).join('; ');
         showResult(3, `Classificado Risco III (Alto) por apresentar: ${motivos}.`);
         return;
     }
@@ -1129,6 +1147,11 @@ function showResult(risk, reason) {
         } else {
             finalReason = `${reason} Classificação também respaldada pelo CNAE ${cnaeState.matched} (Risco Médio, Art. 3º, II c/c Anexo II).`;
         }
+    }
+
+    // Piso de critério do questionário (hoje inativo; ver RISCO_LOJA_EM_POSTO).
+    if (criterioState.floor > risk) {
+        finalReason = `Risco mínimo II (Médio) aplicado por: ${criterioState.reason}. ${finalReason}`;
     }
 
     // Esconde a etapa atual (com a mesma animação de saída das demais transições)
