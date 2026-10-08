@@ -1356,6 +1356,52 @@ ul.details-list li::before {
     line-height: var(--leading-support);
 }
 
+/* Passos do Risco I (solicitação da DDLCB): mesma lista numerada, nas cores do Risco I. */
+.next-steps--low .next-steps__step-num { background: var(--color-low-text); }
+
+.next-steps--low .next-steps__steps li div {
+    gap: var(--space-2);
+    min-width: 0;
+    font-size: var(--text-support);
+    line-height: var(--leading-support);
+    color: var(--color-text);
+}
+
+.next-steps--low .next-steps__list { margin-bottom: 0; }
+
+/* Os itens das listas internas não herdam o flex dos passos (.next-steps__steps li). */
+.next-steps--low .next-steps__list li {
+    display: block;
+    margin-bottom: var(--space-1);
+    font-size: var(--text-support);
+    color: var(--color-text);
+}
+
+.next-steps--low .next-steps__list strong { font-size: inherit; }
+
+/* E-mails longos quebram no celular em vez de criar rolagem horizontal. */
+.next-steps--low .next-steps__list a { overflow-wrap: anywhere; }
+
+.next-steps--low a {
+    color: var(--color-primary);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.next-steps--low a:focus-visible {
+    outline: none;
+    border-radius: 2px;
+    box-shadow: var(--shadow-focus);
+}
+
+.next-steps__note {
+    font-size: var(--text-meta);
+    color: var(--color-text-muted);
+    line-height: var(--leading-support);
+    margin-bottom: 0;
+}
+
 /* CTA link para o site do CBMPE */
 .next-steps__cta {
     display: inline-flex;

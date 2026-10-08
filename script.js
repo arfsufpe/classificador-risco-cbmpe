@@ -124,6 +124,14 @@ function getRiskFloor() {
     return Math.max(cnaeState.floor, criterioState.floor);
 }
 
+// E-mails para solicitação de DDLCB (procedimento provisório). Preencher os e-mails pendentes quando confirmados. email: null mostra 'e-mail em confirmação'.
+const CATS_DDLCB = [
+    { nome: "CAT RMR", regiao: "Região Metropolitana do Recife", email: "cat.rmr@bombeiros.pe.gov.br" },
+    { nome: "CAT Agreste", regiao: "Agreste", email: null },
+    { nome: "CAT Zona da Mata", regiao: "Zona da Mata", email: null },
+    { nome: "CAT Sertão", regiao: "Sertão", email: null }
+];
+
 // Histórico de etapas visitadas, para permitir "Voltar".
 let stepHistory = [];
 
@@ -1083,9 +1091,32 @@ function setupExclusiveCheckGroup(stepId) {
     updateState();
 }
 
+// Próximos passos do Risco I: um item por CAT, com o e-mail escrito por extenso (cópia e
+// impressão). Montado uma vez no carregamento, com textContent, nunca innerHTML.
+function renderCatsDdlcb() {
+    const lista = document.getElementById('cats-ddlcb');
+    if (!lista) return;
+    lista.replaceChildren(...CATS_DDLCB.map(cat => {
+        const li = document.createElement('li');
+        const nome = document.createElement('strong');
+        nome.textContent = cat.nome;
+        li.append(nome, ` (${cat.regiao}): `);
+        if (cat.email) {
+            const link = document.createElement('a');
+            link.href = `mailto:${cat.email}?subject=Solicita%C3%A7%C3%A3o%20de%20DDLCB`;
+            link.textContent = cat.email;
+            li.append(link);
+        } else {
+            li.append('e-mail em confirmação');
+        }
+        return li;
+    }));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const initial = document.querySelector('.step.active');
     if (initial) updateProgressUI(initial);
+    renderCatsDdlcb();
     setupCnaeSearch();
     setupAreaFlow();
     setupEventosFlow();
