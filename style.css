@@ -192,22 +192,18 @@ button { font-family: inherit; }
     margin-bottom: var(--space-4);
 }
 
-.brand__icon {
+/* Brasão do CBMPE (assets/brasao-cbmpe.svg). alt="" no HTML: o nome da corporação já está
+   em texto ao lado. O arquivo já é circular, então não leva fundo nem borda próprios. */
+.brand__logo {
     flex-shrink: 0;
-    width: 52px;
-    height: 52px;
+    display: block;
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    /* A borda preta do brasão some no azul do gradiente: anel branco para destacar o contorno.
+       O border-radius só arredonda o anel (o box-shadow segue a caixa); não recorta o brasão. */
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.16);
-    border: 1px solid rgba(255, 255, 255, 0.28);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.brand__icon svg {
-    width: 28px;
-    height: 28px;
-    color: var(--color-accent);
+    box-shadow: 0 0 0 2px #fff;
 }
 
 .brand__org {
@@ -1096,6 +1092,7 @@ ul.details-list li::before {
 
 /* Grupo secundário (próximos passos, aviso e ações) entra logo em seguida. */
 .result-box.is-visible .next-steps,
+.result-box.is-visible .result-cnaes,
 .result-box.is-visible .disclaimer--result,
 .result-box.is-visible .actions--result {
     animation: resultReveal var(--dur-result-b) var(--ease-out) both;
@@ -1175,6 +1172,58 @@ ul.details-list li::before {
 .result-reason .result-reason__legal {
     font-size: var(--text-meta);
     margin-top: var(--space-3);
+    color: var(--color-text-muted);
+}
+
+/* --- CNAEs INFORMADOS (resultado) ---
+   Mesmo quadro neutro do motivo (raio, borda); cresce com a lista, sem rolagem interna. */
+.result-cnaes {
+    text-align: left;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    margin-bottom: var(--space-4);
+}
+
+.result-cnaes__title {
+    font-size: var(--text-subheading);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--space-3);
+}
+
+.result-cnaes__group + .result-cnaes__group { margin-top: var(--space-4); }
+
+.result-cnaes__subtitle {
+    font-size: var(--text-label);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-2);
+}
+
+.result-cnaes__list { list-style: none; }
+
+.result-cnaes__list li {
+    font-size: var(--text-support);
+    line-height: var(--leading-support);
+    padding-block: var(--space-2);
+    break-inside: avoid;
+}
+
+.result-cnaes__list li + li { border-top: 1px solid var(--color-separator); }
+
+.result-cnaes__code {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-text);
+}
+
+.result-cnaes__desc { color: var(--color-text-muted); }
+
+.result-cnaes__empty {
+    font-size: var(--text-support);
     color: var(--color-text-muted);
 }
 
@@ -1383,6 +1432,7 @@ ul.details-list li::before {
     body:has(#step-cnae:not(.active)) .brand__subtitle,
     body:has(#step-cnae:not(.active)) .brand__legal { display: none; }
     body:has(#step-cnae:not(.active)) .site-header { padding-bottom: var(--space-7); }
+    .brand__logo { width: 44px; height: 44px; }
     /* Usa todo o espaço ao lado de "Voltar" (antes limitado a 60%, quebrava em 3 linhas). */
     .step-indicator { max-width: calc(100% - 6.5rem); }
     /* Sem recuo sob a caixa de marcação: no celular cada 34px custa ~5 caracteres por linha. */
@@ -1415,21 +1465,37 @@ ul.details-list li::before {
     .card { box-shadow: none; margin-top: 0; border: none; }
     .result-box { display: block !important; }
     /* Compacta cabeçalho e selo para o resultado completo caber numa folha A4. */
-    .site-header { padding: var(--space-5) 0; }
+    .site-header { padding: var(--space-4) 0; }
     /* Sem o respiro inferior da tela: sozinho ele empurrava o aviso final para uma 2ª folha. */
     .page { padding-bottom: 0; }
     .content-area { padding-top: var(--space-5); padding-bottom: 0; }
     .result-icon { width: 64px; height: 64px; margin-bottom: var(--space-2); }
     .result-icon svg { width: 36px; height: 36px; }
     .result-reason, .next-steps { break-inside: avoid; }
-    .result-reason { margin-bottom: var(--space-4); }
+    /* Com a lista de CNAEs, o Risco II (o mais longo) passava de uma folha. No papel saem o
+       selo do resultado (decorativo: o título colorido já diz o nível) e o subtítulo do
+       cabeçalho (instrução de preenchimento), e a lista fica mais compacta, em duas colunas. */
+    .result-icon, .brand__subtitle { display: none !important; }
+    .result-title { margin-bottom: var(--space-3); }
+    .result-cnaes {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+        column-gap: var(--space-5);
+        padding: var(--space-3) var(--space-4);
+    }
+    .result-cnaes__title { grid-column: 1 / -1; margin-bottom: var(--space-2); }
+    .result-cnaes__title, .result-cnaes__subtitle { break-after: avoid; }
+    .result-cnaes__group + .result-cnaes__group { margin-top: 0; }
+    .result-cnaes__list li { padding-block: 2px; }
+    .result-reason { margin-bottom: var(--space-3); }
+    .next-steps { padding: var(--space-4); }
     /* No papel o link não é clicável: vira texto com o endereço ao lado, sem forma de botão. */
     .next-steps__cta,
     .next-steps__cta:hover { display: inline; padding: 0; background: none; color: var(--color-primary); }
     .next-steps__cta svg { display: none; }
     .next-steps__cta::after { content: ": " attr(href); font-weight: 400; }
     .result-reason, .next-steps, .next-steps__alert, .next-steps__step-num,
-    .btn-primary, .icon-low, .icon-medium, .icon-high, .result-icon {
+    .btn-primary, .icon-low, .icon-medium, .icon-high, .result-icon, .brand__logo {
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
     }

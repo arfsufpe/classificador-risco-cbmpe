@@ -6,7 +6,7 @@
     <meta name="description" content="Ferramenta gratuita do Corpo de Bombeiros Militar de Pernambuco para identificar a classificação de risco de incêndio (Risco I, II ou III) do seu estabelecimento, conforme o Decreto Estadual nº 52.005/2021 (atualizado pelo Decreto nº 61.082/2026).">
     <meta name="theme-color" content="#0034B7">
     <title>Classificador de Risco de Incêndio | CBMPE</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230034B7'/%3E%3Cpath d='M12 20.5c3.6 0 5.6-2.4 5.6-5.4 0-2.6-1.6-4-2.6-5.8-.6 1.3-1.4 2.1-2.2 2.1-1.2 0-1.1-1.6-1.1-2.7C11.4 6.9 10.4 5 9.2 5c.5 1.6-.2 2.6-1.1 3.8C7.1 10 6.2 11.6 6.2 13.6c0 3.6 2 6.9 5.8 6.9Z' fill='%23FFB60C'/%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="assets/brasao-cbmpe.svg">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,12 +20,7 @@
 <header class="site-header">
     <div class="site-header__inner">
         <div class="brand">
-            <span class="brand__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 22c4.5 0 7-3 7-6.8 0-3.2-2-5-3.2-7.3-.7 1.6-1.8 2.6-2.8 2.6-1.5 0-1.3-2-1.3-3.4C11.7 4.3 10.5 2 9 2c.6 2-.2 3.3-1.4 4.8C6.2 8.6 5 10.6 5 13.2 5 18 7.5 22 12 22Z"/>
-                    <path d="M12 22c1.8 0 3-1.4 3-3.2 0-1.6-1-2.6-1.6-3.7-.5.8-1 1.2-1.4 1.2-.6 0-.7-.8-.6-1.5-.9.6-1.9 1.8-1.9 3.4 0 2 1.4 3.8 2.5 3.8Z" fill="currentColor" stroke="none"/>
-                </svg>
-            </span>
+            <img class="brand__logo" src="assets/brasao-cbmpe.svg" alt="" width="56" height="56">
             <div class="brand__text">
                 <span class="brand__org">Corpo de Bombeiros Militar de Pernambuco</span>
                 <h1 class="brand__title">Classificador de Risco de Incêndio</h1>
@@ -880,6 +875,21 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                     </a>
                 </div>
+
+                <!-- CNAEs informados na Etapa 1 (preenchido por renderCnaesNoResultado()) -->
+                <section class="result-cnaes" aria-labelledby="result-cnaes-title">
+                    <h3 id="result-cnaes-title" class="result-cnaes__title">CNAEs informados</h3>
+                    <div class="result-cnaes__group">
+                        <h4 class="result-cnaes__subtitle">Atividade principal</h4>
+                        <ul id="res-cnae-principal" class="result-cnaes__list"></ul>
+                        <p id="res-cnae-principal-empty" class="result-cnaes__empty" hidden>Nenhuma atividade principal informada.</p>
+                    </div>
+                    <div class="result-cnaes__group">
+                        <h4 class="result-cnaes__subtitle">Atividades secundárias</h4>
+                        <ul id="res-cnae-secundarias" class="result-cnaes__list"></ul>
+                        <p id="res-cnae-secundarias-empty" class="result-cnaes__empty" hidden>Nenhuma atividade secundária informada.</p>
+                    </div>
+                </section>
 
                 <p class="disclaimer disclaimer--result">Esta ferramenta tem caráter orientativo e não substitui a análise técnica oficial do CBMPE. Em caso de dúvida, procure a unidade do Corpo de Bombeiros responsável pela sua região.</p>
 

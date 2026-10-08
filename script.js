@@ -1085,6 +1085,37 @@ document.addEventListener('DOMContentLoaded', () => {
 //       diretas de Risco III (Etapas 1 e 2) — e, na Etapa 7, também eventos e área/andares;
 //   (d) como (a) encerra o percurso no primeiro nível II/III apurado, nenhuma chamada pode
 //       vir com nível menor que um já apurado; o único nível "herdado" é o piso do CNAE.
+// Tela de resultado: lista os CNAEs informados na Etapa 1, separando principal e secundárias.
+// Lê os campos no momento da chamada (reflete edições feitas depois de voltar à Etapa 1) e usa
+// as descrições de cnaes.js já guardadas nos selecionados. Só código e descrição: o risco de cada
+// CNAE não é exibido. Conteúdo montado com textContent, nunca innerHTML.
+function renderCnaesNoResultado() {
+    const grupos = [
+        ['res-cnae-principal', cnaeCampos.principal],
+        ['res-cnae-secundarias', cnaeCampos.secundarias],
+    ];
+    grupos.forEach(([id, campo]) => {
+        const lista = document.getElementById(id);
+        const vazio = document.getElementById(`${id}-empty`);
+        if (!lista) return;
+        lista.replaceChildren();
+        const selecionados = campo ? campo.selecionados : [];
+        selecionados.forEach(sel => {
+            const li = document.createElement('li');
+            const code = document.createElement('strong');
+            code.className = 'result-cnaes__code';
+            code.textContent = sel.fmt;
+            const desc = document.createElement('span');
+            desc.className = 'result-cnaes__desc';
+            desc.textContent = sel.desc || 'código não encontrado nos Anexos do Decreto Estadual nº 52.005/2021';
+            li.append(code, ' — ', desc);
+            lista.appendChild(li);
+        });
+        lista.hidden = selecionados.length === 0;
+        if (vazio) vazio.hidden = selecionados.length > 0;
+    });
+}
+
 function showResult(risk, reason) {
     // Aplica o piso mínimo definido pelo(s) CNAE(s) (etapa 1)
     const finalRisk = Math.max(risk, getRiskFloor());
@@ -1132,6 +1163,8 @@ function showResult(risk, reason) {
     }
 
     desc.innerText = finalReason;
+
+    renderCnaesNoResultado();
 
     // Leva o foco para o resultado, para leitores de tela anunciarem a classificação.
     box.setAttribute('tabindex', '-1');
