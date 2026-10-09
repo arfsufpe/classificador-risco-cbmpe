@@ -1,0 +1,11 @@
+{
+  "name": "classificador-risco-regressao",
+  "private": true,
+  "description": "Regressão do simulador de classificação de risco (CBMPE).",
+  "scripts": {
+    "regressao": "node regressao.js"
+  },
+  "devDependencies": {
+    "playwright": "1.64.0"
+  }
+}

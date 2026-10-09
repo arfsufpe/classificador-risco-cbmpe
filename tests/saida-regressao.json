@@ -1,0 +1,4307 @@
+[
+  {
+    "id": "cnae/principal-baixo",
+    "risco": "RISCO I (BAIXO)",
+    "motivos": "Classificado Risco I (Baixo): pequeno estabelecimento físico que atende a todas as condições cumulativas do Art. 5º, VII."
+  },
+  {
+    "id": "cnae/principal-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "CNAE 2063100 classificado como Risco Médio (piso mínimo aplicado, Art. 3º, II c/c Anexo II). Classificado Risco I (Baixo): pequeno estabelecimento físico que atende a todas as condições cumulativas do Art. 5º, VII."
+  },
+  {
+    "id": "cnae/principal-alto",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "CNAE 8610101 classificado como Risco Alto (Art. 6º). Classificação direta, sem necessidade de responder às demais perguntas."
+  },
+  {
+    "id": "cnae/secundaria-alto",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "CNAE 8610101 classificado como Risco Alto (Art. 6º). Classificação direta, sem necessidade de responder às demais perguntas."
+  },
+  {
+    "id": "cnae/secundaria-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "CNAE 2063100 classificado como Risco Médio (piso mínimo aplicado, Art. 3º, II c/c Anexo II). Classificado Risco I (Baixo): pequeno estabelecimento físico que atende a todas as condições cumulativas do Art. 5º, VII."
+  },
+  {
+    "id": "cnae/fora-dos-anexos",
+    "risco": "RISCO I (BAIXO)",
+    "motivos": "Classificado Risco I (Baixo): pequeno estabelecimento físico que atende a todas as condições cumulativas do Art. 5º, VII."
+  },
+  {
+    "id": "etapa2/casa-festas/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: atividade de casa de festas e eventos ou de discoteca/danceteria/salão de dança, constante do Anexo II (Art. 6º, caput)."
+  },
+  {
+    "id": "etapa2/reuniao-publico/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: atividade destinada à reunião de público com lotação superior a 100 pessoas (Art. 6º, III)."
+  },
+  {
+    "id": "etapa2/saude-internacao/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: estabelecimento de saúde com internação ou pacientes com locomoção dificultada (Art. 6º, VI)."
+  },
+  {
+    "id": "etapa2/hospedagem-40-leitos/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: hotel, pousada ou pensão com mais de 40 leitos (Art. 6º, IV)."
+  },
+  {
+    "id": "etapa3/glp/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: venda/revenda de botijões de GLP, ou utilização/armazenamento de mais de 190 kg de GLP no total (Art. 6º, VIII e X)."
+  },
+  {
+    "id": "etapa3/liquidos-1000l/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: mais de 1.000 litros de líquidos combustíveis ou inflamáveis (Art. 6º, V)."
+  },
+  {
+    "id": "etapa3/chk-loja-posto/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: funciona dentro de posto de combustíveis, com comunicação com a área coberta de abastecimento, conforme entendimento da DIESp/CBMPE."
+  },
+  {
+    "id": "etapa3/outros-gases/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: gases combustíveis além do GLP, em recipientes estacionários ou transportáveis (Art. 6º, XI)."
+  },
+  {
+    "id": "etapa3/produtos-perigosos/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: produtos perigosos à saúde humana, ao meio ambiente ou ao patrimônio (Art. 6º, XII)."
+  },
+  {
+    "id": "etapa4/domicilio-fiscal/cnae-baixo",
+    "risco": "RISCO I (BAIXO)",
+    "motivos": "Classificado Risco I (Baixo) por apresentar: domicílio fiscal / trabalho digital ou externo, sem atendimento presencial no local (Art. 5º, II)."
+  },
+  {
+    "id": "etapa4/residencia/cnae-baixo",
+    "risco": "RISCO I (BAIXO)",
+    "motivos": "Classificado Risco I (Baixo) por apresentar: atividade econômica desenvolvida em residência unifamiliar (Art. 5º, I)."
+  },
+  {
+    "id": "etapa4/ambulante/cnae-baixo",
+    "risco": "RISCO I (BAIXO)",
+    "motivos": "Classificado Risco I (Baixo) por apresentar: atividade ambulante exercida de forma transitória, considerada individualmente, fora de conjunto com área delimitada (Art. 5º, III c/c §2º)."
+  },
+  {
+    "id": "etapa4/estrutura-provisoria/cnae-baixo",
+    "risco": "RISCO I (BAIXO)",
+    "motivos": "Classificado Risco I (Baixo) por apresentar: estrutura provisória ou móvel de até 200 m², sem endereço formal (Art. 5º, IV)."
+  },
+  {
+    "id": "etapa4/estrutura-tecnica/cnae-baixo",
+    "risco": "RISCO I (BAIXO)",
+    "motivos": "Classificado Risco I (Baixo) por apresentar: estrutura técnica desabitada de até 200 m² (Art. 5º, VI)."
+  },
+  {
+    "id": "etapa2/casa-festas/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: atividade de casa de festas e eventos ou de discoteca/danceteria/salão de dança, constante do Anexo II (Art. 6º, caput). (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa2/reuniao-publico/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: atividade destinada à reunião de público com lotação superior a 100 pessoas (Art. 6º, III). (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa2/saude-internacao/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: estabelecimento de saúde com internação ou pacientes com locomoção dificultada (Art. 6º, VI). (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa2/hospedagem-40-leitos/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: hotel, pousada ou pensão com mais de 40 leitos (Art. 6º, IV). (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa3/glp/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: venda/revenda de botijões de GLP, ou utilização/armazenamento de mais de 190 kg de GLP no total (Art. 6º, VIII e X). (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa3/liquidos-1000l/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: mais de 1.000 litros de líquidos combustíveis ou inflamáveis (Art. 6º, V). (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa3/chk-loja-posto/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: funciona dentro de posto de combustíveis, com comunicação com a área coberta de abastecimento, conforme entendimento da DIESp/CBMPE. (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa3/outros-gases/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: gases combustíveis além do GLP, em recipientes estacionários ou transportáveis (Art. 6º, XI). (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa3/produtos-perigosos/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: produtos perigosos à saúde humana, ao meio ambiente ou ao patrimônio (Art. 6º, XII). (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa4/domicilio-fiscal/cnae-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "CNAE 2063100 classificado como Risco Médio (piso mínimo aplicado, Art. 3º, II c/c Anexo II). Classificado Risco I (Baixo) por apresentar: domicílio fiscal / trabalho digital ou externo, sem atendimento presencial no local (Art. 5º, II)."
+  },
+  {
+    "id": "etapa4/residencia/cnae-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "CNAE 2063100 classificado como Risco Médio (piso mínimo aplicado, Art. 3º, II c/c Anexo II). Classificado Risco I (Baixo) por apresentar: atividade econômica desenvolvida em residência unifamiliar (Art. 5º, I)."
+  },
+  {
+    "id": "etapa4/ambulante/cnae-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "CNAE 2063100 classificado como Risco Médio (piso mínimo aplicado, Art. 3º, II c/c Anexo II). Classificado Risco I (Baixo) por apresentar: atividade ambulante exercida de forma transitória, considerada individualmente, fora de conjunto com área delimitada (Art. 5º, III c/c §2º)."
+  },
+  {
+    "id": "etapa4/estrutura-provisoria/cnae-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "CNAE 2063100 classificado como Risco Médio (piso mínimo aplicado, Art. 3º, II c/c Anexo II). Classificado Risco I (Baixo) por apresentar: estrutura provisória ou móvel de até 200 m², sem endereço formal (Art. 5º, IV)."
+  },
+  {
+    "id": "etapa4/estrutura-tecnica/cnae-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "CNAE 2063100 classificado como Risco Médio (piso mínimo aplicado, Art. 3º, II c/c Anexo II). Classificado Risco I (Baixo) por apresentar: estrutura técnica desabitada de até 200 m² (Art. 5º, VI)."
+  },
+  {
+    "id": "etapa5-eventos/caminho/inicio",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "e1"
+      ],
+      "respostas": {},
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa5-eventos/caminho/e1=nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "e1"
+      ],
+      "respostas": {
+        "e1": "nao"
+      },
+      "status": "Pergunta respondida: siga para a próxima etapa.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa5-eventos/caminho/e1=sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "e1",
+        "e2"
+      ],
+      "respostas": {
+        "e1": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa5-eventos/caminho/e1=sim,e2=nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "e1",
+        "e2",
+        "e3"
+      ],
+      "respostas": {
+        "e1": "sim",
+        "e2": "nao"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa5-eventos/caminho/e1=sim,e2=nao,e3=nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "e1",
+        "e2",
+        "e3"
+      ],
+      "respostas": {
+        "e1": "sim",
+        "e2": "nao",
+        "e3": "nao"
+      },
+      "status": "Pergunta respondida: evento temporário de pequeno porte — classificação Risco II.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa5-eventos/caminho/e1=sim,e2=nao,e3=sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "e1",
+        "e2",
+        "e3"
+      ],
+      "respostas": {
+        "e1": "sim",
+        "e2": "nao",
+        "e3": "sim"
+      },
+      "status": "Pergunta respondida: enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa5-eventos/caminho/e1=sim,e2=sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "e1",
+        "e2"
+      ],
+      "respostas": {
+        "e1": "sim",
+        "e2": "sim"
+      },
+      "status": "Pergunta respondida: enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa5-eventos/troca/e1=nao/e1->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "e1",
+        "e2"
+      ],
+      "respostas": {
+        "e1": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa5-eventos/troca/e1=sim/e1->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "e1"
+      ],
+      "respostas": {
+        "e1": "nao"
+      },
+      "status": "Pergunta respondida: siga para a próxima etapa.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa5-eventos/troca/e1=sim,e2=nao/e1->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "e1"
+      ],
+      "respostas": {
+        "e1": "nao"
+      },
+      "status": "Pergunta respondida: siga para a próxima etapa.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa5-eventos/troca/e1=sim,e2=nao/e2->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "e1",
+        "e2"
+      ],
+      "respostas": {
+        "e1": "sim",
+        "e2": "sim"
+      },
+      "status": "Pergunta respondida: enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa5-eventos/troca/e1=sim,e2=nao,e3=nao/e1->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "e1"
+      ],
+      "respostas": {
+        "e1": "nao"
+      },
+      "status": "Pergunta respondida: siga para a próxima etapa.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa5-eventos/troca/e1=sim,e2=nao,e3=nao/e2->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "e1",
+        "e2"
+      ],
+      "respostas": {
+        "e1": "sim",
+        "e2": "sim"
+      },
+      "status": "Pergunta respondida: enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa5-eventos/troca/e1=sim,e2=nao,e3=nao/e3->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "e1",
+        "e2",
+        "e3"
+      ],
+      "respostas": {
+        "e1": "sim",
+        "e2": "nao",
+        "e3": "sim"
+      },
+      "status": "Pergunta respondida: enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa5-eventos/troca/e1=sim,e2=nao,e3=sim/e1->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "e1"
+      ],
+      "respostas": {
+        "e1": "nao"
+      },
+      "status": "Pergunta respondida: siga para a próxima etapa.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa5-eventos/troca/e1=sim,e2=nao,e3=sim/e2->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "e1",
+        "e2"
+      ],
+      "respostas": {
+        "e1": "sim",
+        "e2": "sim"
+      },
+      "status": "Pergunta respondida: enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa5-eventos/troca/e1=sim,e2=nao,e3=sim/e3->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "e1",
+        "e2",
+        "e3"
+      ],
+      "respostas": {
+        "e1": "sim",
+        "e2": "nao",
+        "e3": "nao"
+      },
+      "status": "Pergunta respondida: evento temporário de pequeno porte — classificação Risco II.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa5-eventos/troca/e1=sim,e2=sim/e1->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "e1"
+      ],
+      "respostas": {
+        "e1": "nao"
+      },
+      "status": "Pergunta respondida: siga para a próxima etapa.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa5-eventos/troca/e1=sim,e2=sim/e2->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "e1",
+        "e2",
+        "e3"
+      ],
+      "respostas": {
+        "e1": "sim",
+        "e2": "nao"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa5-eventos/final/e1=nao/cnae-baixo",
+    "risco": "RISCO I (BAIXO)",
+    "motivos": "Classificado Risco I (Baixo): pequeno estabelecimento físico que atende a todas as condições cumulativas do Art. 5º, VII."
+  },
+  {
+    "id": "etapa5-eventos/final/e1=sim,e2=nao,e3=nao/cnae-baixo",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Classificado Risco II (Médio): evento temporário sem controle de acesso, com público de até 100 pessoas, área de até 930 m² e sem camarotes ou arquibancadas para mais de 100 pessoas. Não se enquadra no Art. 6º, III, XIV e XV, e evento temporário que reúne público não pode ser Risco I (Art. 5º, VII, \"m\"); classificado como Risco II por exclusão (Art. 7º, caput)."
+  },
+  {
+    "id": "etapa5-eventos/final/e1=sim,e2=nao,e3=sim/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: evento temporário sem controle de acesso, com área construída, ocupada ou montada superior a 930 m² ou camarotes/arquibancadas para mais de 100 pessoas (Art. 6º, XIV)."
+  },
+  {
+    "id": "etapa5-eventos/final/e1=sim,e2=sim/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: evento temporário com controle/restrição de acesso de público, independentemente da área (Art. 6º, XV)."
+  },
+  {
+    "id": "etapa5-eventos/final/e1=nao/cnae-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "CNAE 2063100 classificado como Risco Médio (piso mínimo aplicado, Art. 3º, II c/c Anexo II). Classificado Risco I (Baixo): pequeno estabelecimento físico que atende a todas as condições cumulativas do Art. 5º, VII."
+  },
+  {
+    "id": "etapa5-eventos/final/e1=sim,e2=nao,e3=nao/cnae-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Classificado Risco II (Médio): evento temporário sem controle de acesso, com público de até 100 pessoas, área de até 930 m² e sem camarotes ou arquibancadas para mais de 100 pessoas. Não se enquadra no Art. 6º, III, XIV e XV, e evento temporário que reúne público não pode ser Risco I (Art. 5º, VII, \"m\"); classificado como Risco II por exclusão (Art. 7º, caput). Classificação também respaldada pelo CNAE 2063100 (Risco Médio, Art. 3º, II c/c Anexo II)."
+  },
+  {
+    "id": "etapa5-eventos/final/e1=sim,e2=nao,e3=sim/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: evento temporário sem controle de acesso, com área construída, ocupada ou montada superior a 930 m² ou camarotes/arquibancadas para mais de 100 pessoas (Art. 6º, XIV). (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa5-eventos/final/e1=sim,e2=sim/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: evento temporário com controle/restrição de acesso de público, independentemente da área (Art. 6º, XV). (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa6-area/caminho/inicio",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1"
+      ],
+      "respostas": {},
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=inteiro,area-imovel=nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel",
+        "pav-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro",
+        "area-imovel": "nao"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=inteiro,area-imovel=nao,pav-imovel=nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel",
+        "pav-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro",
+        "area-imovel": "nao",
+        "pav-imovel": "nao"
+      },
+      "status": "Área e andares não geram Risco Alto. Siga para a próxima etapa.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=inteiro,area-imovel=nao,pav-imovel=sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel",
+        "pav-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro",
+        "area-imovel": "nao",
+        "pav-imovel": "sim"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=inteiro,area-imovel=sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro",
+        "area-imovel": "sim"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio"
+      ],
+      "respostas": {
+        "p1": "unidade"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=nao,pav-predio=nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "nao"
+      },
+      "status": "Área e andares não geram Risco Alto. Siga para a próxima etapa.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=nao,pav-predio=sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=nao,pav-predio=sim,p2=nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3",
+        "p4a"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3",
+        "p4a"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim",
+        "p4b": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b",
+        "p4c"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim",
+        "p4b": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b",
+        "p4c"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim",
+        "p4b": "sim",
+        "p4c": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b",
+        "p4c"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim",
+        "p4b": "sim",
+        "p4c": "sim"
+      },
+      "status": "Exceção do Art. 7º, §3º aplicável: Risco II.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=sim,p2=nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=sim,p2=sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=sim,p2=sim,p3=nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=sim,p2=sim,p3=sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3",
+        "p4a"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3",
+        "p4a"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim",
+        "p4b": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b",
+        "p4c"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim",
+        "p4b": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b",
+        "p4c"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim",
+        "p4b": "sim",
+        "p4c": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/caminho/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b",
+        "p4c"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim",
+        "p4b": "sim",
+        "p4c": "sim"
+      },
+      "status": "Exceção do Art. 7º, §3º aplicável: Risco II.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=inteiro/p1->unidade",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio"
+      ],
+      "respostas": {
+        "p1": "unidade"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=inteiro,area-imovel=nao/p1->unidade",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio"
+      ],
+      "respostas": {
+        "p1": "unidade"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=inteiro,area-imovel=nao/area-imovel->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro",
+        "area-imovel": "sim"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=inteiro,area-imovel=nao,pav-imovel=nao/p1->unidade",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio"
+      ],
+      "respostas": {
+        "p1": "unidade"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=inteiro,area-imovel=nao,pav-imovel=nao/area-imovel->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro",
+        "area-imovel": "sim"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=inteiro,area-imovel=nao,pav-imovel=nao/pav-imovel->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel",
+        "pav-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro",
+        "area-imovel": "nao",
+        "pav-imovel": "sim"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=inteiro,area-imovel=nao,pav-imovel=sim/p1->unidade",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio"
+      ],
+      "respostas": {
+        "p1": "unidade"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=inteiro,area-imovel=nao,pav-imovel=sim/area-imovel->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro",
+        "area-imovel": "sim"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=inteiro,area-imovel=nao,pav-imovel=sim/pav-imovel->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel",
+        "pav-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro",
+        "area-imovel": "nao",
+        "pav-imovel": "nao"
+      },
+      "status": "Área e andares não geram Risco Alto. Siga para a próxima etapa.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=inteiro,area-imovel=sim/p1->unidade",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio"
+      ],
+      "respostas": {
+        "p1": "unidade"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=inteiro,area-imovel=sim/area-imovel->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel",
+        "pav-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro",
+        "area-imovel": "nao"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao/area-predio->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=nao/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=nao/area-predio->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=nao/pav-predio->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim/area-predio->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim/pav-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "nao"
+      },
+      "status": "Área e andares não geram Risco Alto. Siga para a próxima etapa.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=nao/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=nao/area-predio->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=nao/pav-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "nao"
+      },
+      "status": "Área e andares não geram Risco Alto. Siga para a próxima etapa.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=nao/p2->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim/area-predio->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim/pav-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "nao"
+      },
+      "status": "Área e andares não geram Risco Alto. Siga para a próxima etapa.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim/p2->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=nao/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=nao/area-predio->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=nao/pav-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "nao"
+      },
+      "status": "Área e andares não geram Risco Alto. Siga para a próxima etapa.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=nao/p2->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=nao/p3->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3",
+        "p4a"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim/area-predio->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim/pav-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "nao"
+      },
+      "status": "Área e andares não geram Risco Alto. Siga para a próxima etapa.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim/p2->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim/p3->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=nao/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=nao/area-predio->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=nao/pav-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "nao"
+      },
+      "status": "Área e andares não geram Risco Alto. Siga para a próxima etapa.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=nao/p2->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=nao/p3->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=nao/p4a->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim/area-predio->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim/pav-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "nao"
+      },
+      "status": "Área e andares não geram Risco Alto. Siga para a próxima etapa.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim/p2->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim/p3->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim/p4a->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3",
+        "p4a"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=nao/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=nao/area-predio->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=nao/pav-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "nao"
+      },
+      "status": "Área e andares não geram Risco Alto. Siga para a próxima etapa.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=nao/p2->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=nao/p3->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=nao/p4a->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3",
+        "p4a"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=nao/p4b->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b",
+        "p4c"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim",
+        "p4b": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim/area-predio->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim/pav-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "nao"
+      },
+      "status": "Área e andares não geram Risco Alto. Siga para a próxima etapa.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim/p2->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim/p3->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim/p4a->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3",
+        "p4a"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim/p4b->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim",
+        "p4b": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=nao/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=nao/area-predio->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=nao/pav-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "nao"
+      },
+      "status": "Área e andares não geram Risco Alto. Siga para a próxima etapa.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=nao/p2->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=nao/p3->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=nao/p4a->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3",
+        "p4a"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=nao/p4b->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim",
+        "p4b": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=nao/p4c->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b",
+        "p4c"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim",
+        "p4b": "sim",
+        "p4c": "sim"
+      },
+      "status": "Exceção do Art. 7º, §3º aplicável: Risco II.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=sim/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=sim/area-predio->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=sim/pav-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "nao"
+      },
+      "status": "Área e andares não geram Risco Alto. Siga para a próxima etapa.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=sim/p2->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=sim/p3->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=sim/p4a->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3",
+        "p4a"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=sim/p4b->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim",
+        "p4b": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=sim/p4c->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b",
+        "p4c"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao",
+        "pav-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim",
+        "p4b": "sim",
+        "p4c": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim/area-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=nao/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=nao/area-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=nao/p2->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim/area-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim/p2->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=nao/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=nao/area-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=nao/p2->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=nao/p3->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3",
+        "p4a"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim/area-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim/p2->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim/p3->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=nao/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=nao/area-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=nao/p2->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=nao/p3->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=nao/p4a->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim/area-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim/p2->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim/p3->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim/p4a->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3",
+        "p4a"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=nao/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=nao/area-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=nao/p2->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=nao/p3->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=nao/p4a->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3",
+        "p4a"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=nao/p4b->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b",
+        "p4c"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim",
+        "p4b": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim/area-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim/p2->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim/p3->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim/p4a->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3",
+        "p4a"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim/p4b->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim",
+        "p4b": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=nao/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=nao/area-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=nao/p2->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=nao/p3->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=nao/p4a->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3",
+        "p4a"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=nao/p4b->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim",
+        "p4b": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=nao/p4c->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b",
+        "p4c"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim",
+        "p4b": "sim",
+        "p4c": "sim"
+      },
+      "status": "Exceção do Art. 7º, §3º aplicável: Risco II.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=sim/p1->inteiro",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-imovel"
+      ],
+      "respostas": {
+        "p1": "inteiro"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=sim/area-predio->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "pav-predio"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "nao"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=sim/p2->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=sim/p3->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=sim/p4a->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3",
+        "p4a"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=sim/p4b->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim",
+        "p4b": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/troca/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=sim/p4c->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "p1",
+        "area-predio",
+        "p2",
+        "p3",
+        "p4a",
+        "p4b",
+        "p4c"
+      ],
+      "respostas": {
+        "p1": "unidade",
+        "area-predio": "sim",
+        "p2": "sim",
+        "p3": "sim",
+        "p4a": "sim",
+        "p4b": "sim",
+        "p4c": "nao"
+      },
+      "status": "Enquadra em Risco Alto.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa6-area/final/p1=inteiro,area-imovel=nao,pav-imovel=nao/cnae-baixo",
+    "risco": "RISCO I (BAIXO)",
+    "motivos": "Classificado Risco I (Baixo): pequeno estabelecimento físico que atende a todas as condições cumulativas do Art. 5º, VII."
+  },
+  {
+    "id": "etapa6-area/final/p1=inteiro,area-imovel=nao,pav-imovel=sim/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: edificação com mais de 3 pavimentos (Art. 6º, II)."
+  },
+  {
+    "id": "etapa6-area/final/p1=inteiro,area-imovel=sim/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: área construída superior a 930 m² (Art. 6º, I)."
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=nao,pav-predio=nao/cnae-baixo",
+    "risco": "RISCO I (BAIXO)",
+    "motivos": "Classificado Risco I (Baixo): pequeno estabelecimento físico que atende a todas as condições cumulativas do Art. 5º, VII."
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=nao,pav-predio=sim,p2=nao/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: unidade inserida em edificação com mais de 3 pavimentos (Art. 6º, II), sem atender às condições da exceção do Art. 7º, §3º."
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=nao/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: unidade inserida em edificação com mais de 3 pavimentos (Art. 6º, II), sem atender às condições da exceção do Art. 7º, §3º."
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=nao/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: unidade inserida em edificação com mais de 3 pavimentos (Art. 6º, II), sem atender às condições da exceção do Art. 7º, §3º."
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=nao/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: unidade inserida em edificação com mais de 3 pavimentos (Art. 6º, II), sem atender às condições da exceção do Art. 7º, §3º."
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=nao/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: unidade inserida em edificação com mais de 3 pavimentos (Art. 6º, II), sem atender às condições da exceção do Art. 7º, §3º."
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=sim/cnae-baixo",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Classificado Risco II (Médio): unidade autônoma situada exclusivamente no pavimento térreo, com área de até 930 m², inserida em edificação principal que seria de Risco Alto pela área ou pela quantidade de andares, sem compartilhar sistemas preventivos, sem acesso às áreas comuns e com saída direta para a via pública (Art. 7º, §3º)."
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=sim,p2=nao/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: unidade inserida em edificação com área construída superior a 930 m² (Art. 6º, I), sem atender às condições da exceção do Art. 7º, §3º."
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=sim,p2=sim,p3=nao/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: unidade inserida em edificação com área construída superior a 930 m² (Art. 6º, I), sem atender às condições da exceção do Art. 7º, §3º."
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=nao/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: unidade inserida em edificação com área construída superior a 930 m² (Art. 6º, I), sem atender às condições da exceção do Art. 7º, §3º."
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=nao/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: unidade inserida em edificação com área construída superior a 930 m² (Art. 6º, I), sem atender às condições da exceção do Art. 7º, §3º."
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=nao/cnae-baixo",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: unidade inserida em edificação com área construída superior a 930 m² (Art. 6º, I), sem atender às condições da exceção do Art. 7º, §3º."
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=sim/cnae-baixo",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Classificado Risco II (Médio): unidade autônoma situada exclusivamente no pavimento térreo, com área de até 930 m², inserida em edificação principal que seria de Risco Alto pela área ou pela quantidade de andares, sem compartilhar sistemas preventivos, sem acesso às áreas comuns e com saída direta para a via pública (Art. 7º, §3º)."
+  },
+  {
+    "id": "etapa6-area/final/p1=inteiro,area-imovel=nao,pav-imovel=nao/cnae-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "CNAE 2063100 classificado como Risco Médio (piso mínimo aplicado, Art. 3º, II c/c Anexo II). Classificado Risco I (Baixo): pequeno estabelecimento físico que atende a todas as condições cumulativas do Art. 5º, VII."
+  },
+  {
+    "id": "etapa6-area/final/p1=inteiro,area-imovel=nao,pav-imovel=sim/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: edificação com mais de 3 pavimentos (Art. 6º, II). (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa6-area/final/p1=inteiro,area-imovel=sim/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: área construída superior a 930 m² (Art. 6º, I). (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=nao,pav-predio=nao/cnae-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "CNAE 2063100 classificado como Risco Médio (piso mínimo aplicado, Art. 3º, II c/c Anexo II). Classificado Risco I (Baixo): pequeno estabelecimento físico que atende a todas as condições cumulativas do Art. 5º, VII."
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=nao,pav-predio=sim,p2=nao/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: unidade inserida em edificação com mais de 3 pavimentos (Art. 6º, II), sem atender às condições da exceção do Art. 7º, §3º. (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=nao/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: unidade inserida em edificação com mais de 3 pavimentos (Art. 6º, II), sem atender às condições da exceção do Art. 7º, §3º. (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=nao/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: unidade inserida em edificação com mais de 3 pavimentos (Art. 6º, II), sem atender às condições da exceção do Art. 7º, §3º. (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=nao/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: unidade inserida em edificação com mais de 3 pavimentos (Art. 6º, II), sem atender às condições da exceção do Art. 7º, §3º. (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=nao/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: unidade inserida em edificação com mais de 3 pavimentos (Art. 6º, II), sem atender às condições da exceção do Art. 7º, §3º. (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=nao,pav-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=sim/cnae-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Classificado Risco II (Médio): unidade autônoma situada exclusivamente no pavimento térreo, com área de até 930 m², inserida em edificação principal que seria de Risco Alto pela área ou pela quantidade de andares, sem compartilhar sistemas preventivos, sem acesso às áreas comuns e com saída direta para a via pública (Art. 7º, §3º). Classificação também respaldada pelo CNAE 2063100 (Risco Médio, Art. 3º, II c/c Anexo II)."
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=sim,p2=nao/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: unidade inserida em edificação com área construída superior a 930 m² (Art. 6º, I), sem atender às condições da exceção do Art. 7º, §3º. (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=sim,p2=sim,p3=nao/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: unidade inserida em edificação com área construída superior a 930 m² (Art. 6º, I), sem atender às condições da exceção do Art. 7º, §3º. (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=nao/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: unidade inserida em edificação com área construída superior a 930 m² (Art. 6º, I), sem atender às condições da exceção do Art. 7º, §3º. (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=nao/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: unidade inserida em edificação com área construída superior a 930 m² (Art. 6º, I), sem atender às condições da exceção do Art. 7º, §3º. (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=nao/cnae-medio",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Classificado Risco III (Alto) por apresentar: unidade inserida em edificação com área construída superior a 930 m² (Art. 6º, I), sem atender às condições da exceção do Art. 7º, §3º. (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "etapa6-area/final/p1=unidade,area-predio=sim,p2=sim,p3=sim,p4a=sim,p4b=sim,p4c=sim/cnae-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Classificado Risco II (Médio): unidade autônoma situada exclusivamente no pavimento térreo, com área de até 930 m², inserida em edificação principal que seria de Risco Alto pela área ou pela quantidade de andares, sem compartilhar sistemas preventivos, sem acesso às áreas comuns e com saída direta para a via pública (Art. 7º, §3º). Classificação também respaldada pelo CNAE 2063100 (Risco Médio, Art. 3º, II c/c Anexo II)."
+  },
+  {
+    "id": "etapa7-hospedagem/caminho/inicio",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "h1"
+      ],
+      "respostas": {},
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa7-hospedagem/caminho/h1=nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "h1"
+      ],
+      "respostas": {
+        "h1": "nao"
+      },
+      "status": "Pergunta respondida: critério de hospedagem atendido.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa7-hospedagem/caminho/h1=sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "h1",
+        "h2"
+      ],
+      "respostas": {
+        "h1": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa7-hospedagem/caminho/h1=sim,h2=nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "h1",
+        "h2"
+      ],
+      "respostas": {
+        "h1": "sim",
+        "h2": "nao"
+      },
+      "status": "Pergunta respondida: hospedagem com mais de 16 leitos não atende a este critério de Risco Baixo.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa7-hospedagem/caminho/h1=sim,h2=sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "h1",
+        "h2"
+      ],
+      "respostas": {
+        "h1": "sim",
+        "h2": "sim"
+      },
+      "status": "Pergunta respondida: critério de hospedagem atendido.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa7-hospedagem/troca/h1=nao/h1->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "h1",
+        "h2"
+      ],
+      "respostas": {
+        "h1": "sim"
+      },
+      "status": "",
+      "continuarLiberado": false
+    }
+  },
+  {
+    "id": "etapa7-hospedagem/troca/h1=sim/h1->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "h1"
+      ],
+      "respostas": {
+        "h1": "nao"
+      },
+      "status": "Pergunta respondida: critério de hospedagem atendido.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa7-hospedagem/troca/h1=sim,h2=nao/h1->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "h1"
+      ],
+      "respostas": {
+        "h1": "nao"
+      },
+      "status": "Pergunta respondida: critério de hospedagem atendido.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa7-hospedagem/troca/h1=sim,h2=nao/h2->sim",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "h1",
+        "h2"
+      ],
+      "respostas": {
+        "h1": "sim",
+        "h2": "sim"
+      },
+      "status": "Pergunta respondida: critério de hospedagem atendido.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa7-hospedagem/troca/h1=sim,h2=sim/h1->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "h1"
+      ],
+      "respostas": {
+        "h1": "nao"
+      },
+      "status": "Pergunta respondida: critério de hospedagem atendido.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa7-hospedagem/troca/h1=sim,h2=sim/h2->nao",
+    "risco": null,
+    "motivos": null,
+    "estado": {
+      "visiveis": [
+        "h1",
+        "h2"
+      ],
+      "respostas": {
+        "h1": "sim",
+        "h2": "nao"
+      },
+      "status": "Pergunta respondida: hospedagem com mais de 16 leitos não atende a este critério de Risco Baixo.",
+      "continuarLiberado": true
+    }
+  },
+  {
+    "id": "etapa7-hospedagem/final/h1=nao/cnae-baixo",
+    "risco": "RISCO I (BAIXO)",
+    "motivos": "Classificado Risco I (Baixo): pequeno estabelecimento físico que atende a todas as condições cumulativas do Art. 5º, VII."
+  },
+  {
+    "id": "etapa7-hospedagem/final/h1=sim,h2=nao/cnae-baixo",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Classificado Risco II (Médio) por exclusão: estabelecimento de hospedagem com mais de 16 leitos não atende à condição da alínea \"e\" do Art. 5º, VII, exigida cumulativamente para o Risco Baixo."
+  },
+  {
+    "id": "etapa7-hospedagem/final/h1=sim,h2=sim/cnae-baixo",
+    "risco": "RISCO I (BAIXO)",
+    "motivos": "Classificado Risco I (Baixo): pequeno estabelecimento físico que atende a todas as condições cumulativas do Art. 5º, VII."
+  },
+  {
+    "id": "etapa7-hospedagem/final/h1=nao/cnae-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "CNAE 2063100 classificado como Risco Médio (piso mínimo aplicado, Art. 3º, II c/c Anexo II). Classificado Risco I (Baixo): pequeno estabelecimento físico que atende a todas as condições cumulativas do Art. 5º, VII."
+  },
+  {
+    "id": "etapa7-hospedagem/final/h1=sim,h2=nao/cnae-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Classificado Risco II (Médio) por exclusão: estabelecimento de hospedagem com mais de 16 leitos não atende à condição da alínea \"e\" do Art. 5º, VII, exigida cumulativamente para o Risco Baixo. Classificação também respaldada pelo CNAE 2063100 (Risco Médio, Art. 3º, II c/c Anexo II)."
+  },
+  {
+    "id": "etapa7-hospedagem/final/h1=sim,h2=sim/cnae-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "CNAE 2063100 classificado como Risco Médio (piso mínimo aplicado, Art. 3º, II c/c Anexo II). Classificado Risco I (Baixo): pequeno estabelecimento físico que atende a todas as condições cumulativas do Art. 5º, VII."
+  },
+  {
+    "id": "etapa8/todos/cnae-baixo",
+    "risco": "RISCO I (BAIXO)",
+    "motivos": "Classificado Risco I (Baixo): pequeno estabelecimento físico que atende a todas as condições cumulativas do Art. 5º, VII."
+  },
+  {
+    "id": "etapa8/falta-area-200-terreo/cnae-baixo",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Classificado Risco II (Médio) por exclusão: não se enquadra em nenhuma hipótese direta de Risco Baixo (Art. 5º, I, II, III, IV e VI) nem atende a todas as condições do pequeno estabelecimento (Art. 5º, VII); classificado como Risco II (Art. 7º, caput)."
+  },
+  {
+    "id": "etapa8/falta-saida-direta/cnae-baixo",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Classificado Risco II (Médio) por exclusão: não se enquadra em nenhuma hipótese direta de Risco Baixo (Art. 5º, I, II, III, IV e VI) nem atende a todas as condições do pequeno estabelecimento (Art. 5º, VII); classificado como Risco II (Art. 7º, caput)."
+  },
+  {
+    "id": "etapa8/falta-glp-3-p13/cnae-baixo",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Classificado Risco II (Médio) por exclusão: não se enquadra em nenhuma hipótese direta de Risco Baixo (Art. 5º, I, II, III, IV e VI) nem atende a todas as condições do pequeno estabelecimento (Art. 5º, VII); classificado como Risco II (Art. 7º, caput)."
+  },
+  {
+    "id": "etapa8/falta-liquidos-150l/cnae-baixo",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Classificado Risco II (Médio) por exclusão: não se enquadra em nenhuma hipótese direta de Risco Baixo (Art. 5º, I, II, III, IV e VI) nem atende a todas as condições do pequeno estabelecimento (Art. 5º, VII); classificado como Risco II (Art. 7º, caput)."
+  },
+  {
+    "id": "etapa8/nenhuma/cnae-baixo",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Classificado Risco II (Médio) por exclusão: não se enquadra em nenhuma hipótese direta de Risco Baixo (Art. 5º, I, II, III, IV e VI) nem atende a todas as condições do pequeno estabelecimento (Art. 5º, VII); classificado como Risco II (Art. 7º, caput)."
+  },
+  {
+    "id": "etapa8/todos/cnae-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "CNAE 2063100 classificado como Risco Médio (piso mínimo aplicado, Art. 3º, II c/c Anexo II). Classificado Risco I (Baixo): pequeno estabelecimento físico que atende a todas as condições cumulativas do Art. 5º, VII."
+  },
+  {
+    "id": "etapa8/falta-area-200-terreo/cnae-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Classificado Risco II (Médio) por exclusão: não se enquadra em nenhuma hipótese direta de Risco Baixo (Art. 5º, I, II, III, IV e VI) nem atende a todas as condições do pequeno estabelecimento (Art. 5º, VII); classificado como Risco II (Art. 7º, caput). Classificação também respaldada pelo CNAE 2063100 (Risco Médio, Art. 3º, II c/c Anexo II)."
+  },
+  {
+    "id": "etapa8/falta-saida-direta/cnae-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Classificado Risco II (Médio) por exclusão: não se enquadra em nenhuma hipótese direta de Risco Baixo (Art. 5º, I, II, III, IV e VI) nem atende a todas as condições do pequeno estabelecimento (Art. 5º, VII); classificado como Risco II (Art. 7º, caput). Classificação também respaldada pelo CNAE 2063100 (Risco Médio, Art. 3º, II c/c Anexo II)."
+  },
+  {
+    "id": "etapa8/falta-glp-3-p13/cnae-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Classificado Risco II (Médio) por exclusão: não se enquadra em nenhuma hipótese direta de Risco Baixo (Art. 5º, I, II, III, IV e VI) nem atende a todas as condições do pequeno estabelecimento (Art. 5º, VII); classificado como Risco II (Art. 7º, caput). Classificação também respaldada pelo CNAE 2063100 (Risco Médio, Art. 3º, II c/c Anexo II)."
+  },
+  {
+    "id": "etapa8/falta-liquidos-150l/cnae-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Classificado Risco II (Médio) por exclusão: não se enquadra em nenhuma hipótese direta de Risco Baixo (Art. 5º, I, II, III, IV e VI) nem atende a todas as condições do pequeno estabelecimento (Art. 5º, VII); classificado como Risco II (Art. 7º, caput). Classificação também respaldada pelo CNAE 2063100 (Risco Médio, Art. 3º, II c/c Anexo II)."
+  },
+  {
+    "id": "etapa8/nenhuma/cnae-medio",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Classificado Risco II (Médio) por exclusão: não se enquadra em nenhuma hipótese direta de Risco Baixo (Art. 5º, I, II, III, IV e VI) nem atende a todas as condições do pequeno estabelecimento (Art. 5º, VII); classificado como Risco II (Art. 7º, caput). Classificação também respaldada pelo CNAE 2063100 (Risco Médio, Art. 3º, II c/c Anexo II)."
+  },
+  {
+    "id": "showResult/risco-1/cnae-baixo/criterio-1",
+    "risco": "RISCO I (BAIXO)",
+    "motivos": "Motivo de teste para risco 1."
+  },
+  {
+    "id": "showResult/risco-2/cnae-baixo/criterio-1",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Motivo de teste para risco 2."
+  },
+  {
+    "id": "showResult/risco-3/cnae-baixo/criterio-1",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Motivo de teste para risco 3."
+  },
+  {
+    "id": "showResult/risco-1/cnae-baixo/criterio-2",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Risco mínimo II (Médio) aplicado por: critério de teste. Motivo de teste para risco 1."
+  },
+  {
+    "id": "showResult/risco-2/cnae-baixo/criterio-2",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Motivo de teste para risco 2."
+  },
+  {
+    "id": "showResult/risco-3/cnae-baixo/criterio-2",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Motivo de teste para risco 3."
+  },
+  {
+    "id": "showResult/risco-1/cnae-medio/criterio-1",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "CNAE 2063100 classificado como Risco Médio (piso mínimo aplicado, Art. 3º, II c/c Anexo II). Motivo de teste para risco 1."
+  },
+  {
+    "id": "showResult/risco-2/cnae-medio/criterio-1",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Motivo de teste para risco 2. Classificação também respaldada pelo CNAE 2063100 (Risco Médio, Art. 3º, II c/c Anexo II)."
+  },
+  {
+    "id": "showResult/risco-3/cnae-medio/criterio-1",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Motivo de teste para risco 3. (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  },
+  {
+    "id": "showResult/risco-1/cnae-medio/criterio-2",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Risco mínimo II (Médio) aplicado por: critério de teste. CNAE 2063100 classificado como Risco Médio (piso mínimo aplicado, Art. 3º, II c/c Anexo II). Motivo de teste para risco 1."
+  },
+  {
+    "id": "showResult/risco-2/cnae-medio/criterio-2",
+    "risco": "RISCO II (MÉDIO)",
+    "motivos": "Motivo de teste para risco 2. Classificação também respaldada pelo CNAE 2063100 (Risco Médio, Art. 3º, II c/c Anexo II)."
+  },
+  {
+    "id": "showResult/risco-3/cnae-medio/criterio-2",
+    "risco": "RISCO III (ALTO)",
+    "motivos": "Motivo de teste para risco 3. (O CNAE 2063100 já indicava Risco Médio; o risco foi elevado a Alto com base nas respostas do questionário.)"
+  }
+]
