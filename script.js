@@ -598,7 +598,7 @@ function checkAltoPerigosos() {
 // texto as ressalvas de contexto (área, pavimentos, evento temporário) que o tornariam Risco III.
 // Domicílio fiscal (II) e ambulante (III) não têm ressalva de área/pavimentos: empresa sem
 // estabelecimento não "possui nem está inserida em edificação" para fins do Art. 6º, I e II,
-// e os pavimentos do prédio onde fica o endereço fiscal não a afetam.
+// e os pavimentos da edificação onde fica o endereço fiscal não a afetam.
 function checkBaixoBlocoA() {
     const checked = Array.from(document.querySelectorAll('#step-baixo-bloco-a .check-item__input:checked:not(.check-item__input--none)'));
     if (checked.length > 0) {
@@ -723,7 +723,7 @@ function checkEventos() {
 // atividade "possui ou em que está inserida". A exceção do Art. 7º, §3º (unidade exclusivamente
 // no térreo, com até 930 m², sem compartilhar sistemas preventivos, sem acesso às áreas comuns
 // e com saída direta para a via pública) só tem função quando a edificação principal acionaria
-// o inciso I ou II; por isso o fluxo pergunta primeiro pelo prédio e só depois pela exceção.
+// o inciso I ou II; por isso o fluxo pergunta primeiro pela edificação e só depois pela exceção.
 // Cumprida a exceção, o resultado é Risco II FINAL ("serão classificadas como risco II"): a
 // unidade não segue para as Etapas 6 e 7 (invariante P2).
 // A ordem importa: ao mudar uma resposta, todas as posteriores são apagadas.
@@ -757,7 +757,7 @@ function evaluateAreaFlow() {
         return done(null, null);
     }
 
-    // Unidade dentro de prédio maior: só pergunta a exceção se o prédio acionar o Art. 6º, I ou II.
+    // Unidade dentro de edificação maior: só pergunta a exceção se a edificação acionar o Art. 6º, I ou II.
     let gatilho;
     visible.push('area-predio');
     if (!a['area-predio']) return pending();
