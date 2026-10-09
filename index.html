@@ -550,11 +550,20 @@
                     <p class="risk-block__label">Área e andares da edificação</p>
 
                     <div class="check-item area-flow" id="area-flow">
-                        <fieldset class="area-q" data-q="p1">
-                            <legend class="area-q__legend">O local onde a empresa funciona é apenas uma unidade dentro de uma edificação maior (ex.: uma loja em shopping, uma sala em edifício comercial, um box em galeria), ou é a edificação inteira?</legend>
+                        <fieldset class="area-q" data-q="p1" aria-describedby="area-help-p1">
+                            <legend class="area-q__legend">O local onde a empresa funciona faz parte de uma edificação maior (ex.: loja em shopping, sala em edifício comercial, box em galeria, loja no térreo de prédio residencial) ou fica em uma edificação usada somente pela sua empresa?</legend>
                             <div class="area-q__options">
-                                <label class="area-q__option"><input type="radio" name="area-p1" value="unidade"> É uma unidade dentro de uma edificação maior</label>
-                                <label class="area-q__option"><input type="radio" name="area-p1" value="inteiro"> Ocupa a edificação inteira</label>
+                                <label class="area-q__option"><input type="radio" name="area-p1" value="unidade"> Faz parte de uma edificação maior (divide a edificação com outras lojas, salas, empresas ou moradias)</label>
+                                <label class="area-q__option"><input type="radio" name="area-p1" value="inteiro"> Fica em edificação usada somente pela minha empresa</label>
+                            </div>
+                            <div class="check-item__warning" id="area-help-p1">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
+                                </svg>
+                                <div>
+                                    <strong>Como responder:</strong>
+                                    <p>Se a empresa funciona em parte da sua casa, marque a segunda: a pergunta seguinte explica como contar a área.</p>
+                                </div>
                             </div>
                         </fieldset>
 
