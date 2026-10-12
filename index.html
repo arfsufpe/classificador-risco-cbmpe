@@ -881,7 +881,7 @@
                 <!-- RISCO II -->
                 <div class="next-steps next-steps--medium" aria-label="Próximos passos para Risco II">
                     <h3 class="next-steps__title">O que fazer agora?</h3>
-                    <p class="next-steps__body">Para obter o <strong>AVCB</strong> (Atestado de Vistoria do Corpo de Bombeiros), acesse o site do CBMPE e dê entrada no processo de <strong>Vistoria de Regularização</strong>. Não é necessário apresentar projeto contra incêndio. Na maioria dos casos, o AVCB é emitido sem vistoria prévia (Decreto 52.005/2021, Art. 7º, § 2º).</p>
+                    <p class="next-steps__body">Para obter o <strong>AVCB</strong> (Atestado de Vistoria do Corpo de Bombeiros), acesse o SAC Online do CBMPE e dê entrada no processo de <strong>Vistoria de Regularização</strong>. Não é necessário apresentar projeto contra incêndio. Na maioria dos casos, o AVCB é emitido sem vistoria prévia (Decreto 52.005/2021, Art. 7º, § 2º).</p>
                     <div class="next-steps__alert">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M12 4 3 20h18L12 4Z"/><line x1="12" y1="10" x2="12" y2="14.5"/><circle cx="12" cy="17.2" r="0.9" fill="currentColor" stroke="none"/>
@@ -894,8 +894,9 @@
                         </svg>
                         <span>Quando houver vistoria, prazo médio observado na prática (não é um prazo previsto em lei): cerca de <strong>2 semanas</strong> após a vistoria, quando não há pendências.</span>
                     </p>
-                    <a href="https://www.bombeiros.pe.gov.br" target="_blank" rel="noopener noreferrer" class="next-steps__cta">
-                        Iniciar processo de vistoria no site do CBMPE
+                    <!-- href definido por script.js a partir de LINKS_SAC.vistoria -->
+                    <a id="cta-sac-vistoria" target="_blank" rel="noopener noreferrer" class="next-steps__cta">
+                        Acessar o SAC Online do CBMPE (pedido de vistoria)
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                     </a>
                 </div>
@@ -903,7 +904,37 @@
                 <!-- RISCO III -->
                 <div class="next-steps next-steps--high" aria-label="Próximos passos para Risco III">
                     <h3 class="next-steps__title">O que fazer agora?</h3>
-                    <p class="next-steps__body">A regularização exige dois processos sequenciais. Acesse o site do CBMPE e siga a ordem abaixo:</p>
+                    <!-- Unidade em edificação de Risco III (Art. 6º, I/II sem a exceção do Art. 7º, §3º).
+                         Exibido por showResult() só quando esse é o único motivo de Risco III. -->
+                    <div id="unidade-edificacao" hidden>
+                        <h4 class="next-steps__title">Sua unidade está em uma edificação de Risco III</h4>
+                        <p class="next-steps__body">Pelo <span id="unidade-edificacao-art">Art. 6º, I</span> do decreto, o estabelecimento inserido em edificação <span id="unidade-edificacao-criterio">com área construída superior a 930 m²</span> é classificado como Risco III (risco alto) e precisa estar coberto por um Projeto de Segurança contra Incêndio e Pânico aprovado pelo CBMPE.</p>
+                        <p class="next-steps__body"><strong>Sua sala ou loja já está no projeto da edificação (condomínio, shopping, galeria ou edifício empresarial)?</strong></p>
+                        <p class="next-steps__body">Se a sua unidade estiver completamente inserida e contemplada no Projeto de Segurança contra Incêndio e Pânico aprovado da edificação, não é preciso aprovar um projeto próprio: basta fazer o pedido de vistoria no SAC Online, anexando (Norma Técnica 1.01, item 5.7.2.3):</p>
+                        <ol class="next-steps__steps">
+                            <li>
+                                <span class="next-steps__step-num">1</span>
+                                <div><span>Memorial do Projeto de Segurança contra Incêndio e Pânico da edificação, carimbado e aprovado pelo CBMPE;</span></div>
+                            </li>
+                            <li>
+                                <span class="next-steps__step-num">2</span>
+                                <div><span>AVCB da edificação, dentro da validade;</span></div>
+                            </li>
+                            <li>
+                                <span class="next-steps__step-num">3</span>
+                                <div><span>Planta do Projeto de Segurança contra Incêndio e Pânico da edificação, carimbada e aprovada pelo CBMPE, que mostre a localização da sua unidade na planta baixa.</span></div>
+                            </li>
+                        </ol>
+                        <!-- href definido por script.js a partir de LINKS_SAC.vistoria -->
+                        <p class="next-steps__body">
+                            <a id="unidade-edificacao-vistoria" target="_blank" rel="noopener noreferrer" class="next-steps__cta">
+                                Fazer o pedido de vistoria no SAC Online
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            </a>
+                        </p>
+                        <p class="next-steps__body">Se a sua unidade não estiver no projeto da edificação, ou se você não souber, consulte o síndico ou a administração e, se for o caso, siga os passos abaixo.</p>
+                    </div>
+                    <p class="next-steps__body">A regularização exige dois processos sequenciais. Siga a ordem abaixo:</p>
                     <ol class="next-steps__steps">
                         <li>
                             <span class="next-steps__step-num">1</span>
@@ -920,8 +951,10 @@
                             </div>
                         </li>
                     </ol>
-                    <a href="https://www.bombeiros.pe.gov.br" target="_blank" rel="noopener noreferrer" class="next-steps__cta">
-                        Iniciar processo no site do CBMPE
+                    <!-- Com LINKS_SAC.projeto: botão (href definido por script.js). Com null: só o aviso abaixo. -->
+                    <p id="sac-projeto-pendente" class="next-steps__body">O link para dar entrada no projeto está em confirmação. Enquanto isso, procure o CAT da sua região.</p>
+                    <a id="cta-sac-projeto" target="_blank" rel="noopener noreferrer" class="next-steps__cta" hidden>
+                        Acessar o SAC Online do CBMPE
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                     </a>
                 </div>

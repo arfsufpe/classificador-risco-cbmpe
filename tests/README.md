@@ -26,6 +26,7 @@ Cada cenário é percorrido pela tela, como um usuário faria: digitar o CNAE, m
 - **Etapa 5 (eventos), Etapa 6 (área e andares) e Etapa 7 (hospedagem):** todos os caminhos de resposta e, em cada caminho, a troca de cada resposta já dada. Na Etapa 6, são os 31 caminhos e as 132 trocas. Os caminhos que liberam o Continuar são levados até o resultado final, com CNAE baixo e médio.
 - **Etapa 8:** todos os itens marcados, cada item faltando e "Nenhuma", com CNAE baixo e médio.
 - **showResult:** chamado direto com risco I, II e III, com cada piso de CNAE e com o piso de critério da loja em posto (hoje inativo).
+- **Invariante do bloco "Sua unidade está em uma edificação de Risco III":** em todo cenário com resultado, se o bloco estiver visível, o risco final tem de ser III e o resultado tem de ter saído da Etapa 6, caminho "unidade". Não entra no JSON nem no hash: o script imprime quantos cenários tiveram o bloco e, se houver falha, lista os identificadores e termina com erro.
 
 Quando um cenário só termina numa etapa posterior, o script completa o percurso com as respostas que não acrescentam motivo. Por exemplo, um evento que libera o Continuar segue com "prédio inteiro, até 930 m², até 3 pavimentos", depois "não é hospedagem" e todos os itens da Etapa 8.
 

@@ -30,10 +30,18 @@ const FLUXOS = {
 const registros = [];
 let page;
 
+// Invariante do bloco "Sua unidade está em uma edificação de Risco III" (#unidade-edificacao):
+// só pode estar visível com risco final III vindo da Etapa 6, caminho "unidade". ultimaEtapa é a
+// etapa ativa no último clique em Continuar (a que produziu o resultado). Não entra no JSON.
+let ultimaEtapa = null;
+let cenariosComBloco = 0;
+const falhasInvariante = [];
+
 // --- Interação com a página ---
 
 async function abrir(cnaePrincipal, cnaeSecundarias) {
     await page.goto(PAGINA);
+    ultimaEtapa = null;
     await page.fill('#cnae-principal', cnaePrincipal);
     if (cnaeSecundarias) await page.fill('#cnae-secundarias', cnaeSecundarias);
     await continuar();
@@ -45,6 +53,7 @@ async function clicarInput(seletor) {
 }
 
 async function continuar() {
+    ultimaEtapa = await page.evaluate(() => document.querySelector('.step.active')?.id ?? null);
     await page.locator('.step.active .actions .btn-primary').click();
 }
 
@@ -122,7 +131,22 @@ async function registrarResultado(id) {
     const r = await resultado();
     const reg = { id, risco: r.risco, motivos: r.motivos };
     if (!r.risco) reg.parouEm = await etapaAtiva();
+    else await verificarBlocoUnidade(id, r.risco);
     registros.push(reg);
+}
+
+async function verificarBlocoUnidade(id, risco) {
+    const { visivel, p1 } = await page.evaluate(() => ({
+        visivel: document.getElementById('unidade-edificacao')?.getClientRects().length > 0,
+        p1: document.querySelector('#area-flow input[name="area-p1"]:checked')?.value ?? null,
+    }));
+    if (!visivel) return;
+    cenariosComBloco++;
+    const problemas = [];
+    if (risco !== 'RISCO III (ALTO)') problemas.push(`risco final ${risco}`);
+    if (ultimaEtapa !== 'step-area') problemas.push(`resultado veio de ${ultimaEtapa ?? 'chamada direta'}, não da Etapa 6`);
+    if (p1 !== 'unidade') problemas.push(`caminho da Etapa 6 = ${p1 ?? 'sem resposta'}, não "unidade"`);
+    if (problemas.length) falhasInvariante.push(`${id}: bloco da unidade visível com ${problemas.join('; ')}`);
 }
 
 // Estado de um fluxo de perguntas (sem resultado final): perguntas visíveis, respostas,
@@ -261,6 +285,7 @@ async function cenariosShowResult() {
         for (const criterio of [1, 2]) {
             for (const risco of [1, 2, 3]) {
                 await page.goto(PAGINA);
+                ultimaEtapa = null;
                 await page.evaluate(({ codigo, piso, criterio, risco }) => {
                     cnaeState = piso === 'medio' ? { floor: 2, matched: codigo, level: 'medio' } : { floor: 1, matched: null, level: 'baixo' };
                     criterioState = criterio === 2 ? { floor: 2, reason: 'critério de teste' } : { floor: 1, reason: null };
@@ -294,6 +319,10 @@ async function cenariosShowResult() {
         console.error('Erros de JavaScript na página:\n' + [...new Set(erros)].join('\n'));
         process.exitCode = 1;
     }
+    if (falhasInvariante.length) {
+        console.error('FALHA no invariante do bloco da unidade em edificação de Risco III:\n' + falhasInvariante.join('\n'));
+        process.exitCode = 1;
+    }
 
     const conteudo = JSON.stringify(registros, null, 2) + '\n';
     writeFileSync(SAIDA, conteudo);
@@ -301,4 +330,5 @@ async function cenariosShowResult() {
     const finais = registros.filter(r => r.risco).length;
     console.log(`${registros.length} cenários (${finais} com resultado final, ${registros.length - finais} de estado dos fluxos)`);
     console.log(`sha256 ${hash}  tests/saida-regressao.json`);
+    console.log(`invariante do bloco da unidade: ${cenariosComBloco} cenários com o bloco visível, ${falhasInvariante.length} falhas`);
 })().catch(e => { console.error(e); process.exit(1); });

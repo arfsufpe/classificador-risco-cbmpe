@@ -132,6 +132,12 @@ const CATS_DDLCB = [
     { nome: "CAT Sertão", regiao: "Sertão", email: null }
 ];
 
+// Links do SAC Online. 'projeto' aguarda confirmação do CAT RMR (entrada de projeto para Risco III). null mostra 'link em confirmação'.
+const LINKS_SAC = {
+    vistoria: "https://saconline.bombeiros.pe.gov.br/sacbm_ctrl_login_online/sacbm_ctrl_login_online.php?var_tipo_menu=R",
+    projeto: null
+};
+
 // Histórico de etapas visitadas, para permitir "Voltar".
 let stepHistory = [];
 
@@ -758,22 +764,25 @@ function evaluateAreaFlow() {
     }
 
     // Unidade dentro de edificação maior: só pergunta a exceção se a edificação acionar o Art. 6º, I ou II.
-    let gatilho;
+    // incisos: quais incisos do Art. 6º a edificação acionou, para o bloco de orientação do resultado.
+    let gatilho, incisos;
     visible.push('area-predio');
     if (!a['area-predio']) return pending();
     if (a['area-predio'] === 'sim') {
         gatilho = 'unidade inserida em edificação com área construída superior a 930 m² (Art. 6º, I)';
+        incisos = ['I'];
     } else {
         visible.push('pav-predio');
         if (!a['pav-predio']) return pending();
         if (a['pav-predio'] === 'nao') return done(null, null);
         gatilho = 'unidade inserida em edificação com mais de 3 pavimentos (Art. 6º, II)';
+        incisos = ['II'];
     }
 
     for (const q of AREA_EXCECAO_QS) {
         visible.push(q);
         if (!a[q]) return pending();
-        if (a[q] === 'nao') return done(3, `${gatilho}, sem atender às condições da exceção do Art. 7º, §3º`);
+        if (a[q] === 'nao') return { ...done(3, `${gatilho}, sem atender às condições da exceção do Art. 7º, §3º`), incisos };
     }
     return done(2, 'Classificado Risco II (Médio): unidade autônoma situada exclusivamente no pavimento térreo, com área de até 930 m², inserida em edificação principal que seria de Risco Alto pela área ou pela quantidade de andares, sem compartilhar sistemas preventivos, sem acesso às áreas comuns e com saída direta para a via pública (Art. 7º, §3º).');
 }
@@ -848,10 +857,10 @@ function setupAreaFlow() {
 }
 
 function checkArea() {
-    const { resolved, result, reason } = evaluateAreaFlow();
+    const { resolved, result, reason, incisos } = evaluateAreaFlow();
     if (!resolved) return;
     if (result === 3) {
-        showResult(3, `Classificado Risco III (Alto) por apresentar: ${reason}.`);
+        showResult(3, `Classificado Risco III (Alto) por apresentar: ${reason}.`, { unidadeEmEdificacao: incisos });
         return;
     }
     if (result === 2) {
@@ -1117,6 +1126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const initial = document.querySelector('.step.active');
     if (initial) updateProgressUI(initial);
     renderCatsDdlcb();
+    aplicarLinksSac();
     setupCnaeSearch();
     setupAreaFlow();
     setupEventosFlow();
@@ -1165,9 +1175,43 @@ function renderCnaesNoResultado() {
     });
 }
 
-function showResult(risk, reason) {
+// Bloco "Sua unidade está em uma edificação de Risco III" (próximos passos do Risco III).
+// incisos: ['I'], ['II'] ou ['I', 'II'], vindos de evaluateAreaFlow(); null esconde o bloco.
+function renderUnidadeEdificacao(incisos) {
+    const bloco = document.getElementById('unidade-edificacao');
+    if (!bloco) return;
+    bloco.hidden = !incisos;
+    if (!incisos) return;
+    const criterios = { I: 'com área construída superior a 930 m²', II: 'com mais de 3 pavimentos' };
+    document.getElementById('unidade-edificacao-art').textContent = `Art. 6º, ${incisos.join(' e ')}`;
+    document.getElementById('unidade-edificacao-criterio').textContent =
+        incisos.length === 2 ? `${criterios.I} e mais de 3 pavimentos` : criterios[incisos[0]];
+}
+
+// Links do SAC Online nos próximos passos. Sem URL, o link fica escondido; no Risco III, aparece
+// no lugar o aviso de "link em confirmação".
+function aplicarLinksSac() {
+    const definir = (id, url) => {
+        const link = document.getElementById(id);
+        if (!link) return;
+        link.hidden = !url;
+        if (url) link.href = url;
+    };
+    definir('cta-sac-vistoria', LINKS_SAC.vistoria);
+    definir('unidade-edificacao-vistoria', LINKS_SAC.vistoria);
+    definir('cta-sac-projeto', LINKS_SAC.projeto);
+    const pendente = document.getElementById('sac-projeto-pendente');
+    if (pendente) pendente.hidden = Boolean(LINKS_SAC.projeto);
+}
+
+// extras.unidadeEmEdificacao: incisos do Art. 6º quando o Risco III veio só da edificação em que a
+// unidade está inserida (checkArea). Como todo Risco III encerra o percurso na hora (invariante P2,
+// abaixo), nenhum outro motivo de Risco III pode coexistir com ele; CNAE de Risco Alto termina na
+// Etapa 1 e nunca chega à Etapa 6.
+function showResult(risk, reason, extras = {}) {
     // Aplica o piso mínimo definido pelo(s) CNAE(s) (etapa 1)
     const finalRisk = Math.max(risk, getRiskFloor());
+    renderUnidadeEdificacao(finalRisk === 3 ? extras.unidadeEmEdificacao || null : null);
     let finalReason = reason;
 
     if (cnaeState.floor === 2) {

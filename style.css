@@ -1417,6 +1417,9 @@ ul.details-list li::before {
     background: var(--color-primary);
 }
 
+/* Link do SAC Online sem URL configurada (LINKS_SAC em script.js). */
+.next-steps__cta[hidden] { display: none; }
+
 .next-steps__cta svg {
     width: 15px;
     height: 15px;
@@ -1540,6 +1543,11 @@ ul.details-list li::before {
     .next-steps__cta:hover { display: inline; padding: 0; background: none; color: var(--color-primary); }
     .next-steps__cta svg { display: none; }
     .next-steps__cta::after { content: ": " attr(href); font-weight: 400; }
+    /* Bloco da unidade em edificação de Risco III: sem a URL (longa) do SAC no papel, e o
+       Risco III, mais alto com ele, pode quebrar entre folhas, mas não no meio do bloco. */
+    #unidade-edificacao .next-steps__cta::after { content: none; }
+    .next-steps:has(#unidade-edificacao:not([hidden])) { break-inside: auto; }
+    #unidade-edificacao, .next-steps__steps li { break-inside: avoid; }
     .result-reason, .next-steps, .next-steps__alert, .next-steps__step-num,
     .btn-primary, .icon-low, .icon-medium, .icon-high, .result-icon, .brand__logo {
         -webkit-print-color-adjust: exact;
