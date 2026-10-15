@@ -54,6 +54,17 @@ O estabelecimento é dispensado do licenciamento, e a tela orienta a solicitar a
 
 Os contatos ficam só na constante `CATS_DDLCB`, em `script.js`: qualquer alteração de e-mail ou telefone é feita ali, e a lista da tela (e da impressão) é montada a partir dela por `renderCatsDdlcb()`.
 
+### Links do SAC Online (Riscos II e III)
+
+Os links de entrada no SAC Online ficam só na constante `LINKS_SAC`, em `script.js`, e são aplicados por `aplicarLinksSac()`; link com URL `null` fica escondido. Hoje vistoria e análise de projeto entram pela mesma página:
+
+`https://saconline.bombeiros.pe.gov.br/sacbm_ctrl_login_online/sacbm_ctrl_login_online.php?var_tipo_menu=R`
+
+- `LINKS_SAC.vistoria`: pedido de vistoria no Risco II e no bloco da unidade em edificação de Risco III (NT 1.01, item 5.7.2.3).
+- `LINKS_SAC.projeto`: análise de projeto, primeiro passo do Risco III.
+
+Como a URL é a mesma, o texto de cada link é o que diferencia os processos. Os links abrem em nova aba, avisada aos leitores de tela por um texto oculto ("abre em nova aba").
+
 ## Atualizando a lista de CNAEs
 
 As listas `CNAE_ALTO_RISCO` e `CNAE_MEDIO_RISCO` em `script.js` foram geradas a partir da coluna **`CBMPE_nivel`** do CSV consolidado (não usar `Nivel_de_risco`, que traz valores ambíguos como "II ou III" para parte das linhas). Para atualizar:

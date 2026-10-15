@@ -138,10 +138,11 @@ const CATS_DDLCB = [
       telefones: [{ cidade: null, numero: "(87) 98835-2828" }] }
 ];
 
-// Links do SAC Online. 'projeto' aguarda confirmação do CAT RMR (entrada de projeto para Risco III). null mostra 'link em confirmação'.
+// Links do SAC Online. Hoje vistoria e projeto entram pela mesma página; as chaves ficam separadas
+// caso passem a divergir. null esconde o link correspondente.
 const LINKS_SAC = {
     vistoria: "https://saconline.bombeiros.pe.gov.br/sacbm_ctrl_login_online/sacbm_ctrl_login_online.php?var_tipo_menu=R",
-    projeto: null
+    projeto: "https://saconline.bombeiros.pe.gov.br/sacbm_ctrl_login_online/sacbm_ctrl_login_online.php?var_tipo_menu=R"
 };
 
 // Histórico de etapas visitadas, para permitir "Voltar".
@@ -1212,8 +1213,7 @@ function renderUnidadeEdificacao(incisos) {
         incisos.length === 2 ? `${criterios.I} e mais de 3 pavimentos` : criterios[incisos[0]];
 }
 
-// Links do SAC Online nos próximos passos. Sem URL, o link fica escondido; no Risco III, aparece
-// no lugar o aviso de "link em confirmação".
+// Links do SAC Online nos próximos passos. Sem URL, o link fica escondido.
 function aplicarLinksSac() {
     const definir = (id, url) => {
         const link = document.getElementById(id);
@@ -1224,8 +1224,6 @@ function aplicarLinksSac() {
     definir('cta-sac-vistoria', LINKS_SAC.vistoria);
     definir('unidade-edificacao-vistoria', LINKS_SAC.vistoria);
     definir('cta-sac-projeto', LINKS_SAC.projeto);
-    const pendente = document.getElementById('sac-projeto-pendente');
-    if (pendente) pendente.hidden = Boolean(LINKS_SAC.projeto);
 }
 
 // extras.unidadeEmEdificacao: incisos do Art. 6º quando o Risco III veio só da edificação em que a
