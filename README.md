@@ -48,6 +48,12 @@ O visual segue o **Padrão Digital de Pernambuco** (azul `#0034B7`, amarelo `#FF
 
 Nas etapas 2, 3, 4 e 8, o botão de avançar só habilita depois de uma escolha explícita: ao menos um item marcado ou a opção **"Nenhuma das alternativas anteriores"**, que é exclusiva (marcá-la desmarca as demais, e vice-versa). Nas etapas 5, 6 e 7, o botão só habilita quando o fluxo de perguntas Sim/Não está totalmente respondido. Os textos de ajuda ("Como responder") ficam sempre visíveis, sem precisar de clique.
 
+### Resultado de Risco I
+
+O estabelecimento é dispensado do licenciamento, e a tela orienta a solicitar a **DDLCB** (Declaração de Dispensa de Licenciamento do Corpo de Bombeiros) em dois passos: baixar e preencher o requerimento (`assets/requerimento-ddlcb.docx`) e enviá-lo por e-mail ao CAT (Centro de Atividades Técnicas) responsável pela região do estabelecimento. A tela lista todos os CATs — RMR, Agreste, Zona da Mata (Mata Sul e Mata Norte) e Sertão —, com o e-mail como link `mailto:` (assunto "Solicitação de DDLCB") e, quando houver, os telefones como links `tel:`. O envio por e-mail é provisório, até o sistema de emissão da DDLCB ficar pronto.
+
+Os contatos ficam só na constante `CATS_DDLCB`, em `script.js`: qualquer alteração de e-mail ou telefone é feita ali, e a lista da tela (e da impressão) é montada a partir dela por `renderCatsDdlcb()`.
+
 ## Atualizando a lista de CNAEs
 
 As listas `CNAE_ALTO_RISCO` e `CNAE_MEDIO_RISCO` em `script.js` foram geradas a partir da coluna **`CBMPE_nivel`** do CSV consolidado (não usar `Nivel_de_risco`, que traz valores ambíguos como "II ou III" para parte das linhas). Para atualizar:

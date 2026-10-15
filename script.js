@@ -124,12 +124,18 @@ function getRiskFloor() {
     return Math.max(cnaeState.floor, criterioState.floor);
 }
 
-// E-mails para solicitação de DDLCB (procedimento provisório). Preencher os e-mails pendentes quando confirmados. email: null mostra 'e-mail em confirmação'.
+// Contatos dos CATs para solicitação de DDLCB (procedimento provisório). Único lugar a alterar:
+// a lista do Risco I é montada daqui. email: null mostra 'e-mail em confirmação'.
+// regiao só quando o nome não basta para identificar o CAT. telefones: número no formato de
+// exibição; o link tel: é derivado dele (+55 e só os dígitos).
 const CATS_DDLCB = [
     { nome: "CAT RMR", regiao: "Região Metropolitana do Recife", email: "cat.rmr@bombeiros.pe.gov.br" },
-    { nome: "CAT Agreste", regiao: "Agreste", email: null },
-    { nome: "CAT Zona da Mata", regiao: "Zona da Mata", email: null },
-    { nome: "CAT Sertão", regiao: "Sertão", email: null }
+    { nome: "CAT Agreste", regiao: null, email: "catagreste1@bombeiros.pe.gov.br",
+      telefones: [{ cidade: "Caruaru", numero: "(81) 98494-3351" }, { cidade: "Garanhuns", numero: "(87) 98877-2493" }] },
+    { nome: "CAT Zona da Mata", regiao: "Mata Sul", email: "catzmsulddlcb@bombeiros.pe.gov.br" },
+    { nome: "CAT Zona da Mata", regiao: "Mata Norte", email: "catzmnorteddlcb@bombeiros.pe.gov.br" },
+    { nome: "CAT Sertão", regiao: null, email: "catsertao2cbmpe@gmail.com",
+      telefones: [{ cidade: null, numero: "(87) 98835-2828" }] }
 ];
 
 // Links do SAC Online. 'projeto' aguarda confirmação do CAT RMR (entrada de projeto para Risco III). null mostra 'link em confirmação'.
@@ -1100,8 +1106,10 @@ function setupExclusiveCheckGroup(stepId) {
     updateState();
 }
 
-// Próximos passos do Risco I: um item por CAT, com o e-mail escrito por extenso (cópia e
-// impressão). Montado uma vez no carregamento, com textContent, nunca innerHTML.
+// Próximos passos do Risco I: um item por CAT, com e-mail e telefones escritos por extenso
+// (cópia e impressão). Montado uma vez no carregamento, com textContent, nunca innerHTML.
+// O aria-label repete o texto visível (WCAG 2.5.3) e acrescenta o CAT, que o leitor de tela
+// não teria ao navegar só pelos links.
 function renderCatsDdlcb() {
     const lista = document.getElementById('cats-ddlcb');
     if (!lista) return;
@@ -1109,14 +1117,30 @@ function renderCatsDdlcb() {
         const li = document.createElement('li');
         const nome = document.createElement('strong');
         nome.textContent = cat.nome;
-        li.append(nome, ` (${cat.regiao}): `);
+        const identificacao = cat.regiao ? `${cat.nome}, ${cat.regiao}` : cat.nome;
+        li.append(nome, cat.regiao ? ` (${cat.regiao}): ` : ': ');
         if (cat.email) {
             const link = document.createElement('a');
             link.href = `mailto:${cat.email}?subject=Solicita%C3%A7%C3%A3o%20de%20DDLCB`;
             link.textContent = cat.email;
+            link.setAttribute('aria-label', `Enviar e-mail ao ${identificacao}: ${cat.email}`);
             li.append(link);
         } else {
             li.append('e-mail em confirmação');
+        }
+        const telefones = cat.telefones || [];
+        if (telefones.length > 0) {
+            li.append(document.createElement('br'), telefones.length > 1 ? 'Telefones: ' : 'Telefone: ');
+            telefones.forEach((tel, i) => {
+                if (i > 0) li.append('; ');
+                if (tel.cidade) li.append(`${tel.cidade} `);
+                const link = document.createElement('a');
+                link.href = `tel:+55${tel.numero.replace(/\D/g, '')}`;
+                link.textContent = tel.numero;
+                const local = tel.cidade ? `${identificacao}, ${tel.cidade}` : identificacao;
+                link.setAttribute('aria-label', `Ligar para o ${local}: ${tel.numero}`);
+                li.append(link);
+            });
         }
         return li;
     }));
