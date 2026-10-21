@@ -1356,10 +1356,13 @@ ul.details-list li::before {
     line-height: var(--leading-support);
 }
 
-/* Passos do Risco I (solicitação da DDLCB): mesma lista numerada, nas cores do Risco I. */
+/* Passos do Risco I (solicitação da DDLCB) e do Risco II (requerimento de AR/AVCB): mesma
+   lista numerada, cada uma nas cores do seu nível. */
 .next-steps--low .next-steps__step-num { background: var(--color-low-text); }
+.next-steps--medium .next-steps__step-num { background: var(--color-medium-text); }
 
-.next-steps--low .next-steps__steps li div {
+.next-steps--low .next-steps__steps li div,
+.next-steps--medium .next-steps__steps li div {
     gap: var(--space-2);
     min-width: 0;
     font-size: var(--text-support);
@@ -1367,29 +1370,39 @@ ul.details-list li::before {
     color: var(--color-text);
 }
 
-.next-steps--low .next-steps__list { margin-bottom: 0; }
+.next-steps--low .next-steps__list,
+.next-steps--medium .next-steps__list { margin-bottom: 0; }
 
 /* Os itens das listas internas não herdam o flex dos passos (.next-steps__steps li). */
-.next-steps--low .next-steps__list li {
+.next-steps--low .next-steps__list li,
+.next-steps--medium .next-steps__list li {
     display: block;
     margin-bottom: var(--space-1);
     font-size: var(--text-support);
     color: var(--color-text);
 }
 
-.next-steps--low .next-steps__list strong { font-size: inherit; }
+/* Negrito dentro do texto não usa o tamanho de título de passo (.next-steps__steps li strong). */
+.next-steps--low .next-steps__list strong,
+.next-steps--medium .next-steps__list strong,
+.next-steps--medium .next-steps__steps li div p strong { font-size: inherit; }
 
 /* E-mails longos quebram no celular em vez de criar rolagem horizontal. */
-.next-steps--low .next-steps__list a { overflow-wrap: anywhere; }
+.next-steps--low .next-steps__list a,
+.next-steps--medium .next-steps__list a { overflow-wrap: anywhere; }
 
-.next-steps--low a {
+/* No Risco II, só os links dos passos: o botão do SAC (.next-steps__cta) fica fora dos passos
+   e perderia a forma de botão com a regra de link. */
+.next-steps--low a,
+.next-steps--medium .next-steps__steps a {
     color: var(--color-primary);
     font-weight: 700;
     text-decoration: underline;
     text-underline-offset: 2px;
 }
 
-.next-steps--low a:focus-visible {
+.next-steps--low a:focus-visible,
+.next-steps--medium .next-steps__steps a:focus-visible {
     outline: none;
     border-radius: 2px;
     box-shadow: var(--shadow-focus);
@@ -1548,6 +1561,11 @@ ul.details-list li::before {
     #unidade-edificacao .next-steps__cta::after { content: none; }
     .next-steps:has(#unidade-edificacao:not([hidden])) { break-inside: auto; }
     #unidade-edificacao, .next-steps__steps li { break-inside: avoid; }
+    /* Risco II com os passos do requerimento: inteiro, não cabia ao lado do motivo e deixava a
+       1ª folha quase vazia. Quebra entre folhas como o Risco III acima, com cada passo inteiro;
+       o botão do SAC, que leva o endereço no ::after, não se parte. */
+    .next-steps--medium { break-inside: auto; }
+    .next-steps--medium .next-steps__cta { display: inline-block; break-inside: avoid; }
     .result-reason, .next-steps, .next-steps__alert, .next-steps__step-num,
     .btn-primary, .icon-low, .icon-medium, .icon-high, .result-icon, .brand__logo {
         -webkit-print-color-adjust: exact;
