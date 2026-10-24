@@ -50,7 +50,7 @@ Nas etapas 2, 3, 4 e 8, o botão de avançar só habilita depois de uma escolha 
 
 ### Resultado de Risco I
 
-O estabelecimento é dispensado do licenciamento, e a tela orienta a solicitar a **DDLCB** (Declaração de Dispensa de Licenciamento do Corpo de Bombeiros) em dois passos: baixar e preencher o requerimento (`assets/requerimento-ddlcb.docx`) e enviá-lo por e-mail ao CAT (Centro de Atividades Técnicas) responsável pela região do estabelecimento. A tela lista todos os CATs — RMR, Agreste, Zona da Mata (Mata Sul e Mata Norte) e Sertão —, com o e-mail como link `mailto:` (assunto "Solicitação de DDLCB") e, quando houver, os telefones como links `tel:`. O envio por e-mail é provisório, até o sistema de emissão da DDLCB ficar pronto.
+O estabelecimento é dispensado do licenciamento, e a tela orienta a solicitar a **DDLCB** (Declaração de Dispensa de Licenciamento do Corpo de Bombeiros) em dois passos: baixar e preencher o requerimento (`assets/requerimento-ddlcb.docx`) e enviá-lo por e-mail ao CAT (Centro de Atividades Técnicas) responsável pela região do estabelecimento. A tela lista todos os CATs — RMR, Zona da Mata, Agreste e Sertão —, com o e-mail como link `mailto:` (assunto "Solicitação de DDLCB") e, quando houver, os números de contato. Cada número tem o campo `tipo`: `"whatsapp"` gera link `https://wa.me/55` + dígitos, aberto em nova aba, numa linha "WhatsApp:"; `"telefone"` gera link `tel:+55` + dígitos, numa linha "Telefone:" ou "Telefones:". O envio por e-mail é provisório, até o sistema de emissão da DDLCB ficar pronto.
 
 Os contatos ficam só na constante `CATS_DDLCB`, em `script.js`: qualquer alteração de e-mail ou telefone é feita ali, e a lista da tela (e da impressão) é montada a partir dela por `renderCatsDdlcb()`.
 

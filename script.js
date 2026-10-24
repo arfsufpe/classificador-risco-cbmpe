@@ -127,15 +127,18 @@ function getRiskFloor() {
 // Contatos dos CATs para solicitação de DDLCB (procedimento provisório). Único lugar a alterar:
 // a lista do Risco I é montada daqui. email: null mostra 'e-mail em confirmação'.
 // regiao só quando o nome não basta para identificar o CAT. telefones: número no formato de
-// exibição; o link tel: é derivado dele (+55 e só os dígitos).
+// exibição; o link é derivado dele (só os dígitos). tipo: "telefone" gera link tel: (+55);
+// "whatsapp" gera link https://wa.me/55..., em nova aba, numa linha própria "WhatsApp:".
 const CATS_DDLCB = [
-    { nome: "CAT RMR", regiao: "Região Metropolitana do Recife", email: "cat.rmr@bombeiros.pe.gov.br" },
+    { nome: "CAT RMR", regiao: "Região Metropolitana do Recife", email: "cat.rmr@bombeiros.pe.gov.br",
+      telefones: [{ tipo: "whatsapp", cidade: null, numero: "(81) 99488-4923" }] },
+    { nome: "CAT Zona da Mata", regiao: null, email: "catzonadamata@bombeiros.pe.gov.br",
+      telefones: [{ tipo: "whatsapp", cidade: null, numero: "(81) 98494-2888" }] },
     { nome: "CAT Agreste", regiao: null, email: "catagreste1@bombeiros.pe.gov.br",
-      telefones: [{ cidade: "Caruaru", numero: "(81) 98494-3351" }, { cidade: "Garanhuns", numero: "(87) 98877-2493" }] },
-    { nome: "CAT Zona da Mata", regiao: "Mata Sul", email: "catzmsulddlcb@bombeiros.pe.gov.br" },
-    { nome: "CAT Zona da Mata", regiao: "Mata Norte", email: "catzmnorteddlcb@bombeiros.pe.gov.br" },
+      telefones: [{ tipo: "telefone", cidade: "Caruaru", numero: "(81) 98494-3351" },
+                  { tipo: "telefone", cidade: "Garanhuns", numero: "(87) 98877-2493" }] },
     { nome: "CAT Sertão", regiao: null, email: "catsertao2cbmpe@gmail.com",
-      telefones: [{ cidade: null, numero: "(87) 98835-2828" }] }
+      telefones: [{ tipo: "telefone", cidade: null, numero: "(87) 98835-2828" }] }
 ];
 
 // Links do SAC Online. Hoje vistoria e projeto entram pela mesma página; as chaves ficam separadas
@@ -1107,10 +1110,10 @@ function setupExclusiveCheckGroup(stepId) {
     updateState();
 }
 
-// Próximos passos do Risco I: um item por CAT, com e-mail e telefones escritos por extenso
-// (cópia e impressão). Montado uma vez no carregamento, com textContent, nunca innerHTML.
+// Próximos passos do Risco I: um item por CAT, com e-mail, WhatsApp e telefones escritos por
+// extenso (cópia e impressão). Montado uma vez no carregamento, com textContent, nunca innerHTML.
 // O aria-label repete o texto visível (WCAG 2.5.3) e acrescenta o CAT, que o leitor de tela
-// não teria ao navegar só pelos links.
+// não teria ao navegar só pelos links. WhatsApp e telefone comum ficam em linhas separadas.
 function renderCatsDdlcb() {
     const lista = document.getElementById('cats-ddlcb');
     if (!lista) return;
@@ -1129,7 +1132,24 @@ function renderCatsDdlcb() {
         } else {
             li.append('e-mail em confirmação');
         }
-        const telefones = cat.telefones || [];
+        const todos = cat.telefones || [];
+        const whatsapps = todos.filter(tel => tel.tipo === 'whatsapp');
+        const telefones = todos.filter(tel => tel.tipo !== 'whatsapp');
+        if (whatsapps.length > 0) {
+            li.append(document.createElement('br'), 'WhatsApp: ');
+            whatsapps.forEach((tel, i) => {
+                if (i > 0) li.append('; ');
+                if (tel.cidade) li.append(`${tel.cidade} `);
+                const link = document.createElement('a');
+                link.href = `https://wa.me/55${tel.numero.replace(/\D/g, '')}`;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.textContent = tel.numero;
+                const local = tel.cidade ? `${identificacao}, ${tel.cidade}` : identificacao;
+                link.setAttribute('aria-label', `Conversar pelo WhatsApp com o ${local}: ${tel.numero} (abre em nova aba)`);
+                li.append(link);
+            });
+        }
         if (telefones.length > 0) {
             li.append(document.createElement('br'), telefones.length > 1 ? 'Telefones: ' : 'Telefone: ');
             telefones.forEach((tel, i) => {
